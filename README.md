@@ -20,7 +20,7 @@ The quantities below describe one detector channel.
 | LDR | 3 | Large Light Dependent Resistor (LDR) | https://www.jaycar.com.au/large-light-dependent-resistor-ldr/p/RD3485 |
 | Resistor | 3 | 22 kΩ | https://www.jaycar.com.au/22k-ohm-0-5-watt-metal-film-resistors-pack-of-8/p/RR0604 |
 | Tracing Paper | 1 | | https://www.officeworks.com.au/shop/officeworks/p/studymate-a4-tracing-pad-50-leaf-orange-smtrce50r?region_id=GTYP6H&regionIdSet=true |
-| Foam Board | 3 | https://www.officeworks.com.au/shop/officeworks/p/a3-foam-board-5mm-white-ljpcfba3we |  |
+| Foam Board | 3 |  | https://www.officeworks.com.au/shop/officeworks/p/a3-foam-board-5mm-white-ljpcfba3we |
 
 ## Hardware Setup
 
