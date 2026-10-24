@@ -1,10 +1,8 @@
-import csv
 import json
 import time
 from datetime import datetime
 from pathlib import Path
 
-import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.linalg import hadamard
@@ -13,15 +11,17 @@ from screeninfo import get_monitors
 from imaging_common import (
     ADC_FIELDS,
     acquisition_session,
-    load_roi,
+    csv_log,
     display_for,
+    display_pattern,
+    load_roi,
     read_adc,
 )
 
 SERIAL_PORT = "COM8"
 PROJECTOR_INDEX = 1
 
-GRID_SIZE = 64  # Change to 32 later
+GRID_SIZE = 64
 
 PATTERN_SETTLE_S = 1.0
 DC_SETTLE_S = 6.0
@@ -39,7 +39,8 @@ ADC_SAMPLE_INTERVAL_MS = 4
 def main():
     projector = get_monitors()[PROJECTOR_INDEX]
     W, H = projector.width, projector.height
-    roi_x, roi_y, roi_w, roi_h = load_roi()
+    roi_geometry = load_roi()
+    roi_x, roi_y, roi_w, roi_h = roi_geometry
 
     N = GRID_SIZE * GRID_SIZE
     H_matrix = hadamard(N)
@@ -119,23 +120,16 @@ def main():
             SERIAL_PORT, window, projector, black_frame
         ) as arduino:
             with (
-                (output_dir / "hadamard_raw.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as rf,
-                (output_dir / "hadamard_pairs.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as pf,
-                (output_dir / "black_reference.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as bf,
+                csv_log(
+                    output_dir / "hadamard_raw.csv", raw_columns, dictionaries=True
+                ) as write_raw,
+                csv_log(
+                    output_dir / "hadamard_pairs.csv", pair_columns, dictionaries=True
+                ) as write_pair,
+                csv_log(
+                    output_dir / "black_reference.csv", black_columns, dictionaries=True
+                ) as write_black,
             ):
-                raw_writer = csv.DictWriter(rf, fieldnames=raw_columns)
-                pair_writer = csv.DictWriter(pf, fieldnames=pair_columns)
-                black_writer = csv.DictWriter(bf, fieldnames=black_columns)
-                raw_writer.writeheader()
-                pair_writer.writeheader()
-                black_writer.writeheader()
-
                 def capture_black():
                     nonlocal measurement_id
                     display_for(window, black_frame, BLACK_SETTLE_S)
@@ -148,8 +142,7 @@ def main():
                     }
                     measurement_id += 1
                     black_records.append(record)
-                    black_writer.writerow(record)
-                    bf.flush()
+                    write_black(record)
                     print(
                         f"BLACK after {len(pair_records)} pairs: {adc['mean_adc']:.3f} ADC"
                     )
@@ -174,15 +167,9 @@ def main():
                             if polarity == "positive"
                             else 255 - logical_pattern
                         )
-                        roi = cv2.resize(
-                            cells, (roi_w, roi_h), interpolation=cv2.INTER_NEAREST
-                        )
-                        frame = black_frame.copy()
-                        frame[roi_y : roi_y + roi_h, roi_x : roi_x + roi_w] = roi
-
                         # Extra settling for DC
                         settle = DC_SETTLE_S if row_index == 0 else PATTERN_SETTLE_S
-                        display_for(window, frame, settle)
+                        display_pattern(window, black_frame, roi_geometry, cells, settle)
                         adc = read_adc(arduino, measurement_id)
                         record = {
                             "pair_number": pair_number,
@@ -194,8 +181,7 @@ def main():
                         }
                         measurement_id += 1
                         raw_records.append(record)
-                        raw_writer.writerow(record)
-                        rf.flush()
+                        write_raw(record)
                         readings[polarity] = adc
 
                     positive = readings["positive"]
@@ -213,8 +199,7 @@ def main():
                         "time_s": time.monotonic() - start,
                     }
                     pair_records.append(pair)
-                    pair_writer.writerow(pair)
-                    pf.flush()
+                    write_pair(pair)
                     print(
                         f"PAIR {pair_number:04d}/{N}: H[{row_index:04d}], "
                         f"Delta={delta:+.4f} ADC"

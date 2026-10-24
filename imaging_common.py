@@ -1,3 +1,4 @@
+import csv
 import json
 import time
 from contextlib import contextmanager
@@ -28,6 +29,24 @@ def load_roi():
     return tuple(int(config[key]) for key in ("ROI_X", "ROI_Y", "ROI_W", "ROI_H"))
 
 
+@contextmanager
+def csv_log(path, columns, *, dictionaries=False):
+    with path.open("w", newline="", encoding="utf-8") as file:
+        if dictionaries:
+            writer = csv.DictWriter(file, fieldnames=columns)
+            writer.writeheader()
+        else:
+            writer = csv.writer(file)
+            writer.writerow(columns)
+        file.flush()
+
+        def write_row(row):
+            writer.writerow(row)
+            file.flush()
+
+        yield write_row
+
+
 def display_for(window, frame, settle_s):
     cv2.imshow(window, frame)
     key = cv2.waitKey(30) & 0xFF
@@ -40,6 +59,15 @@ def display_for(window, frame, settle_s):
         if key in (ord("q"), 27):
             raise KeyboardInterrupt("Acquisition stopped by user")
         time.sleep(0.005)
+
+
+def display_pattern(window, black_frame, roi, cells, settle_s):
+    x, y, width, height = roi
+    frame = black_frame.copy()
+    frame[y : y + height, x : x + width] = cv2.resize(
+        cells, (width, height), interpolation=cv2.INTER_NEAREST
+    )
+    display_for(window, frame, settle_s)
 
 
 def read_adc(arduino, measurement_id):

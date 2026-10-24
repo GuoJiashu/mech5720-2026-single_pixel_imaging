@@ -1,7 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from calibration_common import Projector, ArduinoADC, make_output_dir, save_csv
+from calibration_common import (
+    calibration_session,
+    append_csv,
+    make_output_dir,
+    save_csv,
+)
 
 PATCH_SIZE = 96
 REPEATS = 3
@@ -11,18 +16,11 @@ PATCH_SETTLE_S = 2.0
 
 folder = make_output_dir("spatial_response")
 
-projector = None
-arduino = None
 rows = []
 
-try:
-    projector = Projector()
-    arduino = ArduinoADC()
-
+with calibration_session() as (projector, arduino):
     x_centers = np.array([1 / 6, 3 / 6, 5 / 6]) * projector.rw
-
     y_centers = np.array([1 / 6, 3 / 6, 5 / 6]) * projector.rh
-
     for repeat in range(REPEATS):
         print(f"\nRepeat {repeat+1}/{REPEATS}")
 
@@ -53,15 +51,9 @@ try:
 
                 rows.append(row)
 
-                save_csv(folder / "spatial_raw.csv", rows)
+                append_csv(folder / "spatial_raw.csv", row)
 
-                print(f"({r},{c}) " f"Delta={delta:.3f} ADC")
-
-finally:
-    if projector:
-        projector.close()
-    if arduino:
-        arduino.close()
+                print(f"({r},{c}) Delta={delta:.3f} ADC")
 
 response = np.full((3, 3), np.nan)
 std_matrix = np.full((3, 3), np.nan)

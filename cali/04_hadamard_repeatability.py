@@ -1,7 +1,12 @@
 import numpy as np
 from scipy.linalg import hadamard
 
-from calibration_common import Projector, ArduinoADC, make_output_dir, save_csv
+from calibration_common import (
+    calibration_session,
+    append_csv,
+    make_output_dir,
+    save_csv,
+)
 
 GRID_SIZE = 16
 
@@ -12,18 +17,10 @@ SETTLING_TIME_S = 2.0
 
 folder = make_output_dir("hadamard_repeatability")
 
-projector = None
-arduino = None
-
-raw_rows = []
 pair_rows = []
 
-try:
-    projector = Projector()
-    arduino = ArduinoADC()
-
+with calibration_session() as (projector, arduino):
     H = hadamard(GRID_SIZE**2)
-
     for repeat in range(N_REPEATS):
         print(f"\nRepeat {repeat+1}/{N_REPEATS}")
 
@@ -41,16 +38,15 @@ try:
 
                 readings[polarity] = adc["mean_adc"]
 
-                raw_rows.append(
+                append_csv(
+                    folder / "hadamard_measurements.csv",
                     {
                         "repeat": repeat + 1,
                         "hadamard_row": row_index,
                         "polarity": polarity,
                         **adc,
-                    }
+                    },
                 )
-
-                save_csv(folder / "hadamard_measurements.csv", raw_rows)
 
             delta = readings["positive"] - readings["negative"]
 
@@ -64,15 +60,9 @@ try:
                 }
             )
 
-            save_csv(folder / "hadamard_pair_differences.csv", pair_rows)
+            append_csv(folder / "hadamard_pair_differences.csv", pair_rows[-1])
 
-            print(f"H[{row_index:3d}] " f"Delta = {delta:+.4f} ADC")
-
-finally:
-    if projector:
-        projector.close()
-    if arduino:
-        arduino.close()
+            print(f"H[{row_index:3d}] Delta = {delta:+.4f} ADC")
 
 summary = []
 
@@ -80,10 +70,8 @@ for row_index in PATTERN_INDICES:
     values = np.array(
         [r["delta_adc"] for r in pair_rows if r["hadamard_row"] == row_index]
     )
-
     if len(values) < 2:
         continue
-
     summary.append(
         {
             "hadamard_row": row_index,

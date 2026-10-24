@@ -1,6 +1,7 @@
 import csv
 import json
 import time
+from contextlib import closing, contextmanager
 from datetime import datetime
 from pathlib import Path
 
@@ -9,13 +10,10 @@ import numpy as np
 import serial
 from screeninfo import get_monitors
 
-# ==========================================
 # Hardware configuration
-# ==========================================
 
 SERIAL_PORT = "COM8"
 PROJECTOR_INDEX = 1
-EXPECTED_RESOLUTION = (1920, 1080)
 
 DEFAULT_ROI = {"ROI_X": 732, "ROI_Y": 664, "ROI_W": 352, "ROI_H": 384}
 
@@ -23,57 +21,46 @@ DEFAULT_ROI = {"ROI_X": 732, "ROI_Y": 664, "ROI_W": 352, "ROI_H": 384}
 def load_roi():
     path = Path("roi_calibration.json")
     config = DEFAULT_ROI.copy()
-
     if path.exists():
         saved = json.loads(path.read_text(encoding="utf-8"))
-        for key in config:
-            if key in saved:
-                config[key] = int(saved[key])
-
-    return (config["ROI_X"], config["ROI_Y"], config["ROI_W"], config["ROI_H"])
+        config.update(saved)
+    return tuple(int(config[key]) for key in DEFAULT_ROI)
 
 
 def make_output_dir(name):
     folder = Path("results") / name / datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-    folder.mkdir(parents=True, exist_ok=False)
+    folder.mkdir(parents=True)
     return folder
 
 
 def save_csv(path, rows):
     if not rows:
         return
-
     with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        writer = csv.DictWriter(f, fieldnames=rows[0])
         writer.writeheader()
         writer.writerows(rows)
 
 
+def append_csv(path, row):
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=row)
+        if f.tell() == 0:
+            writer.writeheader()
+        writer.writerow(row)
+
+
+@contextmanager
+def calibration_session():
+    with closing(Projector()) as projector, closing(ArduinoADC()) as arduino:
+        yield projector, arduino
+
+
 class Projector:
     def __init__(self):
-        monitors = get_monitors()
-
-        for i, m in enumerate(monitors):
-            print(f"Monitor {i}: {m.width}x{m.height}, " f"position=({m.x},{m.y})")
-
-        if PROJECTOR_INDEX >= len(monitors):
-            raise ValueError("Projector index not found")
-
-        m = monitors[PROJECTOR_INDEX]
+        m = get_monitors()[PROJECTOR_INDEX]
         self.w, self.h = m.width, m.height
-
-        if (self.w, self.h) != EXPECTED_RESOLUTION:
-            raise ValueError(f"Unexpected resolution: {self.w}x{self.h}")
-
         self.x, self.y, self.rw, self.rh = load_roi()
-
-        if not (
-            0 <= self.x < self.w
-            and 0 <= self.y < self.h
-            and self.x + self.rw <= self.w
-            and self.y + self.rh <= self.h
-        ):
-            raise ValueError("ROI outside projector")
 
         self.black = np.zeros((self.h, self.w), dtype=np.uint8)
         self.window = "CGI Calibration Projector"
@@ -88,9 +75,6 @@ class Projector:
         cv2.waitKey(100)
 
     def frame(self, roi_image):
-        if roi_image.shape != (self.rh, self.rw):
-            raise ValueError("Incorrect ROI image size")
-
         frame = self.black.copy()
         frame[self.y : self.y + self.rh, self.x : self.x + self.rw] = roi_image
         return frame
@@ -133,7 +117,7 @@ class Projector:
         try:
             self.show(self.black, 0.1)
         finally:
-            cv2.destroyAllWindows()
+            cv2.destroyWindow(self.window)
 
 
 class ArduinoADC:
@@ -153,33 +137,24 @@ class ArduinoADC:
         deadline = time.monotonic() + 8.0
 
         while time.monotonic() < deadline:
-            line = self.ser.readline().decode("ascii", errors="replace").strip()
-
-            if not line or line.startswith("READY,"):
-                continue
-
-            if line.startswith("ERROR,"):
-                raise RuntimeError(line)
+            line = self.ser.readline().decode("ascii").strip()
 
             if not line.startswith("RESULT,"):
                 continue
 
-            parts = line.split(",")
+            _, reply_id, mean, std, low, high, count, capture_ms = line.split(",")
 
-            if len(parts) != 8:
-                raise RuntimeError(f"Invalid reply: {line}")
-
-            if int(parts[1]) != mid:
+            if int(reply_id) != mid:
                 raise RuntimeError(f"ID mismatch: {line}")
 
             return {
                 "measurement_id": mid,
-                "mean_adc": float(parts[2]),
-                "std_adc": float(parts[3]),
-                "min_adc": int(parts[4]),
-                "max_adc": int(parts[5]),
-                "n_samples": int(parts[6]),
-                "capture_ms": int(parts[7]),
+                "mean_adc": float(mean),
+                "std_adc": float(std),
+                "min_adc": int(low),
+                "max_adc": int(high),
+                "n_samples": int(count),
+                "capture_ms": int(capture_ms),
             }
 
         raise TimeoutError(f"Arduino timeout: {mid}")

@@ -4,7 +4,6 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from screeninfo import get_monitors
@@ -12,8 +11,10 @@ from screeninfo import get_monitors
 from imaging_common import (
     ADC_FIELDS,
     acquisition_session,
-    load_roi,
+    csv_log,
     display_for,
+    display_pattern,
+    load_roi,
     read_adc,
 )
 
@@ -21,7 +22,7 @@ from imaging_common import (
 SERIAL_PORT = "COM8"
 PROJECTOR_INDEX = 1
 
-GRID_SIZE = 64  # Change to 32 later
+GRID_SIZE = 64
 
 BLACK_EVERY_N = 16
 BLACK_SETTLE_S = 6.0
@@ -37,7 +38,8 @@ ADC_SAMPLE_INTERVAL_MS = 4
 def main():
     projector = get_monitors()[PROJECTOR_INDEX]
     W, H = projector.width, projector.height
-    roi_x, roi_y, roi_w, roi_h = load_roi()
+    roi_geometry = load_roi()
+    roi_x, roi_y, roi_w, roi_h = roi_geometry
 
     # Output Directory
     output_dir = OUTPUT_ROOT / datetime.now().strftime("%Y%m%d_%H%M%S_%f")
@@ -89,18 +91,13 @@ def main():
         ) as arduino:
             # Create CSV Files
             with (
-                (output_dir / "spot_raw.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as sf,
-                (output_dir / "black_anchors.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as bf,
+                csv_log(
+                    output_dir / "spot_raw.csv", spot_columns, dictionaries=True
+                ) as write_spot,
+                csv_log(
+                    output_dir / "black_anchors.csv", black_columns, dictionaries=True
+                ) as write_black,
             ):
-                spot_writer = csv.DictWriter(sf, fieldnames=spot_columns)
-                black_writer = csv.DictWriter(bf, fieldnames=black_columns)
-                spot_writer.writeheader()
-                black_writer.writeheader()
-
                 # Black Background Acquisition
                 def measure_black():
                     nonlocal measurement_id
@@ -113,8 +110,7 @@ def main():
                     }
                     measurement_id += 1
                     blacks.append(row)
-                    black_writer.writerow(row)
-                    bf.flush()
+                    write_black(row)
                     print(f"BLACK #{len(blacks):02d}: {row['mean_adc']:.3f} ADC")
 
                 # Initial background
@@ -126,12 +122,9 @@ def main():
                     r, c = divmod(index, GRID_SIZE)
                     cells = np.zeros((GRID_SIZE, GRID_SIZE), dtype=np.uint8)
                     cells[r, c] = 255
-                    roi = cv2.resize(
-                        cells, (roi_w, roi_h), interpolation=cv2.INTER_NEAREST
+                    display_pattern(
+                        window, black_frame, roi_geometry, cells, SPOT_SETTLE_S
                     )
-                    frame = black_frame.copy()
-                    frame[roi_y : roi_y + roi_h, roi_x : roi_x + roi_w] = roi
-                    display_for(window, frame, SPOT_SETTLE_S)
                     adc = read_adc(arduino, measurement_id)
                     row = {
                         "row": r,
@@ -143,8 +136,7 @@ def main():
                     }
                     measurement_id += 1
                     spots.append(row)
-                    spot_writer.writerow(row)
-                    sf.flush()
+                    write_spot(row)
                     print(
                         f"SPOT {index+1:04d}/{total}: "
                         f"row={r}, col={c}, "

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-CSV_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261023_232207_754080\black_anchors.csv"
+CSV_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261024_052155_912611\black_reference.csv"
 
 df = pd.read_csv(CSV_PATH)
 
@@ -29,9 +29,7 @@ intervals = np.diff(time_s)
 print("Mean Black Interval (s):", np.mean(intervals))
 print("Black Interval Std (s):", np.std(intervals, ddof=1))
 
-# =====================================
 # Background Drift
-# =====================================
 
 plt.figure(figsize=(10, 4))
 
@@ -45,9 +43,7 @@ plt.tight_layout()
 
 plt.savefig("background_drift.png", dpi=200)
 
-# =====================================
 # ADC Noise
-# =====================================
 
 plt.figure(figsize=(10, 4))
 
@@ -61,14 +57,11 @@ plt.tight_layout()
 
 plt.savefig("background_noise.png", dpi=200)
 
-# =====================================
 # Simulated Black Sampling Interval
-# =====================================
 
 print("\n===== Sparse Black Reference Test =====")
 
 for factor in [2, 4]:
-
     indices = np.arange(0, len(df), factor)
     indices = np.unique(np.append(indices, len(df) - 1))
 
@@ -78,15 +71,12 @@ for factor in [2, 4]:
     # Evaluate only omitted anchors
     omitted = np.ones(len(df), dtype=bool)
     omitted[indices] = False
-
     errors = predicted[omitted] - mean_adc[omitted]
 
     if errors.size == 0:
         continue
-
     mae = np.mean(np.abs(errors))
     rmse = np.sqrt(np.mean(errors**2))
-
-    print(f"Every {16*factor} spots: " f"MAE={mae:.4f}, RMSE={rmse:.4f} ADC")
+    print(f"Every {16*factor} spots: MAE={mae:.4f}, RMSE={rmse:.4f} ADC")
 
 plt.show()

@@ -1,10 +1,8 @@
-import csv
 import json
 import time
 from datetime import datetime
 from pathlib import Path
 
-import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from screeninfo import get_monitors
@@ -12,15 +10,17 @@ from screeninfo import get_monitors
 from imaging_common import (
     ADC_FIELDS,
     acquisition_session,
-    load_roi,
+    csv_log,
     display_for,
+    display_pattern,
+    load_roi,
     read_adc,
 )
 
 SERIAL_PORT = "COM8"
 PROJECTOR_INDEX = 1
 
-GRID_SIZE = 64  # Change to 32 later
+GRID_SIZE = 64
 
 PATTERN_SETTLE_S = 1.0
 DC_SETTLE_S = 6.0
@@ -36,9 +36,9 @@ OUTPUT_ROOT = Path("fourier_results")
 def main():
     N = GRID_SIZE
     projector = get_monitors()[PROJECTOR_INDEX]
-    W = projector.width
-    H = projector.height
-    roi_x, roi_y, roi_w, roi_h = load_roi()
+    W, H = projector.width, projector.height
+    roi_geometry = load_roi()
+    roi_x, roi_y, roi_w, roi_h = roi_geometry
 
     # Real images need only one measurement per conjugate frequency pair.
     frequencies = [
@@ -87,37 +87,29 @@ def main():
     window = "Fourier Projector"
     sample_id = 0
     start = time.monotonic()
+    raw_columns = [
+        "freq_index",
+        "fy",
+        "fx",
+        "phase_deg",
+        "time_s",
+        "measurement_id",
+        *ADC_FIELDS,
+    ]
 
     try:
         with acquisition_session(SERIAL_PORT, window, projector, black) as arduino:
             with (
-                (folder / "fourier_raw.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as rf,
-                (folder / "fourier_frequencies.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as ff,
-                (folder / "black_reference.csv").open(
-                    "w", newline="", encoding="utf-8"
-                ) as bf,
+                csv_log(folder / "fourier_raw.csv", raw_columns) as write_raw,
+                csv_log(
+                    folder / "fourier_frequencies.csv",
+                    ["freq_index", "fy", "fx", "fourier_real", "fourier_imag"],
+                ) as write_frequency,
+                csv_log(
+                    folder / "black_reference.csv",
+                    ["after_groups", "time_s", "mean_adc", "std_adc"],
+                ) as write_black,
             ):
-                rw = csv.writer(rf)
-                fw = csv.writer(ff)
-                bw = csv.writer(bf)
-                rw.writerow(
-                    [
-                        "freq_index",
-                        "fy",
-                        "fx",
-                        "phase_deg",
-                        "time_s",
-                        "measurement_id",
-                        *ADC_FIELDS,
-                    ]
-                )
-                fw.writerow(["freq_index", "fy", "fx", "fourier_real", "fourier_imag"])
-                bw.writerow(["after_groups", "time_s", "mean_adc", "std_adc"])
-
                 def capture_black():
                     nonlocal sample_id
                     display_for(window, black, BLACK_SETTLE_S)
@@ -130,8 +122,7 @@ def main():
                         result["std_adc"],
                     ]
                     black_records.append(record)
-                    bw.writerow(record)
-                    bf.flush()
+                    write_black(record)
                     print(f"BLACK: {result['mean_adc']:.3f} ADC")
 
                 capture_black()
@@ -149,16 +140,11 @@ def main():
                         small = np.rint(127.5 * (1 + np.cos(angle + phi))).astype(
                             np.uint8
                         )
-                        roi = cv2.resize(
-                            small, (roi_w, roi_h), interpolation=cv2.INTER_NEAREST
-                        )
-                        frame = black.copy()
-                        frame[roi_y : roi_y + roi_h, roi_x : roi_x + roi_w] = roi
                         settle = DC_SETTLE_S if (fy, fx) == (0, 0) else PATTERN_SETTLE_S
-                        display_for(window, frame, settle)
+                        display_pattern(window, black, roi_geometry, small, settle)
                         result = read_adc(arduino, sample_id)
                         t = time.monotonic() - start
-                        rw.writerow(
+                        write_raw(
                             [
                                 idx,
                                 fy,
@@ -169,7 +155,6 @@ def main():
                                 *(result[field] for field in ADC_FIELDS),
                             ]
                         )
-                        rf.flush()
                         phase_adc.append(result["mean_adc"])
                         phase_std.append(result["std_adc"])
                         phase_times.append(t)
@@ -183,8 +168,7 @@ def main():
                     measurements.append(phase_adc)
                     measurement_std.append(phase_std)
                     measurement_times.append(phase_times)
-                    fw.writerow([idx, fy, fx, coefficient.real, coefficient.imag])
-                    ff.flush()
+                    write_frequency([idx, fy, fx, coefficient.real, coefficient.imag])
                     print(
                         f"{idx+1}/{len(frequencies)} F({fy},{fx}) = "
                         f"{coefficient.real:+.3f}{coefficient.imag:+.3f}j"
