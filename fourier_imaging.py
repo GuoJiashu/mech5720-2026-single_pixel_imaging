@@ -1,5 +1,3 @@
-"""Four-step Fourier Single-Pixel Imaging with Arduino UNO."""
-
 import csv
 import json
 import time

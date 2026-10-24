@@ -1,6 +1,6 @@
 #include <math.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Reflective Single-Pixel Imaging
 // Arduino UNO R3 - Shared Acquisition
@@ -18,11 +18,14 @@ void performMeasurement(int id) {
   unsigned long nextUs = startUs;
 
   for (uint16_t i = 0; i < N_SAMPLES; i++) {
-    while ((long)(micros() - nextUs) < 0) {}
+    while ((long)(micros() - nextUs) < 0) {
+    }
 
     int raw = analogRead(LDR_PIN);
-    if (raw < minADC) minADC = raw;
-    if (raw > maxADC) maxADC = raw;
+    if (raw < minADC)
+      minADC = raw;
+    if (raw > maxADC)
+      maxADC = raw;
 
     // Running mean and variance
     float delta = raw - mean;
@@ -61,7 +64,8 @@ void setup() {
 }
 
 void loop() {
-  if (!Serial.available()) return;
+  if (!Serial.available())
+    return;
 
   char buffer[32];
   size_t n = Serial.readBytesUntil('\n', buffer, sizeof(buffer) - 1);

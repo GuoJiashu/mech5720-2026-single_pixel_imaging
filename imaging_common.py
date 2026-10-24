@@ -1,5 +1,3 @@
-"""Shared serial acquisition and projector display for the imaging scripts."""
-
 import json
 import time
 from contextlib import contextmanager
