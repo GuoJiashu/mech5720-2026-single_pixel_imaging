@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 
+import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from screeninfo import get_monitors
@@ -11,7 +12,7 @@ from screeninfo import get_monitors
 from imaging_common import (
     ADC_FIELDS,
     acquisition_session,
-    adjust_roi,
+    load_roi,
     display_for,
     read_adc,
 )
@@ -20,10 +21,7 @@ from imaging_common import (
 SERIAL_PORT = "COM8"
 PROJECTOR_INDEX = 1
 
-ROI_X, ROI_Y = 732, 664
-ROI_W, ROI_H = 352, 384
-
-GRID_SIZE = 16  # Change to 32 later
+GRID_SIZE = 64  # Change to 32 later
 
 BLACK_EVERY_N = 16
 BLACK_SETTLE_S = 6.0
@@ -39,10 +37,7 @@ ADC_SAMPLE_INTERVAL_MS = 4
 def main():
     projector = get_monitors()[PROJECTOR_INDEX]
     W, H = projector.width, projector.height
-    selected_roi = adjust_roi(projector, (ROI_X, ROI_Y, ROI_W, ROI_H), GRID_SIZE)
-    if selected_roi is None:
-        return
-    roi_x, roi_y, roi_w, roi_h = selected_roi
+    roi_x, roi_y, roi_w, roi_h = load_roi()
 
     # Output Directory
     output_dir = OUTPUT_ROOT / datetime.now().strftime("%Y%m%d_%H%M%S_%f")
@@ -69,8 +64,6 @@ def main():
 
     # Initialise Variables
     black_frame = np.zeros((H, W), dtype=np.uint8)
-    cell_w = roi_w // GRID_SIZE
-    cell_h = roi_h // GRID_SIZE
     spots = []
     blacks = []
     measurement_id = 0
@@ -131,10 +124,13 @@ def main():
                 total = GRID_SIZE * GRID_SIZE
                 for index in range(total):
                     r, c = divmod(index, GRID_SIZE)
+                    cells = np.zeros((GRID_SIZE, GRID_SIZE), dtype=np.uint8)
+                    cells[r, c] = 255
+                    roi = cv2.resize(
+                        cells, (roi_w, roi_h), interpolation=cv2.INTER_NEAREST
+                    )
                     frame = black_frame.copy()
-                    x = roi_x + c * cell_w
-                    y = roi_y + r * cell_h
-                    frame[y : y + cell_h, x : x + cell_w] = 255
+                    frame[roi_y : roi_y + roi_h, roi_x : roi_x + roi_w] = roi
                     display_for(window, frame, SPOT_SETTLE_S)
                     adc = read_adc(arduino, measurement_id)
                     row = {

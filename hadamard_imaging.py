@@ -13,7 +13,7 @@ from screeninfo import get_monitors
 from imaging_common import (
     ADC_FIELDS,
     acquisition_session,
-    adjust_roi,
+    load_roi,
     display_for,
     read_adc,
 )
@@ -21,10 +21,7 @@ from imaging_common import (
 SERIAL_PORT = "COM8"
 PROJECTOR_INDEX = 1
 
-ROI_X, ROI_Y = 732, 664
-ROI_W, ROI_H = 352, 384
-
-GRID_SIZE = 16  # Change to 32 later
+GRID_SIZE = 64  # Change to 32 later
 
 PATTERN_SETTLE_S = 1.0
 DC_SETTLE_S = 6.0
@@ -42,10 +39,7 @@ ADC_SAMPLE_INTERVAL_MS = 4
 def main():
     projector = get_monitors()[PROJECTOR_INDEX]
     W, H = projector.width, projector.height
-    selected_roi = adjust_roi(projector, (ROI_X, ROI_Y, ROI_W, ROI_H), GRID_SIZE)
-    if selected_roi is None:
-        return
-    roi_x, roi_y, roi_w, roi_h = selected_roi
+    roi_x, roi_y, roi_w, roi_h = load_roi()
 
     N = GRID_SIZE * GRID_SIZE
     H_matrix = hadamard(N)

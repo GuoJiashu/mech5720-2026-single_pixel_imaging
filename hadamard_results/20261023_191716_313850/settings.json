@@ -1,0 +1,31 @@
+{
+  "mode": "direct_reflective_complementary_hadamard",
+  "grid_size": 16,
+  "roi_xy": [
+    712,
+    636
+  ],
+  "roi_size_px": [
+    452,
+    444
+  ],
+  "projector_to_object_mm": 420,
+  "object_to_ldr_mm": 250,
+  "lens": "L14224, f=19 mm, diameter=10.9 mm",
+  "fixed_resistor_ohm": 22000,
+  "adc": "Arduino UNO R3, 10-bit A0",
+  "adc_samples": 125,
+  "adc_sample_interval_ms": 4,
+  "pattern_settle_s": 1.0,
+  "dc_settle_s": 6.0,
+  "black_settle_s": 6.0,
+  "black_every_pairs": 32,
+  "basis": "Sylvester Hadamard",
+  "positive_pattern": "(H[row]+1)/2",
+  "negative_pattern": "(1-H[row])/2",
+  "differential": "positive_ADC - negative_ADC",
+  "random_seed": 5720,
+  "status": "complete",
+  "completed_pairs": 256,
+  "elapsed_s": 864.090582599998
+}
