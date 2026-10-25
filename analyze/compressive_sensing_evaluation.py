@@ -1,51 +1,31 @@
-from pathlib import Path
 import json
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from scipy.sparse.linalg import LinearOperator, cg
 from skimage.metrics import structural_similarity
 
-# ========= CONFIGURATION =========
-DATASETS = {
-    "Direct_Scene": {
-        "Hadamard": {
-            16: r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261023_191716_313850",
-            32: r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261023_200537_930670",
-            64: r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261024_013607_094384",
-        },
-        "Fourier": {
-            16: r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261023_213635_003130",
-            32: r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261023_215608_700959",
-            64: r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261024_052155_912611",
-        },
-    },
-    "NLOS": {
-        "Hadamard": {
-            16: r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261024_220710_549725",
-            32: r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261024_232029_873143",
-            64: r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261025_041555_865482",
-        },
-        "Fourier": {
-            16: r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261024_222205_895619",
-            32: r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261025_002849_105656",
-            64: r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261025_080248_743060",
-        },
-    },
-}
-OUTPUT_DIR = Path("compressive_sensing_results")
-SAMPLING_RATES = [1.0, 0.75, 0.50, 0.25, 0.10]
-SELECTION_MODE = (
-    "random"  # 'random' or 'low_frequency' (Hadamard = Walsh-like 2D complexity)
-)
+from experiment_config import DATASETS, REPORT_DIR
+
+OUTPUT_DIR = REPORT_DIR / "compressive_sensing"
+RESOLUTION = 64
+SAMPLING_RATES = [1.0, 0.50, 0.25, 0.10]
+SCENES = ("Direct_Scene", "NLOS")
+METHODS = ("Hadamard", "Fourier")
+SELECTION_MODE = "random"
 RANDOM_SEED = 5720
-TV_WEIGHT = 0.015  # dimensionless relative to reference intensity range
-RHO = 1.0  # ADMM penalty in reference-normalized units
+TV_WEIGHT = 0.015
+RHO = 1.0
 ADMM_ITERS = 100
 CG_MAXITER = 50
 CG_RTOL = 1e-5
-SHOW_PLOTS = False
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+REFERENCE = "Full-sampling internal reference; not independent ground truth"
+SAMPLING_DESIGN = "Retrospective subsets of a complete acquisition"
 
 
 def fwht(v):
@@ -255,145 +235,194 @@ def solve_tv(ref, method, observed, mask, span):
     return x * span
 
 
-def metrics(result, reference, span):
-    err = result - reference
-    rmse = float(np.sqrt(np.mean(err**2)))
-    energy = float(np.mean(reference**2))
-    rsnr = 10 * np.log10(energy / max(rmse * rmse, 1e-30)) if energy > 0 else np.nan
+def reference_ssim(result, reference, span):
+    """Keep the existing 1st/99th-percentile normalization and SSIM definition."""
     rmin = float(np.percentile(reference, 1))
     a = np.clip((reference - rmin) / span, 0, 1)
     b = np.clip((result - rmin) / span, 0, 1)
-    ssim = float(
+    return float(
         structural_similarity(
             a, b, data_range=1.0, win_size=min(7, a.shape[0] // 2 * 2 - 1)
         )
     )
-    return rmse, rmse / span, rsnr, ssim
 
 
-def run_one(scene, method, resolution, source):
-    y, ref, path = load_data(source, method)
-    n = ref.shape[0]
-    if n != resolution:
-        raise ValueError(f"Expected {resolution}x{resolution} but got {n}x{n}: {path}")
-    folder = OUTPUT_DIR / scene / method.replace(" ", "_") / f"{n}x{n}"
-    folder.mkdir(parents=True, exist_ok=True)
-    span = float(np.percentile(ref, 99) - np.percentile(ref, 1))
+def plot_direct_comparison(method, images):
+    fig, axes = plt.subplots(2, len(SAMPLING_RATES), figsize=(10.5, 5.5))
+    upper = max(
+        1e-12,
+        *(
+            float(np.percentile(np.maximum(image, 0), 99))
+            for pair in images
+            for image in pair
+        ),
+    )
+    for column, (rate, pair) in enumerate(zip(SAMPLING_RATES, images)):
+        for row, image in enumerate(pair):
+            axes[row, column].imshow(
+                image, cmap="gray", vmin=0, vmax=upper, interpolation="nearest"
+            )
+            axes[row, column].set_xticks([])
+            axes[row, column].set_yticks([])
+        axes[0, column].set_title(f"{rate:.0%} groups")
+    axes[0, 0].set_ylabel("Zero-filled")
+    axes[1, 0].set_ylabel("TV-ADMM")
+    fig.suptitle(f"Direct Scene | {method} 64 x 64")
+    fig.text(
+        0.5,
+        0.025,
+        "Retrospective random subsets; 100% zero-filled is the internal reference, "
+        "not independent ground truth.",
+        ha="center",
+        fontsize=9,
+    )
+    fig.tight_layout(rect=(0, 0.055, 1, 0.95))
+    fig.savefig(OUTPUT_DIR / f"direct_{method.lower()}_comparison.png", dpi=220)
+    plt.close(fig)
+
+
+def run_one(scene, method):
+    observed, reference, path = load_data(DATASETS[scene][method][RESOLUTION], method)
+    n = reference.shape[0]
+    if n != RESOLUTION:
+        raise ValueError(f"Expected {RESOLUTION} x {RESOLUTION}, got {reference.shape}")
+    span = float(np.percentile(reference, 99) - np.percentile(reference, 1))
     if span <= 0:
-        span = max(float(np.std(ref)), 1e-6)
-    np.save(folder / "full_reference.npy", ref)
-    rows = []
-    images = []
+        span = max(float(np.std(reference)), 1e-6)
+
+    rows, images, masks = [], [], []
+    projections_per_group = 2 if method == "Hadamard" else 4
     for rate in SAMPLING_RATES:
-        seed = RANDOM_SEED + resolution
+        seed = RANDOM_SEED + RESOLUTION
         if method == "Hadamard":
             mask = choose_hadamard(n, rate, seed)
-            projected = fwht(np.where(mask, y, 0.0) / np.sqrt(n * n)).reshape(n, n)
-            count = int(mask.sum())
-            total = n * n
-            actual = count / total
+            zero_filled = fwht(np.where(mask, observed, 0.0) / np.sqrt(n * n)).reshape(
+                n, n
+            )
+            count, total = int(mask.sum()), n * n
         else:
             mask, count, total = choose_fourier(n, rate, seed)
-            projected = np.fft.ifft2(np.where(mask, y, 0.0)).real
-            actual = count / total
-        # The 100% zero-filled inverse is EXACTLY the reference (except fp rounding).
-        reconstructed = solve_tv(ref, method, y, mask, span)
-        for label, img in [("ZeroFilled", projected), ("TV_ADMM", reconstructed)]:
-            rmse, nrmse, rsnr, ssim = metrics(img, ref, span)
+            zero_filled = np.fft.ifft2(np.where(mask, observed, 0.0)).real
+        reconstructed = solve_tv(reference, method, observed, mask, span)
+        for algorithm, image in [
+            ("ZeroFilled", zero_filled),
+            ("TV_ADMM", reconstructed),
+        ]:
             rows.append(
                 {
                     "Scene": scene,
                     "Method": method,
-                    "Resolution": f"{n}x{n}",
+                    "Resolution": "64x64",
+                    "Algorithm": algorithm,
                     "Requested_Rate": rate,
-                    "Actual_Group_Rate": actual,
+                    "Actual_Group_Rate": count / total,
                     "Measured_Groups": count,
                     "Total_Groups": total,
-                    "Algorithm": label,
-                    "RMSE_raw": rmse,
-                    "NRMSE": nrmse,
-                    "RSNR_dB": rsnr,
-                    "SSIM": ssim,
+                    "Signal_Projections": projections_per_group * count,
+                    "Full_Signal_Projections": projections_per_group * total,
+                    "SSIM": reference_ssim(image, reference, span),
+                    "Reference": REFERENCE,
+                    "Sampling_Design": SAMPLING_DESIGN,
                     "Source": str(path),
                 }
             )
-        images.append((rate, projected, reconstructed))
-        np.savez_compressed(
-            folder / f"sampling_{int(rate*100):03d}.npz",
-            mask=mask,
-            zero_filled=projected,
-            tv_admm=reconstructed,
-            reference=ref,
-        )
+        masks.append(mask)
+        images.append((zero_filled, reconstructed))
         print(
-            f"  {scene} {method} {n}x{n} rate={rate:.0%}: "
-            f'ZF SSIM={rows[-2]["SSIM"]:.3f}, ADMM SSIM={rows[-1]["SSIM"]:.3f}'
+            f"{scene} {method} {rate:.0%}: {count}/{total} groups, "
+            f"{projections_per_group * count} signal projections; "
+            f"SSIM ZF={rows[-2]['SSIM']:.4f}, TV-ADMM={rows[-1]['SSIM']:.4f}",
+            flush=True,
         )
-    # Comparison figure, same display limits across panels.
-    fig, axes = plt.subplots(
-        2,
-        len(images) + 1,
-        figsize=(3.2 * (len(images) + 1), 7),
-        constrained_layout=True,
+
+    np.savez_compressed(
+        OUTPUT_DIR / f"{scene}_{method}_64x64.npz",
+        requested_rates=np.asarray(SAMPLING_RATES),
+        masks=np.asarray(masks),
+        zero_filled=np.asarray([pair[0] for pair in images]),
+        tv_admm=np.asarray([pair[1] for pair in images]),
+        reference=reference,
+        source=str(path),
+        reference_description=REFERENCE,
+        sampling_design=SAMPLING_DESIGN,
     )
-    vmin, vmax = np.percentile(ref, [1, 99])
-    for r in range(2):
-        axes[r, 0].imshow(
-            ref, cmap="gray", vmin=vmin, vmax=vmax, interpolation="nearest"
-        )
-        axes[r, 0].set_title("Full reference")
-        axes[r, 0].axis("off")
-    for j, (rate, zf, admm) in enumerate(images, start=1):
-        for row, img, title in [(0, zf, "Zero-filled"), (1, admm, "TV-ADMM")]:
-            axes[row, j].imshow(
-                img, cmap="gray", vmin=vmin, vmax=vmax, interpolation="nearest"
-            )
-            axes[row, j].set_title(f"{int(rate*100)}% {title}")
-            axes[row, j].axis("off")
-    fig.suptitle(f"{scene} | {method} {n}x{n} | {SELECTION_MODE}")
-    fig.savefig(folder / "sampling_comparison.png", dpi=220)
-    plt.close(fig)
+    if scene == "Direct_Scene":
+        plot_direct_comparison(method, images)
     return rows
 
 
+def plot_ssim(summary):
+    direct = summary[summary["Scene"] == "Direct_Scene"]
+    fig, axes = plt.subplots(1, 2, figsize=(9.5, 4.6), sharey=True)
+    for ax, method in zip(axes, METHODS):
+        selected = direct[direct["Method"] == method]
+        for algorithm, label, marker, color in [
+            ("ZeroFilled", "Zero-filled", "o", "#4477AA"),
+            ("TV_ADMM", "TV-ADMM", "s", "#CC6677"),
+        ]:
+            curve = selected[selected["Algorithm"] == algorithm].sort_values(
+                "Actual_Group_Rate"
+            )
+            ax.plot(
+                curve["Actual_Group_Rate"] * 100,
+                curve["SSIM"],
+                marker=marker,
+                color=color,
+                label=label,
+                linewidth=1.8,
+            )
+        ax.set_title(f"{method} 64 x 64")
+        ax.set_xlabel("Retained independent measurement groups (%)")
+        ax.set_xticks([10, 25, 50, 100])
+        ax.set_ylim(-0.03, 1.03)
+        ax.grid(alpha=0.25)
+        ax.legend(frameon=False)
+    axes[0].set_ylabel("SSIM vs full-sampling internal reference")
+    fig.suptitle("Direct Scene: retrospective undersampling")
+    fig.text(
+        0.5,
+        0.025,
+        "Internal reference is not independent ground truth. "
+        "Fixed parameters; no acquisition-time savings measured.",
+        ha="center",
+        fontsize=8.5,
+    )
+    fig.tight_layout(rect=(0, 0.065, 1, 0.93))
+    for suffix in ("png", "pdf"):
+        fig.savefig(REPORT_DIR / f"compressive_sensing_ssim.{suffix}", dpi=220)
+    plt.close(fig)
+
+
 def main():
-    results = []
-    for scene, methods in DATASETS.items():
-        for method, resolutions in methods.items():
-            for n, path in resolutions.items():
-                if not path:
-                    print(f"[SKIP] {scene} {method} {n}x{n} - empty path")
-                    continue
-                try:
-                    results += run_one(scene, method, n, path)
-                except (FileNotFoundError, ValueError, KeyError) as e:
-                    print(f"[ERROR] {scene} {method} {n}x{n}: {e}")
-    if not results:
-        raise RuntimeError(
-            "No dataset processed. Set DATASETS paths to full NPZ or containing directories."
-        )
-    df = pd.DataFrame(results)
-    df.to_csv(OUTPUT_DIR / "compressive_sensing_summary.csv", index=False)
-    for (scene, method, resolution), group in df.groupby(
-        ["Scene", "Method", "Resolution"]
-    ):
-        fig, axs = plt.subplots(1, 2, figsize=(11, 4), constrained_layout=True)
-        for algo, g in group.groupby("Algorithm"):
-            g = g.sort_values("Actual_Group_Rate")
-            axs[0].plot(100 * g["Actual_Group_Rate"], g["SSIM"], "o-", label=algo)
-            axs[1].plot(100 * g["Actual_Group_Rate"], g["NRMSE"], "o-", label=algo)
-        axs[0].set(xlabel="Measured independent groups (%)", ylabel="SSIM")
-        axs[1].set(xlabel="Measured independent groups (%)", ylabel="Normalised RMSE")
-        for ax in axs:
-            ax.grid(alpha=0.3)
-            ax.legend()
-        fig.suptitle(f"{scene} | {method} {resolution}")
-        out = OUTPUT_DIR / scene / method.replace(" ", "_") / resolution
-        fig.savefig(out / "quality_vs_sampling_rate.png", dpi=220)
-        plt.close(fig)
-    print(f'\nSaved: {(OUTPUT_DIR/"compressive_sensing_summary.csv").resolve()}')
-    if SHOW_PLOTS:
-        plt.show()
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    settings = {
+        "resolution": RESOLUTION,
+        "sampling_rates": SAMPLING_RATES,
+        "selection_mode": SELECTION_MODE,
+        "seed": RANDOM_SEED + RESOLUTION,
+        "tv_weight": TV_WEIGHT,
+        "rho": RHO,
+        "admm_iterations": ADMM_ITERS,
+        "cg_maxiter": CG_MAXITER,
+        "cg_rtol": CG_RTOL,
+        "reference": REFERENCE,
+        "sampling_design": SAMPLING_DESIGN,
+        "ssim_normalization": "Full-reference 1st/99th percentile span; clip both images to [0,1]",
+        "input": "Original measured Hadamard differential vector / Fourier spectrum; no new background correction",
+        "projection_count": "Signal patterns only: 2 per Hadamard pair, 4 per independent Fourier group; black references excluded",
+        "timing": "Retrospective subsets do not measure a new compressed acquisition or its elapsed time",
+    }
+    (OUTPUT_DIR / "settings.json").write_text(
+        json.dumps(settings, indent=2), encoding="utf-8"
+    )
+    rows = []
+    for scene in SCENES:
+        for method in METHODS:
+            rows.extend(run_one(scene, method))
+    summary = pd.DataFrame(rows)
+    summary.to_csv(OUTPUT_DIR / "summary.csv", index=False)
+    plot_ssim(summary)
+    print(f"Saved {len(summary)} rows to {OUTPUT_DIR / 'summary.csv'}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,19 @@
+Scene_Type,Method,Resolution,Grid_Size,Acquisition_min,Pattern_Projections,Black_References,Total_Measurements,Drift_Range_ADC,Net_Drift_ADC,Mean_Within_Window_Std_ADC,Timing_Source
+Direct_Scene,Point Scanning,16x16,16,8.509163,256,17,273,1.464000,0.080000,2.053394,settings.json:elapsed_s
+Direct_Scene,Point Scanning,32x32,32,33.549326,1024,65,1089,2.144000,-2.144000,2.108208,settings.json:elapsed_s
+Direct_Scene,Point Scanning,64x64,64,133.868771,4096,257,4353,2.888000,1.728000,2.031572,settings.json:elapsed_s
+Direct_Scene,Hadamard,16x16,16,14.401510,512,9,521,1.152000,-1.152000,2.114167,settings.json:elapsed_s
+Direct_Scene,Hadamard,32x32,32,56.692911,2048,33,2081,1.112000,-0.432000,2.127639,settings.json:elapsed_s
+Direct_Scene,Hadamard,64x64,64,225.789416,8192,129,8321,2.776000,-2.536000,2.036326,settings.json:elapsed_s
+Direct_Scene,Fourier,16x16,16,14.897111,520,10,530,0.696000,-0.560000,2.075540,settings.json:elapsed_s
+Direct_Scene,Fourier,32x32,32,57.165636,2056,34,2090,0.848000,-0.512000,2.015100,settings.json:elapsed_s
+Direct_Scene,Fourier,64x64,64,226.256860,8200,130,8330,25.616000,12.816000,2.070595,settings.json:elapsed_s
+NLOS,Point Scanning,16x16,16,8.532994,256,17,273,0.984000,-0.704000,1.747394,settings.json:elapsed_s
+NLOS,Point Scanning,32x32,32,33.684222,1024,65,1089,0.960000,-0.224000,1.617602,settings.json:elapsed_s
+NLOS,Point Scanning,64x64,64,134.402500,4096,257,4353,0.872000,-0.320000,1.704387,settings.json:elapsed_s
+NLOS,Hadamard,16x16,16,14.436448,512,9,521,0.560000,0.208000,1.770333,settings.json:elapsed_s
+NLOS,Hadamard,32x32,32,56.867964,2048,33,2081,0.784000,-0.112000,1.699721,settings.json:elapsed_s
+NLOS,Hadamard,64x64,64,226.853009,8192,129,8321,364.384000,141.951900,2.303678,settings.json:elapsed_s
+NLOS,Fourier,16x16,16,14.937192,520,10,530,0.464000,-0.064000,1.840460,settings.json:elapsed_s
+NLOS,Fourier,32x32,32,57.419305,2056,34,2090,0.912000,0.280000,1.764771,settings.json:elapsed_s
+NLOS,Fourier,64x64,64,227.318257,8200,130,8330,133.656000,-78.328000,2.927406,settings.json:elapsed_s

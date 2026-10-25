@@ -1,7 +1,0 @@
-Scene,Resolution,Grid_Size,Valid_Pixels,Total_Pixels,Usable_SNR_Pixels,Median_Abs_Signal_ADC,Median_Spot_Std_ADC,Median_Black_Std_ADC,Median_Noise_Proxy_ADC,Median_SNR_Proxy_dB,P10_SNR_Proxy_dB,P90_SNR_Proxy_dB,Positive_Response_Fraction,Input_File
-Direct_Scene,16x16,16,256,256,256,3.910455,2.049600,2.067836,2.921834,2.349088,-17.154293,22.235163,0.988281,C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261023_212721_046887\point_scan_data.npz
-Direct_Scene,32x32,32,1024,1024,1024,0.904004,2.109850,2.111162,2.989656,-10.473533,-28.930971,11.397525,0.872070,C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261023_183716_068313\point_scan_data.npz
-Direct_Scene,64x64,64,4096,4096,4096,0.326371,2.012800,2.026504,2.863701,-18.909703,-34.746230,-0.594507,0.775391,C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261023_232207_754080\point_scan_data.npz
-NLOS,16x16,16,256,256,256,0.373744,1.913200,1.741518,2.618028,-16.888531,-30.661016,-0.567538,0.710938,C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261024_215743_952485\point_scan_data.npz
-NLOS,32x32,32,1024,1024,1024,0.221551,1.702250,1.616927,2.360938,-20.348769,-35.722358,-11.792587,0.654297,C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261024_223747_962874\point_scan_data.npz
-NLOS,64x64,64,4096,4096,4096,0.132284,1.715200,1.692770,2.425147,-25.263037,-39.871419,-17.505715,0.574463,C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261025_020124_483501\point_scan_data.npz

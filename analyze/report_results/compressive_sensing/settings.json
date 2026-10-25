@@ -1,0 +1,22 @@
+{
+  "resolution": 64,
+  "sampling_rates": [
+    1.0,
+    0.5,
+    0.25,
+    0.1
+  ],
+  "selection_mode": "random",
+  "seed": 5784,
+  "tv_weight": 0.015,
+  "rho": 1.0,
+  "admm_iterations": 100,
+  "cg_maxiter": 50,
+  "cg_rtol": 1e-05,
+  "reference": "Full-sampling internal reference; not independent ground truth",
+  "sampling_design": "Retrospective subsets of a complete acquisition",
+  "ssim_normalization": "Full-reference 1st/99th percentile span; clip both images to [0,1]",
+  "input": "Original measured Hadamard differential vector / Fourier spectrum; no new background correction",
+  "projection_count": "Signal patterns only: 2 per Hadamard pair, 4 per independent Fourier group; black references excluded",
+  "timing": "Retrospective subsets do not measure a new compressed acquisition or its elapsed time"
+}
