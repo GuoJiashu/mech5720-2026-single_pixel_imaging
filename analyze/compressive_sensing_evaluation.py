@@ -1,7 +1,3 @@
-"""Part 6: retrospective compressive sampling of FULL Hadamard/Fourier measurements.
-No new acquisition. Full reconstruction is an internal reference, NOT ground truth.
-"""
-
 from pathlib import Path
 import json
 import numpy as np

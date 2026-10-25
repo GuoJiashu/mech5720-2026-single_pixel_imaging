@@ -1,8 +1,3 @@
-"""Part 3: image-level CNR for Direct Scene and NLOS SPC reconstructions.
-
-Requires numpy, pandas, matplotlib. Does not modify source NPZ files.
-"""
-
 from pathlib import Path
 import warnings
 import numpy as np

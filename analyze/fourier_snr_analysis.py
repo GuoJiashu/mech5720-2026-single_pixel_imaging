@@ -1,10 +1,3 @@
-"""Part 2: Fourier four-step acquisition-level SNR proxy analysis.
-
-Reads original fourier_data.npz without modifying it. No projector or ADC required.
-SNR proxy uses per-phase within-window sample STD, NOT the standard error
-of the averaged measurements, and does not model systematic phase drift.
-"""
-
 from pathlib import Path
 import numpy as np
 import pandas as pd
