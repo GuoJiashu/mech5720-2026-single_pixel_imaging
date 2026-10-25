@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from plotting_common import (
+from analyze.reconstruction.plotting_common import (
     DIFFERENCE_CMAP,
     INTENSITY_CMAP,
     INTERPOLATION,

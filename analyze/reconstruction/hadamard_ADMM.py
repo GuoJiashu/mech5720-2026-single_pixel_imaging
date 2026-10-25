@@ -4,14 +4,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.sparse.linalg import LinearOperator, cg
 
-from plotting_common import (
+from analyze.reconstruction.plotting_common import (
     DIFFERENCE_CMAP,
     INTENSITY_CMAP,
     INTERPOLATION,
     difference_limits,
     intensity_limits,
 )
-from tv_common import gradient, gradient_adjoint, total_variation, vector_shrink
+from analyze.reconstruction.tv_common import (
+    gradient,
+    gradient_adjoint,
+    total_variation,
+    vector_shrink,
+)
 
 # Configuration
 
