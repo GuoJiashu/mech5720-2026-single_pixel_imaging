@@ -18,7 +18,7 @@ from tv_common import gradient, gradient_adjoint, total_variation, vector_shrink
 
 NPZ_PATH = Path(
     r"C:\Users\13658\Desktop\MECH 5720\Major\code"
-    r"\fourier_results\20261024_052155_912611"
+    r"\fourier_results\20261025_080248_743060"
     r"\reconstruction_corrected\fourier_reconstruction.npz"
 )
 

@@ -18,7 +18,7 @@ from tv_common import gradient, gradient_adjoint, total_variation, vector_shrink
 # Specify your NPZ path, or use None to
 # automatically select the latest acquisition.
 
-NPZ_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261024_013607_094384\hadamard_data.npz"
+NPZ_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261025_041555_865482\hadamard_data.npz"
 
 RESULT_ROOT = Path("hadamard_results")
 
@@ -28,7 +28,7 @@ RESULT_ROOT = Path("hadamard_results")
 # 0.25 = 25%
 # 0.1 = 10%
 
-SAMPLING_RATE = 0.25  # Fraction of Hadamard rows to use
+SAMPLING_RATE = 1  # Fraction of Hadamard rows to use
 
 # "random" or "sequency"
 SAMPLING_MODE = "sequency"

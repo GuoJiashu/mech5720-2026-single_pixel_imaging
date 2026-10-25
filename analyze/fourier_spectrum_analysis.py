@@ -18,7 +18,7 @@ from plotting_common import (
 # Configuration
 
 NPZ_PATH = Path(
-    r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261024_052155_912611\reconstruction_corrected\fourier_reconstruction.npz"
+    r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261025_080248_743060\reconstruction_corrected\fourier_reconstruction.npz"
 )
 
 GAUSSIAN_SIGMAS = [8, 12, 20, 32]

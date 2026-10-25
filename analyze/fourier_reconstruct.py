@@ -16,7 +16,7 @@ from plotting_common import (
 # Configuration
 
 DATA_DIR = Path(
-    r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261024_052155_912611"
+    r"C:\Users\13658\Desktop\MECH 5720\Major\code\fourier_results\20261025_080248_743060"
 )
 
 OUTPUT_NAME = "reconstruction_corrected"

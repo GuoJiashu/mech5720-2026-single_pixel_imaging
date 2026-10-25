@@ -17,11 +17,11 @@ from tv_common import gradient, gradient_adjoint, total_variation, vector_shrink
 
 # Set to a specific NPZ path if preferred.
 # None = automatically use the latest scan.
-NPZ_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261023_183716_068313\point_scan_data.npz"
+NPZ_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261025_020124_483501\point_scan_data.npz"
 
 RESULT_ROOT = Path("point_scan_results")
 
-LAMBDA_TV = 0.1
+LAMBDA_TV = 0.02
 RHO = 2.0
 
 MAX_ITER = 200
