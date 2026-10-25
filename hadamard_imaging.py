@@ -130,6 +130,7 @@ def main():
                     output_dir / "black_reference.csv", black_columns, dictionaries=True
                 ) as write_black,
             ):
+
                 def capture_black():
                     nonlocal measurement_id
                     display_for(window, black_frame, BLACK_SETTLE_S)
@@ -169,7 +170,9 @@ def main():
                         )
                         # Extra settling for DC
                         settle = DC_SETTLE_S if row_index == 0 else PATTERN_SETTLE_S
-                        display_pattern(window, black_frame, roi_geometry, cells, settle)
+                        display_pattern(
+                            window, black_frame, roi_geometry, cells, settle
+                        )
                         adc = read_adc(arduino, measurement_id)
                         record = {
                             "pair_number": pair_number,

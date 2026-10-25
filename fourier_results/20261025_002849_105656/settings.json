@@ -1,0 +1,27 @@
+{
+  "mode": "reflective_fourier",
+  "grid_size": 32,
+  "roi_xy": [
+    692,
+    626
+  ],
+  "roi_size_px": [
+    432,
+    434
+  ],
+  "projector_object_mm": 420,
+  "object_ldr_mm": 250,
+  "fixed_resistor_ohm": 22000,
+  "phases_deg": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "pattern_settle_s": 1.0,
+  "black_settle_s": 6.0,
+  "black_every": 16,
+  "status": "complete",
+  "completed_frequency_groups": 514,
+  "elapsed_s": 3445.1583088000043
+}

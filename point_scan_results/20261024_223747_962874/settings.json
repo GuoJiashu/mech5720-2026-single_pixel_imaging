@@ -1,0 +1,25 @@
+{
+  "mode": "direct_reflective_point_scanning",
+  "grid_size": 32,
+  "roi_xy": [
+    692,
+    626
+  ],
+  "roi_size_px": [
+    432,
+    434
+  ],
+  "projector_to_object_mm": 420,
+  "object_to_ldr_mm": 250,
+  "lens": "L14224, f=19 mm, diameter=10.9 mm",
+  "fixed_resistor_ohm": 22000,
+  "adc": "Arduino UNO R3, 10-bit A0",
+  "adc_samples": 125,
+  "adc_sample_interval_ms": 4,
+  "black_every_n": 16,
+  "black_settle_s": 6.0,
+  "spot_settle_s": 1.0,
+  "status": "complete",
+  "completed_pixels": 1024,
+  "elapsed_s": 2021.053342500003
+}

@@ -110,6 +110,7 @@ def main():
                     ["after_groups", "time_s", "mean_adc", "std_adc"],
                 ) as write_black,
             ):
+
                 def capture_black():
                     nonlocal sample_id
                     display_for(window, black, BLACK_SETTLE_S)
