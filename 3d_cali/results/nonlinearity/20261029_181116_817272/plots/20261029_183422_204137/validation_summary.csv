@@ -1,0 +1,5 @@
+﻿channel,exponent,fit_complete,fit_checks_passed,expected_validation_groups,pass_groups,fail_groups,inconclusive_groups,status
+A0,1.2283,False,False,0,0,0,0,fit_only
+A1,1.2822,False,False,0,0,0,0,fit_only
+A2,1.1875,False,False,0,0,0,0,fit_only
+A3,1.3082,False,False,0,0,0,0,fit_only

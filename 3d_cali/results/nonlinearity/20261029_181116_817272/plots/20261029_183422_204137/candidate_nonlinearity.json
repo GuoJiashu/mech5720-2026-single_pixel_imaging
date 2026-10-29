@@ -1,0 +1,36 @@
+{
+  "model": "divider_power",
+  "adc_full_scale": 1023,
+  "exponents": {
+    "A0": 1.2283,
+    "A1": 1.2822,
+    "A2": 1.1875,
+    "A3": 1.3082
+  },
+  "status": "candidate_not_validated",
+  "fit_created_at": "2026-10-29T18:11:16.817761+11:00",
+  "fit_source": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\results\\nonlinearity\\20261029_181116_817272",
+  "fit_simulated": false,
+  "fit_complete": {
+    "A0": false,
+    "A1": false,
+    "A2": false,
+    "A3": false
+  },
+  "grid": 16,
+  "roi": {
+    "ROI_X": 832,
+    "ROI_Y": 284,
+    "ROI_W": 352,
+    "ROI_H": 384,
+    "SCREEN_W": 1920,
+    "SCREEN_H": 1080
+  },
+  "fit_objective": "mean squared relative additivity residual, fitting groups only",
+  "fit_checks_passed": {
+    "A0": false,
+    "A1": false,
+    "A2": false,
+    "A3": false
+  }
+}

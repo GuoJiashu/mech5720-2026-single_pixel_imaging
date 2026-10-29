@@ -1,0 +1,2346 @@
+[
+  {
+    "phase_id": 1,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 2,
+    "kind": "white",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "phase_id": 3,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 4,
+    "kind": "pattern",
+    "index": 0,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 5,
+    "kind": "pattern",
+    "index": 1,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 6,
+    "kind": "pattern",
+    "index": 2,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 7,
+    "kind": "pattern",
+    "index": 3,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 8,
+    "kind": "pattern",
+    "index": 4,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 9,
+    "kind": "pattern",
+    "index": 5,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 10,
+    "kind": "pattern",
+    "index": 6,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 11,
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 12,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 13,
+    "kind": "pattern",
+    "index": 8,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 14,
+    "kind": "pattern",
+    "index": 9,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 15,
+    "kind": "pattern",
+    "index": 10,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 16,
+    "kind": "pattern",
+    "index": 11,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 17,
+    "kind": "pattern",
+    "index": 12,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 18,
+    "kind": "pattern",
+    "index": 13,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 19,
+    "kind": "pattern",
+    "index": 14,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 20,
+    "kind": "pattern",
+    "index": 15,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 21,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 22,
+    "kind": "pattern",
+    "index": 16,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 23,
+    "kind": "pattern",
+    "index": 17,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 24,
+    "kind": "pattern",
+    "index": 18,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 25,
+    "kind": "pattern",
+    "index": 19,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 26,
+    "kind": "pattern",
+    "index": 20,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 27,
+    "kind": "pattern",
+    "index": 21,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 28,
+    "kind": "pattern",
+    "index": 22,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 29,
+    "kind": "pattern",
+    "index": 23,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 30,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 31,
+    "kind": "pattern",
+    "index": 24,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 32,
+    "kind": "pattern",
+    "index": 25,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 33,
+    "kind": "pattern",
+    "index": 26,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 34,
+    "kind": "pattern",
+    "index": 27,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 35,
+    "kind": "pattern",
+    "index": 28,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 36,
+    "kind": "pattern",
+    "index": 29,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 37,
+    "kind": "pattern",
+    "index": 30,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 38,
+    "kind": "pattern",
+    "index": 31,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 39,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 40,
+    "kind": "pattern",
+    "index": 32,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 41,
+    "kind": "pattern",
+    "index": 33,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 42,
+    "kind": "pattern",
+    "index": 34,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 43,
+    "kind": "pattern",
+    "index": 35,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 44,
+    "kind": "pattern",
+    "index": 36,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 45,
+    "kind": "pattern",
+    "index": 37,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 46,
+    "kind": "pattern",
+    "index": 38,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 47,
+    "kind": "pattern",
+    "index": 39,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 48,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 49,
+    "kind": "pattern",
+    "index": 40,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 50,
+    "kind": "pattern",
+    "index": 41,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 51,
+    "kind": "pattern",
+    "index": 42,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 52,
+    "kind": "pattern",
+    "index": 43,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 53,
+    "kind": "pattern",
+    "index": 44,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 54,
+    "kind": "pattern",
+    "index": 45,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 55,
+    "kind": "pattern",
+    "index": 46,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 56,
+    "kind": "pattern",
+    "index": 47,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 57,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 58,
+    "kind": "pattern",
+    "index": 48,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 59,
+    "kind": "pattern",
+    "index": 49,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 60,
+    "kind": "pattern",
+    "index": 50,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 61,
+    "kind": "pattern",
+    "index": 51,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 62,
+    "kind": "pattern",
+    "index": 52,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 63,
+    "kind": "pattern",
+    "index": 53,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 64,
+    "kind": "pattern",
+    "index": 54,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 65,
+    "kind": "pattern",
+    "index": 55,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 66,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 67,
+    "kind": "pattern",
+    "index": 56,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 68,
+    "kind": "pattern",
+    "index": 57,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 69,
+    "kind": "pattern",
+    "index": 58,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 70,
+    "kind": "pattern",
+    "index": 59,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 71,
+    "kind": "pattern",
+    "index": 60,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 72,
+    "kind": "pattern",
+    "index": 61,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 73,
+    "kind": "pattern",
+    "index": 62,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 74,
+    "kind": "pattern",
+    "index": 63,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 75,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 76,
+    "kind": "pattern",
+    "index": 64,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 77,
+    "kind": "pattern",
+    "index": 65,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 78,
+    "kind": "pattern",
+    "index": 66,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 79,
+    "kind": "pattern",
+    "index": 67,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 80,
+    "kind": "pattern",
+    "index": 68,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 81,
+    "kind": "pattern",
+    "index": 69,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 82,
+    "kind": "pattern",
+    "index": 70,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 83,
+    "kind": "pattern",
+    "index": 71,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 84,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 85,
+    "kind": "pattern",
+    "index": 72,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 86,
+    "kind": "pattern",
+    "index": 73,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 87,
+    "kind": "pattern",
+    "index": 74,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 88,
+    "kind": "pattern",
+    "index": 75,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 89,
+    "kind": "pattern",
+    "index": 76,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 90,
+    "kind": "pattern",
+    "index": 77,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 91,
+    "kind": "pattern",
+    "index": 78,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 92,
+    "kind": "pattern",
+    "index": 79,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 93,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 94,
+    "kind": "pattern",
+    "index": 80,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 95,
+    "kind": "pattern",
+    "index": 81,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 96,
+    "kind": "pattern",
+    "index": 82,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 97,
+    "kind": "pattern",
+    "index": 83,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 98,
+    "kind": "pattern",
+    "index": 84,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 99,
+    "kind": "pattern",
+    "index": 85,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 100,
+    "kind": "pattern",
+    "index": 86,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 101,
+    "kind": "pattern",
+    "index": 87,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 102,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 103,
+    "kind": "pattern",
+    "index": 88,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 104,
+    "kind": "pattern",
+    "index": 89,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 105,
+    "kind": "pattern",
+    "index": 90,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 106,
+    "kind": "pattern",
+    "index": 91,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 107,
+    "kind": "pattern",
+    "index": 92,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 108,
+    "kind": "pattern",
+    "index": 93,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 109,
+    "kind": "pattern",
+    "index": 94,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 110,
+    "kind": "pattern",
+    "index": 95,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 111,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 112,
+    "kind": "pattern",
+    "index": 96,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 113,
+    "kind": "pattern",
+    "index": 97,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 114,
+    "kind": "pattern",
+    "index": 98,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 115,
+    "kind": "pattern",
+    "index": 99,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 116,
+    "kind": "pattern",
+    "index": 100,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 117,
+    "kind": "pattern",
+    "index": 101,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 118,
+    "kind": "pattern",
+    "index": 102,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 119,
+    "kind": "pattern",
+    "index": 103,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 120,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 121,
+    "kind": "pattern",
+    "index": 104,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 122,
+    "kind": "pattern",
+    "index": 105,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 123,
+    "kind": "pattern",
+    "index": 106,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 124,
+    "kind": "pattern",
+    "index": 107,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 125,
+    "kind": "pattern",
+    "index": 108,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 126,
+    "kind": "pattern",
+    "index": 109,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 127,
+    "kind": "pattern",
+    "index": 110,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 128,
+    "kind": "pattern",
+    "index": 111,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 129,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 130,
+    "kind": "pattern",
+    "index": 112,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 131,
+    "kind": "pattern",
+    "index": 113,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 132,
+    "kind": "pattern",
+    "index": 114,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 133,
+    "kind": "pattern",
+    "index": 115,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 134,
+    "kind": "pattern",
+    "index": 116,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 135,
+    "kind": "pattern",
+    "index": 117,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 136,
+    "kind": "pattern",
+    "index": 118,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 137,
+    "kind": "pattern",
+    "index": 119,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 138,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 139,
+    "kind": "pattern",
+    "index": 120,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 140,
+    "kind": "pattern",
+    "index": 121,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 141,
+    "kind": "pattern",
+    "index": 122,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 142,
+    "kind": "pattern",
+    "index": 123,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 143,
+    "kind": "pattern",
+    "index": 124,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 144,
+    "kind": "pattern",
+    "index": 125,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 145,
+    "kind": "pattern",
+    "index": 126,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 146,
+    "kind": "pattern",
+    "index": 127,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 147,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 148,
+    "kind": "pattern",
+    "index": 128,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 149,
+    "kind": "pattern",
+    "index": 129,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 150,
+    "kind": "pattern",
+    "index": 130,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 151,
+    "kind": "pattern",
+    "index": 131,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 152,
+    "kind": "pattern",
+    "index": 132,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 153,
+    "kind": "pattern",
+    "index": 133,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 154,
+    "kind": "pattern",
+    "index": 134,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 155,
+    "kind": "pattern",
+    "index": 135,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 156,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 157,
+    "kind": "pattern",
+    "index": 136,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 158,
+    "kind": "pattern",
+    "index": 137,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 159,
+    "kind": "pattern",
+    "index": 138,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 160,
+    "kind": "pattern",
+    "index": 139,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 161,
+    "kind": "pattern",
+    "index": 140,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 162,
+    "kind": "pattern",
+    "index": 141,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 163,
+    "kind": "pattern",
+    "index": 142,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 164,
+    "kind": "pattern",
+    "index": 143,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 165,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 166,
+    "kind": "pattern",
+    "index": 144,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 167,
+    "kind": "pattern",
+    "index": 145,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 168,
+    "kind": "pattern",
+    "index": 146,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 169,
+    "kind": "pattern",
+    "index": 147,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 170,
+    "kind": "pattern",
+    "index": 148,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 171,
+    "kind": "pattern",
+    "index": 149,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 172,
+    "kind": "pattern",
+    "index": 150,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 173,
+    "kind": "pattern",
+    "index": 151,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 174,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 175,
+    "kind": "pattern",
+    "index": 152,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 176,
+    "kind": "pattern",
+    "index": 153,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 177,
+    "kind": "pattern",
+    "index": 154,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 178,
+    "kind": "pattern",
+    "index": 155,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 179,
+    "kind": "pattern",
+    "index": 156,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 180,
+    "kind": "pattern",
+    "index": 157,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 181,
+    "kind": "pattern",
+    "index": 158,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 182,
+    "kind": "pattern",
+    "index": 159,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 183,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 184,
+    "kind": "pattern",
+    "index": 160,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 185,
+    "kind": "pattern",
+    "index": 161,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 186,
+    "kind": "pattern",
+    "index": 162,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 187,
+    "kind": "pattern",
+    "index": 163,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 188,
+    "kind": "pattern",
+    "index": 164,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 189,
+    "kind": "pattern",
+    "index": 165,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 190,
+    "kind": "pattern",
+    "index": 166,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 191,
+    "kind": "pattern",
+    "index": 167,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 192,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 193,
+    "kind": "pattern",
+    "index": 168,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 194,
+    "kind": "pattern",
+    "index": 169,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 195,
+    "kind": "pattern",
+    "index": 170,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 196,
+    "kind": "pattern",
+    "index": 171,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 197,
+    "kind": "pattern",
+    "index": 172,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 198,
+    "kind": "pattern",
+    "index": 173,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 199,
+    "kind": "pattern",
+    "index": 174,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 200,
+    "kind": "pattern",
+    "index": 175,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 201,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 202,
+    "kind": "pattern",
+    "index": 176,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 203,
+    "kind": "pattern",
+    "index": 177,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 204,
+    "kind": "pattern",
+    "index": 178,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 205,
+    "kind": "pattern",
+    "index": 179,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 206,
+    "kind": "pattern",
+    "index": 180,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 207,
+    "kind": "pattern",
+    "index": 181,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 208,
+    "kind": "pattern",
+    "index": 182,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 209,
+    "kind": "pattern",
+    "index": 183,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 210,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 211,
+    "kind": "pattern",
+    "index": 184,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 212,
+    "kind": "pattern",
+    "index": 185,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 213,
+    "kind": "pattern",
+    "index": 186,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 214,
+    "kind": "pattern",
+    "index": 187,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 215,
+    "kind": "pattern",
+    "index": 188,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 216,
+    "kind": "pattern",
+    "index": 189,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 217,
+    "kind": "pattern",
+    "index": 190,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 218,
+    "kind": "pattern",
+    "index": 191,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 219,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 220,
+    "kind": "pattern",
+    "index": 192,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 221,
+    "kind": "pattern",
+    "index": 193,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 222,
+    "kind": "pattern",
+    "index": 194,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 223,
+    "kind": "pattern",
+    "index": 195,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 224,
+    "kind": "pattern",
+    "index": 196,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 225,
+    "kind": "pattern",
+    "index": 197,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 226,
+    "kind": "pattern",
+    "index": 198,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 227,
+    "kind": "pattern",
+    "index": 199,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 228,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 229,
+    "kind": "pattern",
+    "index": 200,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 230,
+    "kind": "pattern",
+    "index": 201,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 231,
+    "kind": "pattern",
+    "index": 202,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 232,
+    "kind": "pattern",
+    "index": 203,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 233,
+    "kind": "pattern",
+    "index": 204,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 234,
+    "kind": "pattern",
+    "index": 205,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 235,
+    "kind": "pattern",
+    "index": 206,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 236,
+    "kind": "pattern",
+    "index": 207,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 237,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 238,
+    "kind": "pattern",
+    "index": 208,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 239,
+    "kind": "pattern",
+    "index": 209,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 240,
+    "kind": "pattern",
+    "index": 210,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 241,
+    "kind": "pattern",
+    "index": 211,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 242,
+    "kind": "pattern",
+    "index": 212,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 243,
+    "kind": "pattern",
+    "index": 213,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 244,
+    "kind": "pattern",
+    "index": 214,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 245,
+    "kind": "pattern",
+    "index": 215,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 246,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 247,
+    "kind": "pattern",
+    "index": 216,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 248,
+    "kind": "pattern",
+    "index": 217,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 249,
+    "kind": "pattern",
+    "index": 218,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 250,
+    "kind": "pattern",
+    "index": 219,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 251,
+    "kind": "pattern",
+    "index": 220,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 252,
+    "kind": "pattern",
+    "index": 221,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 253,
+    "kind": "pattern",
+    "index": 222,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 254,
+    "kind": "pattern",
+    "index": 223,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 255,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 256,
+    "kind": "pattern",
+    "index": 224,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 257,
+    "kind": "pattern",
+    "index": 225,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 258,
+    "kind": "pattern",
+    "index": 226,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 259,
+    "kind": "pattern",
+    "index": 227,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 260,
+    "kind": "pattern",
+    "index": 228,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 261,
+    "kind": "pattern",
+    "index": 229,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 262,
+    "kind": "pattern",
+    "index": 230,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 263,
+    "kind": "pattern",
+    "index": 231,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 264,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 265,
+    "kind": "pattern",
+    "index": 232,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 266,
+    "kind": "pattern",
+    "index": 233,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 267,
+    "kind": "pattern",
+    "index": 234,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 268,
+    "kind": "pattern",
+    "index": 235,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 269,
+    "kind": "pattern",
+    "index": 236,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 270,
+    "kind": "pattern",
+    "index": 237,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 271,
+    "kind": "pattern",
+    "index": 238,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 272,
+    "kind": "pattern",
+    "index": 239,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 273,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 274,
+    "kind": "pattern",
+    "index": 240,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 275,
+    "kind": "pattern",
+    "index": 241,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 276,
+    "kind": "pattern",
+    "index": 242,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 277,
+    "kind": "pattern",
+    "index": 243,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 278,
+    "kind": "pattern",
+    "index": 244,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 279,
+    "kind": "pattern",
+    "index": 245,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 280,
+    "kind": "pattern",
+    "index": 246,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 281,
+    "kind": "pattern",
+    "index": 247,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 282,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 283,
+    "kind": "pattern",
+    "index": 248,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 284,
+    "kind": "pattern",
+    "index": 249,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 285,
+    "kind": "pattern",
+    "index": 250,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 286,
+    "kind": "pattern",
+    "index": 251,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 287,
+    "kind": "pattern",
+    "index": 252,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 288,
+    "kind": "pattern",
+    "index": 253,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 289,
+    "kind": "pattern",
+    "index": 254,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "phase_id": 290,
+    "kind": "pattern",
+    "index": 255,
+    "polarity": 1,
+    "settle_s": 3.0,
+    "hold_s": 8.0
+  },
+  {
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "phase_id": 291,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 292,
+    "kind": "white",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  },
+  {
+    "phase_id": 293,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "hold_s": 25.0
+  }
+]
