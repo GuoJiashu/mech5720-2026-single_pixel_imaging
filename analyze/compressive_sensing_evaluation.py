@@ -1,6 +1,3 @@
-import json
-from pathlib import Path
-
 import matplotlib
 
 matplotlib.use("Agg")
@@ -11,6 +8,11 @@ from scipy.sparse.linalg import LinearOperator, cg
 from skimage.metrics import structural_similarity
 
 from experiment_config import DATASETS, REPORT_DIR
+from reconstruction.tv_common import (
+    gradient as grad,
+    gradient_adjoint as grad_adj,
+    vector_shrink,
+)
 
 OUTPUT_DIR = REPORT_DIR / "compressive_sensing"
 RESOLUTION = 64
@@ -19,21 +21,17 @@ SCENES = ("Direct_Scene", "NLOS")
 METHODS = ("Hadamard", "Fourier")
 SELECTION_MODE = "random"
 RANDOM_SEED = 5720
-TV_WEIGHT = 0.015
+TV_WEIGHT = 0.005
 RHO = 1.0
 ADMM_ITERS = 100
 CG_MAXITER = 50
 CG_RTOL = 1e-5
-REFERENCE = "Full-sampling internal reference; not independent ground truth"
-SAMPLING_DESIGN = "Retrospective subsets of a complete acquisition"
 
 
 def fwht(v):
     """Orthonormal Sylvester Hadamard transform, N must be power of two."""
     x = np.asarray(v, dtype=np.float64).copy()
     n = x.size
-    if n == 0 or n & (n - 1):
-        raise ValueError("Hadamard vector length must be a power of two")
     h = 1
     while h < n:
         y = x.reshape(-1, 2, h)
@@ -45,33 +43,16 @@ def fwht(v):
     return x / np.sqrt(n)
 
 
-def grad(x):
-    gx = np.zeros_like(x)
-    gy = np.zeros_like(x)
-    gx[:, :-1] = x[:, 1:] - x[:, :-1]
-    gy[:-1, :] = x[1:, :] - x[:-1, :]
-    return gx, gy
-
-
-def grad_adj(gx, gy):
-    result = np.zeros_like(gx)
-    result[:, :-1] -= gx[:, :-1]
-    result[:, 1:] += gx[:, :-1]
-    result[:-1, :] -= gy[:-1, :]
-    result[1:, :] += gy[:-1, :]
-    return result
-
-
 def choose_hadamard(n, rate, seed):
     count = n * n
-    m = max(1, int(round(count * rate)))
+    m = int(round(count * rate))
     if rate == 1:
         return np.ones(count, dtype=bool)
     rng = np.random.default_rng(seed)
     remaining = np.arange(1, count)
     if SELECTION_MODE == "random":
         picked = rng.choice(remaining, size=m - 1, replace=False)
-    elif SELECTION_MODE == "low_frequency":
+    else:
         # Sylvester Hadamard row -> Walsh sequency, applied to each axis.
         # Row index r = row_y*n + row_x (row-major flattening).
         # Count of sign changes for the corresponding Sylvester row.
@@ -89,8 +70,6 @@ def choose_hadamard(n, rate, seed):
         complexity = (sign_changes[:, None] + sign_changes[None, :]).reshape(-1)
         order = np.lexsort((remaining, complexity[1:]))
         picked = remaining[order[: m - 1]]
-    else:
-        raise ValueError("Invalid SELECTION_MODE")
     mask = np.zeros(count, dtype=bool)
     mask[0] = True
     mask[picked] = True
@@ -111,7 +90,7 @@ def choose_fourier(n, rate, seed):
             seen.add(b)
             groups.append((a, b))
     total = len(groups)
-    m = max(1, int(round(total * rate)))
+    m = int(round(total * rate))
     dc_index = next(i for i, (a, _) in enumerate(groups) if a == (0, 0))
     others = [i for i in range(total) if i != dc_index]
     rng = np.random.default_rng(seed)
@@ -119,15 +98,13 @@ def choose_fourier(n, rate, seed):
         chosen = list(range(total))
     elif SELECTION_MODE == "random":
         chosen = [dc_index] + list(rng.choice(others, size=m - 1, replace=False))
-    elif SELECTION_MODE == "low_frequency":
+    else:
 
         def dist2(i):
             fy, fx = groups[i][0]
             return min(fy, n - fy) ** 2 + min(fx, n - fx) ** 2
 
         chosen = [dc_index] + sorted(others, key=lambda i: (dist2(i), i))[: m - 1]
-    else:
-        raise ValueError("Invalid SELECTION_MODE")
     mask = np.zeros((n, n), dtype=bool)
     for index in chosen:
         a, b = groups[index]
@@ -136,32 +113,18 @@ def choose_fourier(n, rate, seed):
     return mask, m, total
 
 
-def load_data(path, method):
-    path = Path(path)
-    if path.is_dir():
-        filename = "hadamard_data.npz" if method == "Hadamard" else "fourier_data.npz"
-        path = path / filename
-    if not path.is_file():
-        raise FileNotFoundError(path)
+def load_data(folder, method):
+    filename = "hadamard_data.npz" if method == "Hadamard" else "fourier_data.npz"
+    path = folder / filename
     with np.load(path) as f:
         if method == "Hadamard":
             y = np.asarray(f["differential_adc"], dtype=float)
             n = int(np.sqrt(len(y)))
-            if n * n != len(y) or not np.isfinite(y).all():
-                raise ValueError("Need a full, finite Hadamard measurement vector")
             ref = fwht(y / np.sqrt(len(y))).reshape(n, n)
         else:
-            if "fourier_coefficients" in f:
-                y = np.asarray(f["fourier_coefficients"], dtype=complex)
-            elif "corrected_spectrum" in f:
-                y = np.asarray(f["corrected_spectrum"], dtype=complex)
-            else:
-                raise ValueError("Fourier NPZ must contain full coefficients/spectrum")
-            n = y.shape[0]
-            if y.shape != (n, n) or not np.isfinite(y).all():
-                raise ValueError("Need a full finite square Fourier spectrum")
+            y = np.asarray(f["fourier_coefficients"], dtype=complex)
             ref = np.fft.ifft2(y).real
-    return y, ref, path
+    return y, ref
 
 
 def solve_tv(ref, method, observed, mask, span):
@@ -214,7 +177,7 @@ def solve_tv(ref, method, observed, mask, span):
     uy = np.zeros_like(x)
     for _ in range(ADMM_ITERS):
         rhs = rhs_data + RHO * grad_adj(zx - ux, zy - uy)
-        solution, info = cg(
+        solution, _ = cg(
             operator,
             rhs.ravel(),
             x0=x.ravel(),
@@ -222,14 +185,10 @@ def solve_tv(ref, method, observed, mask, span):
             atol=0.0,
             maxiter=CG_MAXITER,
         )
-        if info < 0:
-            raise RuntimeError("CG failed")
         x = solution.reshape(n, n)
         gx, gy = grad(x)
         vx, vy = gx + ux, gy + uy
-        mag = np.sqrt(vx * vx + vy * vy)
-        shrink = np.maximum(0, 1 - (TV_WEIGHT / RHO) / np.maximum(mag, 1e-12))
-        zx, zy = vx * shrink, vy * shrink
+        zx, zy = vector_shrink(vx, vy, TV_WEIGHT / RHO)
         ux += gx - zx
         uy += gy - zy
     return x * span
@@ -240,22 +199,15 @@ def reference_ssim(result, reference, span):
     rmin = float(np.percentile(reference, 1))
     a = np.clip((reference - rmin) / span, 0, 1)
     b = np.clip((result - rmin) / span, 0, 1)
-    return float(
-        structural_similarity(
-            a, b, data_range=1.0, win_size=min(7, a.shape[0] // 2 * 2 - 1)
-        )
-    )
+    return float(structural_similarity(a, b, data_range=1.0, win_size=7))
 
 
 def plot_direct_comparison(method, images):
     fig, axes = plt.subplots(2, len(SAMPLING_RATES), figsize=(10.5, 5.5))
     upper = max(
-        1e-12,
-        *(
-            float(np.percentile(np.maximum(image, 0), 99))
-            for pair in images
-            for image in pair
-        ),
+        float(np.percentile(np.maximum(image, 0), 99))
+        for pair in images
+        for image in pair
     )
     for column, (rate, pair) in enumerate(zip(SAMPLING_RATES, images)):
         for row, image in enumerate(pair):
@@ -282,15 +234,11 @@ def plot_direct_comparison(method, images):
 
 
 def run_one(scene, method):
-    observed, reference, path = load_data(DATASETS[scene][method][RESOLUTION], method)
+    observed, reference = load_data(DATASETS[scene][method][RESOLUTION], method)
     n = reference.shape[0]
-    if n != RESOLUTION:
-        raise ValueError(f"Expected {RESOLUTION} x {RESOLUTION}, got {reference.shape}")
     span = float(np.percentile(reference, 99) - np.percentile(reference, 1))
-    if span <= 0:
-        span = max(float(np.std(reference)), 1e-6)
 
-    rows, images, masks = [], [], []
+    rows, images = [], []
     projections_per_group = 2 if method == "Hadamard" else 4
     for rate in SAMPLING_RATES:
         seed = RANDOM_SEED + RESOLUTION
@@ -312,21 +260,11 @@ def run_one(scene, method):
                 {
                     "Scene": scene,
                     "Method": method,
-                    "Resolution": "64x64",
                     "Algorithm": algorithm,
-                    "Requested_Rate": rate,
                     "Actual_Group_Rate": count / total,
-                    "Measured_Groups": count,
-                    "Total_Groups": total,
-                    "Signal_Projections": projections_per_group * count,
-                    "Full_Signal_Projections": projections_per_group * total,
                     "SSIM": reference_ssim(image, reference, span),
-                    "Reference": REFERENCE,
-                    "Sampling_Design": SAMPLING_DESIGN,
-                    "Source": str(path),
                 }
             )
-        masks.append(mask)
         images.append((zero_filled, reconstructed))
         print(
             f"{scene} {method} {rate:.0%}: {count}/{total} groups, "
@@ -335,17 +273,6 @@ def run_one(scene, method):
             flush=True,
         )
 
-    np.savez_compressed(
-        OUTPUT_DIR / f"{scene}_{method}_64x64.npz",
-        requested_rates=np.asarray(SAMPLING_RATES),
-        masks=np.asarray(masks),
-        zero_filled=np.asarray([pair[0] for pair in images]),
-        tv_admm=np.asarray([pair[1] for pair in images]),
-        reference=reference,
-        source=str(path),
-        reference_description=REFERENCE,
-        sampling_design=SAMPLING_DESIGN,
-    )
     if scene == "Direct_Scene":
         plot_direct_comparison(method, images)
     return rows
@@ -388,41 +315,19 @@ def plot_ssim(summary):
         fontsize=8.5,
     )
     fig.tight_layout(rect=(0, 0.065, 1, 0.93))
-    for suffix in ("png", "pdf"):
-        fig.savefig(REPORT_DIR / f"compressive_sensing_ssim.{suffix}", dpi=220)
+    fig.savefig(REPORT_DIR / "compressive_sensing_ssim.png", dpi=220)
     plt.close(fig)
 
 
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    settings = {
-        "resolution": RESOLUTION,
-        "sampling_rates": SAMPLING_RATES,
-        "selection_mode": SELECTION_MODE,
-        "seed": RANDOM_SEED + RESOLUTION,
-        "tv_weight": TV_WEIGHT,
-        "rho": RHO,
-        "admm_iterations": ADMM_ITERS,
-        "cg_maxiter": CG_MAXITER,
-        "cg_rtol": CG_RTOL,
-        "reference": REFERENCE,
-        "sampling_design": SAMPLING_DESIGN,
-        "ssim_normalization": "Full-reference 1st/99th percentile span; clip both images to [0,1]",
-        "input": "Original measured Hadamard differential vector / Fourier spectrum; no new background correction",
-        "projection_count": "Signal patterns only: 2 per Hadamard pair, 4 per independent Fourier group; black references excluded",
-        "timing": "Retrospective subsets do not measure a new compressed acquisition or its elapsed time",
-    }
-    (OUTPUT_DIR / "settings.json").write_text(
-        json.dumps(settings, indent=2), encoding="utf-8"
-    )
     rows = []
     for scene in SCENES:
         for method in METHODS:
             rows.extend(run_one(scene, method))
     summary = pd.DataFrame(rows)
-    summary.to_csv(OUTPUT_DIR / "summary.csv", index=False)
     plot_ssim(summary)
-    print(f"Saved {len(summary)} rows to {OUTPUT_DIR / 'summary.csv'}")
+    print("Figures:", REPORT_DIR)
 
 
 if __name__ == "__main__":

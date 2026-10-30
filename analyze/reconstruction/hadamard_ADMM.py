@@ -20,12 +20,7 @@ from analyze.reconstruction.tv_common import (
 
 # Configuration
 
-# Specify your NPZ path, or use None to
-# automatically select the latest acquisition.
-
 NPZ_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\hadamard_results\20261025_041555_865482\hadamard_data.npz"
-
-RESULT_ROOT = Path("hadamard_results")
 
 # Sampling configuration
 # 1.0 = Full Hadamard
@@ -62,8 +57,6 @@ def fwht(vector):
     a = np.asarray(vector, dtype=np.float64).copy().reshape(-1)
     n = a.size
 
-    if n < 1 or (n & (n - 1)):
-        raise ValueError("Hadamard length must be a power of two")
     h = 1
 
     while h < n:
@@ -80,12 +73,7 @@ def fwht(vector):
 def select_hadamard_rows(grid_size, available_rows, sampling_rate, sampling_mode):
     n = grid_size**2
     available_rows = np.asarray(available_rows, dtype=int)
-    count = max(1, int(round(n * sampling_rate)))
-
-    if count > len(available_rows):
-        raise ValueError(
-            "Insufficient measured Hadamard rows for the requested sampling rate"
-        )
+    count = int(round(n * sampling_rate))
 
     if sampling_mode == "random":
         rng = np.random.default_rng(RANDOM_SEED)
@@ -117,8 +105,6 @@ def select_hadamard_rows(grid_size, available_rows, sampling_rate, sampling_mode
 
         ordered = sorted(available_rows.tolist(), key=sequency_key)
         return np.sort(np.asarray(ordered[:count], dtype=int))
-    else:
-        raise ValueError("SAMPLING_MODE must be 'random' or 'sequency'")
 
 
 # Hadamard Measurement Operator
@@ -187,7 +173,7 @@ def admm_reconstruct(measurements, operator, shape):
     for iteration in range(MAX_ITER):
         # Step 1: Update x using CG
         rhs = Aty + RHO * gradient_adjoint(zx - ux, zy - uy) + RHO * (w - v)
-        x_flat, info = cg(
+        x_flat, _ = cg(
             linear_operator,
             rhs.ravel(),
             x0=x.ravel(),
@@ -196,8 +182,6 @@ def admm_reconstruct(measurements, operator, shape):
             maxiter=CG_MAX_ITER,
         )
 
-        if info != 0:
-            raise RuntimeError(f"CG failed: info={info}")
         x = x_flat.reshape(shape)
 
         # Step 2: TV Shrinkage
@@ -241,20 +225,9 @@ def admm_reconstruct(measurements, operator, shape):
     return w, np.asarray(history), converged
 
 
-# Find Input NPZ
-def find_input():
-    if NPZ_PATH is not None:
-        return Path(NPZ_PATH)
-    candidates = list(RESULT_ROOT.glob("*/hadamard_data.npz"))
-
-    if not candidates:
-        raise FileNotFoundError("No hadamard_data.npz found")
-    return max(candidates, key=lambda p: p.stat().st_mtime)
-
-
 # Main
 def main():
-    npz_path = find_input()
+    npz_path = Path(NPZ_PATH)
     print("Input:", npz_path)
 
     with np.load(npz_path) as data:
@@ -262,12 +235,6 @@ def main():
         grid_size = int(data["grid_size"])
     shape = (grid_size, grid_size)
     n = grid_size**2
-
-    if not np.all(np.isfinite(y)):
-        raise ValueError("Hadamard differential vector contains NaN or Inf")
-
-    if not (0 < SAMPLING_RATE <= 1):
-        raise ValueError("SAMPLING_RATE must be in (0, 1]")
 
     # Full Inverse Hadamard Baseline
     direct = (fwht(y) / n).reshape(shape)
@@ -303,51 +270,6 @@ def main():
     rate_label = f"{m}_{n}"
     output_dir = npz_path.parent / f"admm_results_{rate_label}_{SAMPLING_MODE}"
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Save Numerical Results
-    np.savez_compressed(
-        output_dir / "hadamard_admm.npz",
-        # Reconstruction
-        full_inverse_hadamard=direct,
-        backprojection=backprojection,
-        reconstructed_adc=reconstruction,
-        # Measurements
-        selected_rows=selected_rows,
-        selected_measurements_adc=y[selected_rows],
-        differential_adc=y,
-        # ADMM
-        convergence_history=history,
-        lambda_tv=LAMBDA_TV,
-        rho=RHO,
-        iterations=len(history),
-        converged=converged,
-        # Metadata
-        grid_size=grid_size,
-        sampling_rate=m / n,
-        sampling_mode=SAMPLING_MODE,
-    )
-
-    np.savetxt(
-        output_dir / "admm_reconstruction.csv",
-        reconstruction,
-        delimiter=",",
-        fmt="%.8f",
-    )
-
-    np.savetxt(
-        output_dir / "admm_convergence.csv",
-        history,
-        delimiter=",",
-        header="iteration,objective,primal,dual,data_fidelity",
-        comments="",
-    )
-
-    np.savetxt(
-        output_dir / "selected_hadamard_rows.csv",
-        selected_rows,
-        fmt="%d",
-        delimiter=",",
-    )
 
     # Comparison Figure
     vmin, vmax = intensity_limits(direct, backprojection, reconstruction)
@@ -398,10 +320,8 @@ def main():
 
     # Convergence Figure
     fig2, ax2 = plt.subplots(figsize=(8, 4.5))
-    ax2.semilogy(
-        history[:, 0], np.maximum(history[:, 2], 1e-12), label="Primal Residual"
-    )
-    ax2.semilogy(history[:, 0], np.maximum(history[:, 3], 1e-12), label="Dual Residual")
+    ax2.semilogy(history[:, 0], history[:, 2], label="Primal Residual")
+    ax2.semilogy(history[:, 0], history[:, 3], label="Dual Residual")
     ax2.set_xlabel("ADMM Iteration")
     ax2.set_ylabel("Residual Norm")
     ax2.set_title("ADMM Convergence")
@@ -425,8 +345,6 @@ def main():
     print("Normalised measurement RMSE:", np.sqrt(np.mean(measurement_residual**2)))
     print("Output:", output_dir.resolve())
 
-    if not converged:
-        print("WARNING: ADMM reached iteration limit before meeting tolerance")
     plt.show()
 
 

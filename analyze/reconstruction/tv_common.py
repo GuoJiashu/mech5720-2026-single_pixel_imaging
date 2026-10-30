@@ -26,5 +26,7 @@ def total_variation(x):
 
 def vector_shrink(gx, gy, threshold):
     magnitude = np.sqrt(gx**2 + gy**2)
-    scale = np.maximum(1.0 - threshold / np.maximum(magnitude, 1e-12), 0.0)
+    scale = np.zeros_like(magnitude)
+    active = magnitude > threshold
+    scale[active] = 1.0 - threshold / magnitude[active]
     return gx * scale, gy * scale

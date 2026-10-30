@@ -9,6 +9,7 @@ def main():
     env = {**os.environ, "MPLBACKEND": "Agg"}
     scripts = (
         "image_cnr_analysis.py",
+        "image_snr_analysis.py",
         "background_analysis.py",
         "compressive_sensing_evaluation.py",
     )
@@ -20,7 +21,7 @@ def main():
             env=env,
             check=True,
         )
-    print(f"\nReport figures and tables: {folder / 'report_results'}")
+    print(f"\nReport figures: {folder / 'report_results'}")
 
 
 if __name__ == "__main__":

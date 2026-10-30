@@ -5,6 +5,11 @@ import numpy as np
 
 from scipy.sparse.linalg import LinearOperator, cg
 
+from analyze.reconstruction.fourier_reconstruct import (
+    correct_background,
+    four_step_reconstruction,
+    load_data as load_raw_data,
+)
 from analyze.reconstruction.plotting_common import (
     DIFFERENCE_CMAP,
     INTENSITY_CMAP,
@@ -21,10 +26,9 @@ from analyze.reconstruction.tv_common import (
 
 # Configuration
 
-NPZ_PATH = Path(
+DATA_DIR = Path(
     r"C:\Users\13658\Desktop\MECH 5720\Major\code"
     r"\fourier_results\20261025_080248_743060"
-    r"\reconstruction_corrected\fourier_reconstruction.npz"
 )
 
 LAMBDA_TV = 0.01
@@ -42,14 +46,10 @@ OUTPUT_NAME = "fourier_admm_results"
 
 
 # Load Corrected Fourier Data
-def load_data(path):
-    with np.load(path) as data:
-        F = data["corrected_spectrum"].copy()
-        original = data["corrected_image"].copy()
-
-    if not np.isfinite(F).all():
-        raise ValueError("Invalid spectrum values")
-    return F, original
+def load_data(folder):
+    raw, black, n = load_raw_data(folder)
+    corrected = correct_background(raw, black)
+    return four_step_reconstruction(corrected, n, "corrected_adc")
 
 
 # Fourier Operator
@@ -102,7 +102,7 @@ def admm_reconstruct(measurements, operator):
     for iteration in range(MAX_ITER):
         # x-update
         rhs = Aty + RHO * gradient_adjoint(zx - ux, zy - uy) + RHO * (w - v)
-        x_flat, info = cg(
+        x_flat, _ = cg(
             linear_operator,
             rhs.ravel(),
             x0=x.ravel(),
@@ -111,8 +111,6 @@ def admm_reconstruct(measurements, operator):
             maxiter=CG_MAX_ITER,
         )
 
-        if info != 0:
-            raise RuntimeError(f"CG solver failed: {info}")
         x = x_flat.reshape(shape)
 
         # TV Update
@@ -161,8 +159,7 @@ def admm_reconstruct(measurements, operator):
 
 # Main
 def main():
-    path = NPZ_PATH
-    F, original = load_data(path)
+    F, original = load_data(DATA_DIR)
     shape = F.shape
     operator = FourierOperator(shape)
 
@@ -170,34 +167,8 @@ def main():
     # orthonormal FFT measurement scaling.
     measurements = F / np.sqrt(F.size)
     reconstructed, history, converged = admm_reconstruct(measurements, operator)
-    output_dir = path.parent / OUTPUT_NAME
+    output_dir = DATA_DIR / "reconstruction_corrected" / OUTPUT_NAME
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Save NPZ and CSV
-    np.savez_compressed(
-        output_dir / "fourier_admm.npz",
-        corrected_image=original,
-        reconstructed_image=reconstructed,
-        corrected_spectrum=F,
-        convergence_history=history,
-        lambda_tv=LAMBDA_TV,
-        rho=RHO,
-        iterations=len(history),
-        converged=converged,
-        non_negative=NON_NEGATIVE,
-    )
-
-    np.savetxt(
-        output_dir / "admm_reconstruction.csv", reconstructed, delimiter=",", fmt="%.8f"
-    )
-
-    np.savetxt(
-        output_dir / "admm_convergence.csv",
-        history,
-        delimiter=",",
-        header="iteration,objective,primal,dual,data_fidelity",
-        comments="",
-    )
 
     # Comparison
     difference = reconstructed - original
@@ -237,10 +208,8 @@ def main():
 
     # Convergence Plot
     fig2, ax2 = plt.subplots(figsize=(8, 4.5))
-    ax2.semilogy(
-        history[:, 0], np.maximum(history[:, 2], 1e-12), label="Primal Residual"
-    )
-    ax2.semilogy(history[:, 0], np.maximum(history[:, 3], 1e-12), label="Dual Residual")
+    ax2.semilogy(history[:, 0], history[:, 2], label="Primal Residual")
+    ax2.semilogy(history[:, 0], history[:, 3], label="Dual Residual")
     ax2.set_xlabel("ADMM Iteration")
     ax2.set_ylabel("Residual Norm")
     ax2.set_title("Fourier ADMM Convergence")
@@ -262,8 +231,6 @@ def main():
     print("RMSE vs Corrected IFFT:", np.sqrt(np.mean(difference**2)))
     print("Output:", output_dir.resolve())
 
-    if not converged:
-        print("WARNING: ADMM reached MAX_ITER")
     plt.show()
 
 

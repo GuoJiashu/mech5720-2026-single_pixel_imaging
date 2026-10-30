@@ -20,11 +20,7 @@ from analyze.reconstruction.tv_common import (
 
 # Configuration
 
-# Set to a specific NPZ path if preferred.
-# None = automatically use the latest scan.
 NPZ_PATH = r"C:\Users\13658\Desktop\MECH 5720\Major\code\point_scan_results\20261025_020124_483501\point_scan_data.npz"
-
-RESULT_ROOT = Path("point_scan_results")
 
 LAMBDA_TV = 0.02
 RHO = 2.0
@@ -38,11 +34,6 @@ CG_MAX_ITER = 300
 
 # ADMM Reconstruction
 def admm_reconstruct(y):
-    if y.ndim != 2:
-        raise ValueError("Input must be a 2D image")
-
-    if not np.all(np.isfinite(y)):
-        raise ValueError("Input contains NaN or Inf. Use a complete acquisition.")
     shape = y.shape
     n = y.size
 
@@ -76,7 +67,7 @@ def admm_reconstruct(y):
     for iteration in range(MAX_ITER):
         # Step 1: Update x
         rhs = y + RHO * gradient_adjoint(zx - ux, zy - uy) + RHO * (w - v)
-        x_flat, info = cg(
+        x_flat, _ = cg(
             operator,
             rhs.ravel(),
             x0=x.ravel(),
@@ -85,8 +76,6 @@ def admm_reconstruct(y):
             maxiter=CG_MAX_ITER,
         )
 
-        if info != 0:
-            raise RuntimeError(f"CG solver failed: info={info}")
         x = x_flat.reshape(shape)
 
         # Step 2: Update TV variables
@@ -129,20 +118,9 @@ def admm_reconstruct(y):
     return w, np.asarray(history)
 
 
-# Find NPZ
-def find_input():
-    if NPZ_PATH is not None:
-        return Path(NPZ_PATH)
-    candidates = list(RESULT_ROOT.glob("*/point_scan_data.npz"))
-
-    if not candidates:
-        raise FileNotFoundError("No point_scan_data.npz found")
-    return max(candidates, key=lambda p: p.stat().st_mtime)
-
-
 # Main
 def main():
-    npz_path = find_input()
+    npz_path = Path(NPZ_PATH)
     print("Input:", npz_path)
 
     with np.load(npz_path) as data:
@@ -157,29 +135,6 @@ def main():
     # Output Directory
     output_dir = npz_path.parent / "admm_results"
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Save Numerical Data
-    np.savez_compressed(
-        output_dir / "admm_reconstruction.npz",
-        original_adc=y,
-        reconstructed_adc=reconstructed,
-        convergence_history=history,
-        lambda_tv=LAMBDA_TV,
-        rho=RHO,
-        iterations=len(history),
-    )
-
-    np.savetxt(
-        output_dir / "admm_reconstruction.csv", reconstructed, delimiter=",", fmt="%.8f"
-    )
-
-    np.savetxt(
-        output_dir / "admm_convergence.csv",
-        history,
-        delimiter=",",
-        header="iteration,objective,primal,dual",
-        comments="",
-    )
 
     # Compare Original and ADMM
     # Common display scale for fair comparison
@@ -218,10 +173,8 @@ def main():
 
     # Convergence Figure
     fig2, ax2 = plt.subplots(figsize=(8, 4.5))
-    ax2.semilogy(
-        history[:, 0], np.maximum(history[:, 2], 1e-12), label="Primal Residual"
-    )
-    ax2.semilogy(history[:, 0], np.maximum(history[:, 3], 1e-12), label="Dual Residual")
+    ax2.semilogy(history[:, 0], history[:, 2], label="Primal Residual")
+    ax2.semilogy(history[:, 0], history[:, 3], label="Dual Residual")
     ax2.set_xlabel("ADMM Iteration")
     ax2.set_ylabel("Residual Norm")
     ax2.set_title("ADMM Convergence")

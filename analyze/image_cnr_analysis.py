@@ -40,15 +40,10 @@ ROIS = {
 SCENE_LABELS = {"Direct_Scene": "Direct scene", "NLOS": "NLOS"}
 
 
-def load_image(folder, method, resolution):
+def load_image(folder, method):
     path = folder / FILENAME[method]
-    with np.load(path, allow_pickle=False) as data:
-        image = np.asarray(data[ARRAY_KEY[method]], dtype=float)
-        if not bool(data["is_complete"]):
-            raise ValueError(f"Incomplete acquisition: {path}")
-    if image.shape != (resolution, resolution) or not np.isfinite(image).all():
-        raise ValueError(f"Invalid reconstruction array: {path}")
-    return image, path
+    with np.load(path) as data:
+        return np.asarray(data[ARRAY_KEY[method]], dtype=float)
 
 
 def polygon_mask(shape, vertices):
@@ -63,13 +58,13 @@ def polygon_mask(shape, vertices):
     return polygon.contains_points(centres).reshape(shape)
 
 
-def evaluate(image, scene, method, resolution, path):
+def evaluate(image, scene, method, resolution):
     signal = image[polygon_mask(image.shape, ROIS[scene]["signal"])]
     background = image[polygon_mask(image.shape, ROIS[scene]["background"])]
     mean_signal, mean_background = float(signal.mean()), float(background.mean())
-    std_background = float(background.std(ddof=1))
+    std_background = background.std(ddof=1)
     contrast = abs(mean_signal - mean_background)
-    cnr = contrast / std_background if std_background > 0 else np.nan
+    cnr = contrast / std_background
     return {
         "Scene": scene,
         "Method": method,
@@ -77,15 +72,7 @@ def evaluate(image, scene, method, resolution, path):
         "Grid_Size": resolution,
         "Signal_Pixels": signal.size,
         "Background_Pixels": background.size,
-        "Signal_Mean": mean_signal,
-        "Background_Mean": mean_background,
-        "Background_Spatial_Std": std_background,
-        "Absolute_Contrast": contrast,
-        "CNR_Linear": cnr,
-        "CNR_dB": 20 * np.log10(cnr) if cnr > 0 else np.nan,
-        "Signal_Median": float(np.median(signal)),
-        "Background_Median": float(np.median(background)),
-        "Source_File": str(path),
+        "CNR_dB": 20 * np.log10(cnr),
     }
 
 
@@ -93,7 +80,6 @@ def save_figure(fig, name):
     path = REPORT_DIR / name
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path.with_suffix(".png"), dpi=300, bbox_inches="tight")
-    fig.savefig(path.with_suffix(".pdf"), bbox_inches="tight")
     plt.close(fig)
 
 
@@ -247,14 +233,10 @@ def main():
     for scene, group in DATASETS.items():
         for method in METHODS:
             for resolution in RESOLUTIONS:
-                image, path = load_image(group[method][resolution], method, resolution)
+                image = load_image(group[method][resolution], method)
                 images[scene, method, resolution] = image
-                rows.append(evaluate(image, scene, method, resolution, path))
+                rows.append(evaluate(image, scene, method, resolution))
     summary = pd.DataFrame(rows)
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    summary.to_csv(
-        REPORT_DIR / "image_cnr_summary.csv", index=False, float_format="%.8f"
-    )
     plot_reconstructions(images)
     plot_cnr(summary)
     plot_roi_verification(images)
