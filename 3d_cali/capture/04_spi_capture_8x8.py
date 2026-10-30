@@ -26,7 +26,8 @@ def make_plan(args):
         plan = sequence
     reference_wait = max(args.settle, args.reference_settle)
     for i, phase in enumerate(plan):
-        long_wait = (args.mode == "hadamard" or phase["kind"] != "pattern"
+        long_wait = (phase["kind"] != "pattern"
+                     or (args.mode == "hadamard" and phase["index"] == 0)
                      or (i > 0 and plan[i - 1]["kind"] == "white"))
         phase["phase_id"] = i + 1
         phase["settle_s"] = reference_wait if long_wait else args.settle
@@ -35,16 +36,25 @@ def make_plan(args):
 
 
 def main():
-    p = parser("Four-channel single-pixel imaging capture", "spi_capture", settle=3.0, record=5.0)
+    p = parser("Four-channel single-pixel imaging capture", "spi_capture", settle=None, record=None)
     p.add_argument("--mode", choices=["pilot", "raster", "hadamard"], default="pilot")
-    p.add_argument("--grid", type=int, choices=[4, 8, 16], default=16)
+    p.add_argument("--grid", type=int, choices=[4, 8, 16, 32, 64], default=16)
     p.add_argument("--gray", type=int, default=255)
-    p.add_argument("--ref-every", type=int, default=8)
-    p.add_argument("--reference-settle", type=float, default=20.0, help="Black/white settling seconds")
+    p.add_argument("--ref-every", type=int, default=None, help="Reference interval in pixels / Hadamard pairs")
+    p.add_argument("--reference-settle", type=float, default=None, help="Black/white settling seconds")
     p.add_argument("--full-white-refs", action="store_true", help="Also insert white at each reference interval")
     p.add_argument("--dry-run", action="store_true", help="Print timing without opening serial/projector")
     p.set_defaults(mapping="Facing ball: A0=right, A1=bottom, A2=top, A3=left")
     args = p.parse_args()
+    is_hadamard = args.mode == "hadamard"
+    if args.settle is None:
+        args.settle = 2.0 if is_hadamard else 3.0
+    if args.record is None:
+        args.record = 2.0 if is_hadamard else 5.0
+    if args.ref_every is None:
+        args.ref_every = 32 if is_hadamard else 8
+    if args.reference_settle is None:
+        args.reference_settle = 10.0 if is_hadamard else 20.0
     if not 1 <= args.gray <= 255 or args.ref_every < 1:
         p.error("Use gray 1..255 and ref-every >= 1.")
     if args.settle < 0 or args.reference_settle < 0 or args.record <= 0:
@@ -52,7 +62,8 @@ def main():
     plan = make_plan(args)
     duration = sum(phase["hold_s"] for phase in plan)
     print(f"Plan: {len(plan)} frames, about {duration / 60:.1f} minutes.")
-    print("Short raster settling is experimental; inspect pilot stability before interpreting 3D.")
+    print(f"Pattern wait/record: {args.settle:g}/{args.record:g} s; reference wait: {args.reference_settle:g} s.")
+    print("DC pair and first pattern after a white reference use the longer wait. Fast timing is experimental.")
     if args.dry_run:
         return 0
     h = hadamard(np, args.grid**2) if args.mode == "hadamard" else None

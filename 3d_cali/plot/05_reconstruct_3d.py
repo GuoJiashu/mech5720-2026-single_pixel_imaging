@@ -1,5 +1,6 @@
-"""Diagnostic photometric stereo from four-channel raster data (not calibrated metrology)."""
+"""Diagnostic 3D from raster or complementary Hadamard data. Requires the latest 04 plot."""
 
+import csv
 import importlib.util
 from plot_common import np, plt, Path, json, plot_parser, load_run, write_json, write_csv
 
@@ -9,7 +10,34 @@ POSITIONS = np.array([[130, 5, 600], [0, -215, 600], [0, 250, 600], [-200, 10, 6
 CHANNELS = ["A0", "A1", "A2", "A3"]
 
 
-def solve_normals(signals, noise, directions, gains, mask, min_signal, max_residual):
+def image_noise(mode, n, phases, stats, folder):
+    """Raster: sample SD. Hadamard: propagated standard error of retained pair means."""
+    noise = np.full((4, n, n), np.nan)
+    if mode == "raster":
+        for phase in phases:
+            if phase["kind"] == "pattern":
+                row, col = divmod(phase["index"], n)
+                for i, channel in enumerate(CHANNELS):
+                    sd = stats[phase["phase_id"], channel]["sd_raw"]
+                    noise[i, row, col] = float(sd) if sd != "" else np.nan
+    else:
+        variance, count = np.zeros(4), np.zeros(4, int)
+        with (folder / "hadamard_coefficients.csv").open(encoding="utf-8-sig", newline="") as f:
+            for pair in csv.DictReader(f):
+                if pair["space"] != "raw_adc" or pair["used"] != "1":
+                    continue
+                i = CHANNELS.index(pair["channel"])
+                for sign in ("positive", "negative"):
+                    s = stats[int(pair[f"{sign}_phase_id"]), pair["channel"]]
+                    variance[i] += s["sd_raw"] ** 2 / s["n"]
+                count[i] += 1
+        # H entries are +/-1, inverse normalization is 1/(n*n), even for partial data.
+        for i in np.flatnonzero(count):
+            noise[i] = np.sqrt(variance[i]) / n**2
+    return noise
+
+
+def solve_normals(signals, noise, directions, gains, mask, min_signal, max_residual, noise_floor=0.2):
     """Fit at least three independent positive observations. Keep rejected pixels as NaN."""
     shape = mask.shape
     normals = np.full((*shape, 3), np.nan)
@@ -24,7 +52,7 @@ def solve_normals(signals, noise, directions, gains, mask, min_signal, max_resid
         if good.sum() < 3:
             continue
         # SD weights reduce noisy-channel influence; they are NOT a full uncertainty model.
-        weight = 1 / np.maximum(sd[good], 0.2)
+        weight = 1 / np.maximum(sd[good], noise_floor)
         a, b = matrix[good] * weight[:, None], values[good] * weight
         condition[row, col] = np.linalg.cond(a)
         if np.linalg.matrix_rank(a) < 3 or condition[row, col] > 30:
@@ -159,7 +187,7 @@ def save_plots(folder, signals, gains, mask, board, normals, height, counts, res
 
 
 def main():
-    parser = plot_parser("Diagnostic 3D reconstruction from four-channel raster capture")
+    parser = plot_parser("Diagnostic 3D reconstruction from raster or Hadamard capture")
     parser.add_argument("--roi-mm", nargs=2, type=float, default=[80, 80], metavar=("WIDTH", "HEIGHT"))
     parser.add_argument(
         "--center",
@@ -184,18 +212,19 @@ def main():
     parser.add_argument(
         "--min-signal",
         type=float,
-        default=0.5,
-        help="Positive net ADC floor; not a statistical confidence bound",
+        default=None,
+        help="Reconstructed pixel ADC floor: raster 0.5; Hadamard 0.05*(32/grid)^2. Not the timing tolerance.",
     )
     parser.add_argument(
         "--max-residual", type=float, default=0.25, help="Relative weighted intensity fit error limit"
     )
     cli = parser.parse_args()
     folder, meta, phases, records, args = load_run(cli, "spi_capture_8x8")
-    if args.mode != "raster":
-        parser.error(
-            "Use a full raster capture; pilot and Hadamard are not supported by this first 3D version."
-        )
+    if args.mode not in ("raster", "hadamard"):
+        parser.error("Use raster or Hadamard data; pilot data do not cover the full image.")
+    args.min_signal = cli.min_signal if cli.min_signal is not None else (
+        0.05 * (32 / args.grid) ** 2 if args.mode == "hadamard" else 0.5)
+    noise_floor = 0.01 * (32 / args.grid) ** 2 if args.mode == "hadamard" else 0.2
     if min(args.roi_mm) <= 0 or args.radius_mm <= 0 or args.min_signal < 0:
         parser.error("ROI/radius must be positive and min-signal nonnegative.")
     # Reuse the existing QC/black-subtraction implementation, rather than duplicating it.
@@ -208,13 +237,17 @@ def main():
     stats, _ = spi.phase_statistics(np, args, phases, records, None)
     n = args.grid
     signals = np.stack([arrays[f"raw_adc_{c}_diagnostic"] for c in CHANNELS])
-    noise = np.full_like(signals, np.nan)
-    for phase in phases:
-        if phase["kind"] == "pattern":
-            row, col = divmod(phase["index"], n)
-            for i, channel in enumerate(CHANNELS):
-                sd = stats[phase["phase_id"], channel]["sd_raw"]
-                noise[i, row, col] = float(sd) if sd != "" else np.nan
+    noise = image_noise(args.mode, n, phases, stats, folder)
+    excluded = []
+    if args.mode == "hadamard":
+        for i, channel in enumerate(CHANNELS):
+            item = next(r for r in summary if r["channel"] == channel and r["space"] == "raw_adc")
+            if not item["dc_available"]:
+                # Unknown channel offset cannot be treated as measured photometric intensity.
+                signals[i] = np.nan
+                excluded.append(channel)
+        print("Hadamard pairs retained:", {r["channel"]: r["diagnostic_measurements"] for r in summary})
+    print(f"Pixel signal floor: {args.min_signal:g} ADC; excluded channels: {excluded}")
     positions = np.asarray(json.loads(cli.positions.read_text()) if cli.positions else POSITIONS, float)
     if positions.shape != (4, 3) or not np.isfinite(positions).all() or np.any(positions[:, 2] <= 0):
         parser.error("Positions must be four finite [x,y,z] rows with z > 0.")
@@ -262,7 +295,9 @@ def main():
     if cli.gains:
         gains = np.asarray(cli.gains)
     else:
-        failed = [r for r in diagnostics if r["usable_board_pixels"] < 8]
+        failed = [r for r in diagnostics if r["usable_board_pixels"] < 8 and r["channel"] not in excluded]
+        if len(excluded) > 1:
+            parser.error("At least three channels with a measured DC coefficient are needed for 3D.")
         if failed:
             write_json(output / "reconstruction_status.json", dict(
                 status="failed_board_gain_estimation", channels=failed,
@@ -274,13 +309,15 @@ def main():
         gains = []
         for i in range(4):
             selected = board & np.isfinite(signals[i]) & (signals[i] > args.min_signal)
-            gains.append(np.median(signals[i, selected]) / directions[i, 2])
+            gains.append(np.median(signals[i, selected]) / directions[i, 2]
+                         if CHANNELS[i] not in excluded else np.nan)
         gains = np.asarray(gains)
+        gains[np.isnan(gains)] = np.nanmedian(gains)
     if not np.isfinite(gains).all() or np.any(gains <= 0):
         parser.error("Gains must be finite and positive.")
     gains /= np.median(gains)
     normals, residual, counts, condition = solve_normals(
-        signals, noise, directions, gains, mask, args.min_signal, args.max_residual
+        signals, noise, directions, gains, mask, args.min_signal, args.max_residual, noise_floor
     )
     height, used, integration_error = integrate(normals, dx, dy)
     maps = dict(
@@ -299,8 +336,8 @@ def main():
         np.savetxt(output / f"{name}.csv", values, delimiter=",", fmt="%.8g")
     warnings = [
         "DIAGNOSTIC ONLY: raw ADC response is not independently linearity-calibrated.",
-        "Background-change flags are retained but allowed; other capture QC failures are masked.",
-        "An isolated rejected black reference may be bridged by adjacent valid references; affected pixels are flagged, interpolation uncertainty is not fully propagated.",
+        "Uses 04 diagnostic QC: timing/reference warnings are retained; hard-invalid measurements are omitted.",
+        "Rejected black anchors are skipped; interpolation between valid anchors can span long gaps. No extrapolation.",
         "Default board gains assume the outer two rows/columns are unshadowed flat board; inspect masks.",
         "Default circular object mask assumes the ball is centred; inspect or override it.",
         "Constant detector directions and board-plane sampling approximate perspective/near-field geometry.",
@@ -308,10 +345,23 @@ def main():
         "Three-channel fits have no redundant observation to check the model.",
         "Only the largest connected valid region is integrated; absolute height/board contact is unknown.",
     ]
+    if args.mode == "hadamard":
+        warnings += [
+            "Missing Hadamard pairs use minimum-norm projection; missing structure is NOT recovered. Channels without DC are excluded from 3D.",
+            "Hadamard noise weights assume independent samples/pairs; correlated noise, missing-coefficient bias and dark-reference uncertainty are omitted.",
+        ]
     details = dict(
         source_folder=args.source_folder,
         run_status=meta["status"],
         simulated=meta["simulated"],
+        mode=args.mode,
+        grid=n,
+        excluded_channels=excluded,
+        channel_reconstruction=summary,
+        noise_model="independent pair-mean standard error" if args.mode == "hadamard" else "sample SD",
+        noise_floor_adc=noise_floor,
+        noise_median_adc={c: float(np.nanmedian(noise[i])) if np.isfinite(noise[i]).any() else None
+                          for i, c in enumerate(CHANNELS)},
         roi_mm=args.roi_mm,
         positions_mm=positions.tolist(),
         directions=directions.tolist(),
@@ -330,7 +380,8 @@ def main():
         warnings=warnings,
     )
     write_json(output / "reconstruction_settings.json", details)
-    write_json(output / "reconstruction_status.json", dict(status="completed_diagnostic_only"))
+    write_json(output / "reconstruction_status.json", dict(
+        status="completed_diagnostic_only" if used.any() else "no_connected_valid_surface"))
     save_plots(output, signals, gains, mask, board, normals, height, counts, residual, dx, dy)
     print(f"DIAGNOSTIC ONLY: normals {details['valid_normal_pixels']}/{mask.sum()}, integrated {used.sum()}")
     print("Effective gains:", dict(zip(CHANNELS, gains.round(4).tolist())))

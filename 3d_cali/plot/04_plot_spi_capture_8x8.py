@@ -24,6 +24,8 @@ def allowed(row, diagnostic=False):
     if diagnostic:
         flags.discard("large_background_change")
         flags.discard("interpolated_over_rejected_black")
+        flags -= {"recording_drift", "not_stable_before_recording", "insufficient_pre_window",
+                  "flagged_white_reference", "white_reference_change_over_10pct"}
     return not flags
 
 
@@ -38,7 +40,15 @@ def reconstruct(args, measured, expected_indices, h, diagnostic=False):
         elif allowed(a, diagnostic):
             vals[k] = a["background_corrected_value"]
     if args.mode == "hadamard":
-        image = h.T @ vals / args.grid**2 if np.isfinite(vals).all() else np.full_like(vals, np.nan)
+        valid = np.isfinite(vals)
+        if valid.all():
+            image = h.T @ vals / args.grid**2
+        elif diagnostic and valid.any():
+            # Orthogonal projection / minimum-norm solution using observed rows only.
+            # Keep missing coefficients as NaN in exports; never shift row indices.
+            image = h[valid].T @ vals[valid] / args.grid**2
+        else:
+            image = np.full_like(vals, np.nan)
     else:
         image = vals
     return vals, image.reshape(args.grid, args.grid)
@@ -83,7 +93,8 @@ def phase_statistics(np, args, phases, records, calibration):
     rows = []
     for p in phases:
         allrows = groups[p["phase_id"]]
-        chosen = [r for r in allrows if r["stage"] == "recording"]
+        chosen = [r for r in allrows if r["stage"] == "recording"
+                  and r["phase_elapsed_s"] < p.get("hold_s", float("inf"))]
         for c in CHANNELS:
             out = dict(
                 phase_id=p["phase_id"],
@@ -104,13 +115,14 @@ def phase_statistics(np, args, phases, records, calibration):
             issues = []
             if p["status"] != "completed":
                 issues.append("incomplete_phase")
-            if len(chosen) < 10:
+            if len(chosen) < 6:
                 issues.append("insufficient_samples")
             if chosen:
                 t = np.array([r["host_elapsed_s"] for r in chosen])
                 v = np.array([r[c] for r in chosen])
                 half = max(1, len(v) // 2)
-                band = max(2.0, 0.05 * abs(float(v.mean())))
+                band = max(getattr(args, "qc_absolute", 2.0),
+                           getattr(args, "qc_relative", 0.05) * abs(float(v.mean())))
                 out.update(
                     midpoint_s=float(t.mean()),
                     mean_raw=float(v.mean()),
@@ -120,9 +132,9 @@ def phase_statistics(np, args, phases, records, calibration):
                 if abs(out["late_minus_early_raw"]) > band:
                     issues.append("recording_drift")
                 settle = p.get("settle_s", args.settle)
-                pre = [r[c] for r in allrows if settle - 2 <= r["phase_elapsed_s"] < settle]
-                late = v[t >= t[-1] - 2]
-                if len(pre) >= 5 and len(late) >= 5:
+                pre = [r[c] for r in allrows if max(0, settle - 0.5) <= r["phase_elapsed_s"] < settle]
+                late = v[t >= t[-1] - 1]
+                if len(pre) >= 2 and len(late) >= 3:
                     out["pre_to_late_raw"] = float(late.mean() - np.mean(pre))
                     if abs(out["pre_to_late_raw"]) > band:
                         issues.append("not_stable_before_recording")
@@ -156,7 +168,7 @@ def phase_statistics(np, args, phases, records, calibration):
 
 
 def dark_estimate(np, darks, t, field):
-    """Interpolate between valid anchors, bridging at most one rejected black frame."""
+    """Discard rejected anchors and interpolate between surrounding valid references."""
     good = sorted(
         [s for s in darks if s["quality"] == "usable" and s[field] != ""], key=lambda s: s["midpoint_s"]
     )
@@ -167,8 +179,6 @@ def dark_estimate(np, darks, t, field):
     skipped = [s["phase_id"] for s in darks
                if left["phase_id"] < s["phase_id"] < right["phase_id"]
                and (s["quality"] != "usable" or s[field] == "")]
-    if len(skipped) > 1:
-        return None, skipped
     value = float(np.interp(t, [s["midpoint_s"] for s in good], [s[field] for s in good]))
     return value, skipped
 
@@ -184,10 +194,11 @@ def analyze(np, args, folder, phases, records, meta, calibration):
     arrays = {}
     measurements = []
     summary = []
+    coefficient_rows = []
     spaces = [("raw_adc", "mean_raw")]
     if calibration:
         spaces.append(("corrected", "mean_corrected"))
-    h = hadamard(np, args.grid**2).astype(float)
+    h = hadamard(np, args.grid**2) if args.mode == "hadamard" else None
     expected = [p for p in make_plan(args) if p["kind"] == "pattern"]
     expected_indices = sorted({p["index"] for p in expected})
     for space, field in spaces:
@@ -257,13 +268,29 @@ def analyze(np, args, folder, phases, records, meta, calibration):
                 measured[(p["index"], p["polarity"])] = out
             vals, grid = reconstruct(args, measured, expected_indices, h)
             diagnostic_vals, diagnostic_grid = reconstruct(args, measured, expected_indices, h, True)
+            if args.mode == "hadamard":
+                for k in expected_indices:
+                    a, b = measured.get((k, 1)), measured.get((k, -1))
+                    reasons = []
+                    for sign, measurement in (("positive", a), ("negative", b)):
+                        if not allowed(measurement, True):
+                            reasons.append(sign + ":" + (measurement["quality"] if measurement else "missing_phase"))
+                    coefficient_rows.append(dict(space=space, channel=c, index=k,
+                        positive_phase_id=a["phase_id"] if a else "",
+                        negative_phase_id=b["phase_id"] if b else "",
+                        coefficient=diagnostic_vals[k] if np.isfinite(diagnostic_vals[k]) else "",
+                        used=int(np.isfinite(diagnostic_vals[k])),
+                        reason=";".join(reasons) or "used"))
+                np.savetxt(folder / f"{space}_{c}_coefficient_used.csv",
+                           np.isfinite(diagnostic_vals).astype(int), delimiter=",", fmt="%d",
+                           header="Hadamard coefficient index order; 1=used, 0=discarded")
             arrays[f"{space}_{c}_diagnostic"] = diagnostic_grid
             np.savetxt(
                 folder / f"{space}_{c}_diagnostic.csv",
                 diagnostic_grid,
                 delimiter=",",
                 fmt="%.10g",
-                header="DIAGNOSTIC ONLY: background drift and single rejected-black interpolation permitted; other flags masked. "
+                header="DIAGNOSTIC ONLY: rejected black anchors excluded; missing Hadamard rows omitted via minimum-norm projection; timing/reference warnings retained. "
                 "Screen rows top-to-bottom; columns left-to-right.",
             )
             arrays[f"{space}_{c}_measurements"] = vals.copy()
@@ -287,6 +314,14 @@ def analyze(np, args, folder, phases, records, meta, calibration):
                     diagnostic_image_pixels=int(np.count_nonzero(np.isfinite(diagnostic_grid))),
                     finite_image_pixels=int(np.count_nonzero(np.isfinite(grid))),
                     all_requested_measurements_usable=n_valid == len(expected_indices),
+                    discarded_coefficients=(int(np.count_nonzero(~np.isfinite(diagnostic_vals)))
+                                            if args.mode == "hadamard" else 0),
+                    diagnostic_method=("complete_inverse" if np.isfinite(diagnostic_vals).all()
+                                       else "partial_minimum_norm" if np.isfinite(diagnostic_vals).any()
+                                       else "no_usable_coefficients") if args.mode == "hadamard" else "raster",
+                    dc_available=bool(np.isfinite(diagnostic_vals[0])) if args.mode == "hadamard" else "",
+                    max_valid_black_gap_s=(max(np.diff(sorted(r["midpoint_s"] for r in good_dark)))
+                                           if len(good_dark) > 1 else ""),
                     reference_quality=";".join(sorted(set(reference_issues))) or "usable",
                     white_reference_span_pct=white_span,
                     rejected_black_phase_ids=";".join(str(r["phase_id"]) for r in darks if r["quality"] != "usable"),
@@ -299,6 +334,9 @@ def analyze(np, args, folder, phases, records, meta, calibration):
                     ),
                 )
             )
+    if args.mode == "hadamard":
+        write_csv(folder / "hadamard_coefficients.csv", coefficient_rows)
+        write_csv(folder / "discarded_hadamard_pairs.csv", [r for r in coefficient_rows if not r["used"]])
     write_csv(folder / "measurements.csv", measurements)
     write_csv(folder / "reference_summary.csv", reference_rows)
     write_csv(folder / "reconstruction_summary.csv", summary)
@@ -358,10 +396,16 @@ def plots(np, args, folder, phases, records, arrays, meta, diagnostic=False):
             if diagnostic and "large_background_change" in row["reference_quality"]:
                 warning = "\nBACKGROUND CHANGE WARNING"
             if diagnostic and row["interpolated_over_rejected_black_pixels"]:
-                warning += f"\nBLACK REFERENCE BRIDGED: {row['interpolated_over_rejected_black_pixels']} samples"
-            ax.set_title(f"{c} ({position}){warning}", fontsize=9)
-            ax.set_xticks(range(args.grid))
-            ax.set_yticks(range(args.grid))
+                warning += f"\nBLACK ANCHORS SKIPPED: {row['rejected_black_phase_ids']}"
+            if diagnostic and args.mode == "hadamard":
+                warning += f"\nPAIRS USED: {row['diagnostic_measurements']}/{row['expected_measurements']}"
+                if row["discarded_coefficients"]:
+                    warning += " | PARTIAL"
+                if not row["dc_available"]:
+                    warning += "\nDC MISSING: ZERO-MEAN ONLY"
+            ax.set_title(f"{c} ({position}){warning}", fontsize=8)
+            ax.set_xticks(range(0, args.grid, max(1, args.grid // 16)))
+            ax.set_yticks(range(0, args.grid, max(1, args.grid // 16)))
             ax.tick_params(labelsize=6)
             ax.set_xlabel("Screen column")
             ax.set_ylabel("Screen row")
@@ -377,7 +421,7 @@ def plots(np, args, folder, phases, records, arrays, meta, diagnostic=False):
             0.02,
             "Gray-blue = missing/blocked; separate scales; positions viewed facing the ball.\n"
             + (
-                "Drift / isolated black-reference interpolation permitted and flagged; accuracy NOT verified."
+                "Invalid frames excluded per channel; partial Hadamard recovery is approximate. See coefficient / reference CSVs."
                 if diagnostic
                 else "Strict quality flags applied; image coordinates unchanged."
             ),
@@ -391,6 +435,9 @@ def plots(np, args, folder, phases, records, arrays, meta, diagnostic=False):
 
 def main():
     p = plot_parser("Reconstruct and plot four-channel imaging data")
+    p.add_argument("--strict-preview", action="store_true", help="Also draw the all-coefficients-required strict preview")
+    p.add_argument("--qc-absolute", type=float, default=2.0, help="ADC stability tolerance floor")
+    p.add_argument("--qc-relative", type=float, default=0.05, help="Stability tolerance fraction of mean raw ADC")
     p.add_argument("--calibration", type=Path, help="Optional independently verified divider_power JSON")
     p.add_argument(
         "--positions",
@@ -400,19 +447,23 @@ def main():
         help="LDR positions viewed facing the ball (labels only)",
     )
     cli = p.parse_args()
+    if cli.qc_absolute <= 0 or cli.qc_relative < 0:
+        p.error("Use qc-absolute > 0 and qc-relative >= 0.")
     folder, meta, phases, records, args = load_run(cli, "spi_capture_8x8")
     calibration = load_calibration(cli.calibration) if cli.calibration else meta.get("calibration_snapshot")
     arrays, summary = analyze(np, args, folder, phases, records, meta, calibration)
-    plots(np, args, folder, phases, records, arrays, meta)
+    if cli.strict_preview:
+        plots(np, args, folder, phases, records, arrays, meta)
     plots(np, args, folder, phases, records, arrays, meta, diagnostic=True)
     time_series(folder, phases, records, meta)
     for row in summary:
         print(
             row["space"],
             row["channel"],
-            f"{row['usable_measurements']}/{row['expected_measurements']}",
+            f"method={row['diagnostic_method']}",
             f"diagnostic={row['diagnostic_measurements']}/{row['expected_measurements']}",
             row["reference_quality"],
+            f"discarded_pairs={row['discarded_coefficients']}" if args.mode == "hadamard" else "",
         )
     finish(folder, dict(vars(args), calibration_snapshot=calibration))
 
