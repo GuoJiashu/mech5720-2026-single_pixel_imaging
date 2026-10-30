@@ -5,6 +5,15 @@ ROOT = ANALYZE_DIR.parent
 REPORT_DIR = ANALYZE_DIR / "report_results"
 METHODS = ("Point Scanning", "Hadamard", "Fourier")
 RESOLUTIONS = (16, 32, 64)
+SCENES = {"Direct_Scene": "LOS", "NLOS": "NLOS"}
+IMAGE_DATA = {
+    "Point Scanning": ("point_scan_data.npz", "response_adc"),
+    "Hadamard": ("hadamard_data.npz", "reconstruction_adc"),
+    "Fourier": ("fourier_data.npz", "reconstruction_adc"),
+}
+# Normalized pixel-centre coordinates: (x_min, x_max, y_min, y_max).
+SIGNAL_ROI = (0.20, 0.44, 0.54, 0.78)
+BACKGROUND_ROI = (0.78, 0.94, 0.16, 0.83)
 DATASETS = {
     "Direct_Scene": {
         "Point Scanning": {

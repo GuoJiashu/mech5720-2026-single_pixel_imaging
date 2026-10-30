@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.sparse.linalg import LinearOperator, cg
 
-from experiment_config import DATASETS, REPORT_DIR
+from experiment_config import DATASETS, REPORT_DIR, SCENES
 from reconstruction.plotting_common import (
     INTENSITY_CMAP,
     INTERPOLATION,
@@ -16,7 +16,6 @@ from reconstruction.tv_common import gradient, gradient_adjoint, vector_shrink
 RESOLUTION = 64
 SAMPLING_RATES = (1.0, 0.75, 0.50, 0.25)
 METHODS = ("Hadamard", "Fourier")
-SCENES = {"Direct_Scene": "LOS", "NLOS": "NLOS"}
 RANDOM_SEED = 5720
 TV_WEIGHT = 0.005
 RHO = 1.0

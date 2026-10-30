@@ -8,7 +8,7 @@ from scipy.sparse.linalg import LinearOperator, cg
 from analyze.reconstruction.fourier_reconstruct import (
     correct_background,
     four_step_reconstruction,
-    load_data as load_raw_data,
+    load_data,
 )
 from analyze.reconstruction.plotting_common import (
     DIFFERENCE_CMAP,
@@ -45,36 +45,11 @@ CG_MAX_ITER = 300
 OUTPUT_NAME = "fourier_admm_results"
 
 
-# Load Corrected Fourier Data
-def load_data(folder):
-    raw, black, n = load_raw_data(folder)
-    corrected = correct_background(raw, black)
-    return four_step_reconstruction(corrected, n, "corrected_adc")
-
-
-# Fourier Operator
-class FourierOperator:
-    def __init__(self, shape):
-        self.shape = shape
-        self.n = int(np.prod(shape))
-
-    def forward(self, image):
-        return np.fft.fft2(np.asarray(image).reshape(self.shape), norm="ortho")
-
-    def adjoint(self, spectrum):
-        return np.fft.ifft2(spectrum, norm="ortho").real
-
-    def normal(self, image):
-        # Full orthonormal Fourier transform
-        # satisfies A.T A = I.
-        return image
-
-
 # ADMM Reconstruction
-def admm_reconstruct(measurements, operator):
-    shape = operator.shape
-    n = operator.n
-    Aty = operator.adjoint(measurements)
+def admm_reconstruct(measurements):
+    shape = measurements.shape
+    n = measurements.size
+    Aty = np.fft.ifft2(measurements, norm="ortho").real
     x = Aty
 
     if NON_NEGATIVE:
@@ -91,7 +66,7 @@ def admm_reconstruct(measurements, operator):
     def matrix_action(flat):
         image = flat.reshape(shape)
         gx, gy = gradient(image)
-        result = operator.normal(image) + RHO * gradient_adjoint(gx, gy) + RHO * image
+        result = image + RHO * gradient_adjoint(gx, gy) + RHO * image
         return result.ravel()
 
     linear_operator = LinearOperator((n, n), matvec=matrix_action, dtype=np.float64)
@@ -137,7 +112,7 @@ def admm_reconstruct(measurements, operator):
         )
         dual_image = RHO * (gradient_adjoint(zx - zx_old, zy - zy_old) + w - w_old)
         dual = np.linalg.norm(dual_image)
-        residual = operator.forward(w) - measurements
+        residual = np.fft.fft2(w, norm="ortho") - measurements
         fidelity = 0.5 * np.sum(np.abs(residual) ** 2)
         objective = fidelity + LAMBDA_TV * total_variation(w)
         history.append([iteration + 1, objective, primal, dual, fidelity])
@@ -159,14 +134,15 @@ def admm_reconstruct(measurements, operator):
 
 # Main
 def main():
-    F, original = load_data(DATA_DIR)
+    raw, black, n = load_data(DATA_DIR)
+    corrected = correct_background(raw, black)
+    F, original = four_step_reconstruction(corrected, n, "corrected_adc")
     shape = F.shape
-    operator = FourierOperator(shape)
 
     # Convert from ordinary FFT to
     # orthonormal FFT measurement scaling.
     measurements = F / np.sqrt(F.size)
-    reconstructed, history, converged = admm_reconstruct(measurements, operator)
+    reconstructed, history, converged = admm_reconstruct(measurements)
     output_dir = DATA_DIR / "reconstruction_corrected" / OUTPUT_NAME
     output_dir.mkdir(parents=True, exist_ok=True)
 

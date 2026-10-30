@@ -1,0 +1,19 @@
+﻿scene,method,grid_size,psnr_db,reference_method,reference_grid_size,fixed_gain,is_reference
+LOS,Point Scanning,16,24.69458947,Hadamard,64,0.118743141,False
+LOS,Point Scanning,32,29.27451841,Hadamard,64,0.118743141,False
+LOS,Point Scanning,64,27.910877,Hadamard,64,0.118743141,False
+LOS,Hadamard,16,26.06875059,Hadamard,64,1,False
+LOS,Hadamard,32,30.61934515,Hadamard,64,1,False
+LOS,Hadamard,64,inf,Hadamard,64,1,True
+LOS,Fourier,16,25.22390116,Hadamard,64,0.774857918,False
+LOS,Fourier,32,27.5571733,Hadamard,64,0.774857918,False
+LOS,Fourier,64,23.4401623,Hadamard,64,0.774857918,False
+NLOS,Point Scanning,16,16.14919068,Hadamard,32,1.387879142,False
+NLOS,Point Scanning,32,14.13540631,Hadamard,32,1.387879142,False
+NLOS,Point Scanning,64,9.919744429,Hadamard,32,1.387879142,False
+NLOS,Hadamard,16,18.165238,Hadamard,32,1,False
+NLOS,Hadamard,32,inf,Hadamard,32,1,True
+NLOS,Hadamard,64,24.93234108,Hadamard,32,1,False
+NLOS,Fourier,16,23.94772704,Hadamard,32,0.875995392,False
+NLOS,Fourier,32,22.39512469,Hadamard,32,0.875995392,False
+NLOS,Fourier,64,22.85655675,Hadamard,32,0.875995392,False

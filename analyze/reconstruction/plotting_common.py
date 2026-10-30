@@ -3,6 +3,8 @@ import numpy as np
 INTENSITY_CMAP = "gray"
 DIFFERENCE_CMAP = "coolwarm"
 INTERPOLATION = "nearest"
+COLORS = ("#4477AA", "#228833", "#CC6677")
+MARKERS = ("o", "s", "^")
 
 
 def intensity_limits(*images):

@@ -118,7 +118,7 @@ class HadamardOperator:
         """
         A @ x
         """
-        transformed = fwht(np.asarray(image).reshape(-1))
+        transformed = fwht(image)
         return transformed[self.rows] / self.scale
 
     def adjoint(self, measurements):
@@ -128,12 +128,6 @@ class HadamardOperator:
         coefficients = np.zeros(self.size, dtype=np.float64)
         coefficients[self.rows] = measurements / self.scale
         return fwht(coefficients)
-
-    def normal(self, image):
-        """
-        A.T @ A @ x
-        """
-        return self.adjoint(self.forward(image))
 
 
 # ADMM Reconstruction
@@ -161,7 +155,7 @@ def admm_reconstruct(measurements, operator, shape):
     def matrix_action(flat):
         image = flat.reshape(shape)
         gx, gy = gradient(image)
-        normal_term = operator.normal(flat).reshape(shape)
+        normal_term = operator.adjoint(operator.forward(flat)).reshape(shape)
         result = normal_term + RHO * gradient_adjoint(gx, gy) + RHO * image
         return result.ravel()
 

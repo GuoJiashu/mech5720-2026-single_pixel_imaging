@@ -38,12 +38,11 @@ def load_data(folder):
 # Temporal Background Correction
 def correct_background(raw, black):
     data = raw.copy()
-    data["estimated_black_adc"] = np.interp(
+    data["corrected_adc"] = data["mean_adc"] - np.interp(
         data["time_s"].to_numpy(),
         black["time_s"].to_numpy(),
         black["mean_adc"].to_numpy(),
     )
-    data["corrected_adc"] = data["mean_adc"] - data["estimated_black_adc"]
     return data
 
 

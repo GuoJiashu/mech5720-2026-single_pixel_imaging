@@ -4,18 +4,13 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from experiment_config import DATASETS, METHODS, RESOLUTIONS, REPORT_DIR
+from experiment_config import DATASETS, METHODS, RESOLUTIONS, REPORT_DIR, IMAGE_DATA
 from reconstruction.plotting_common import (
     INTENSITY_CMAP,
     INTERPOLATION,
     intensity_limits,
 )
 
-IMAGE_DATA = {
-    "Point Scanning": ("point_scan_data.npz", "response_adc"),
-    "Hadamard": ("hadamard_data.npz", "reconstruction_adc"),
-    "Fourier": ("fourier_data.npz", "reconstruction_adc"),
-}
 SCENE_TITLES = {"Direct_Scene": "(a) LOS", "NLOS": "(b) NLOS"}
 
 
