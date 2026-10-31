@@ -1,8 +1,7 @@
-"""SSIM of 64x64 compressive reconstructions against the validated references.
+"""SSIM against each method's own full-sampling reconstruction at 64x64.
 
-Use the existing full-reconstruction intensity calibration: fixed method gains,
-per-image background subtraction, and a shared reference-defined data range.
-NLOS images are evaluated on the 32x32 reference grid.
+Every sampling rate uses the same minimum and range from its full reference.
+Scores measure agreement with that reconstruction, not ground-truth accuracy.
 """
 
 import matplotlib
@@ -18,36 +17,21 @@ from compressive_imaging_comparison import (
     SAMPLING_RATES,
     reconstruct_series,
 )
-from experiment_config import BACKGROUND_ROI, REPORT_DIR, SCENES, SIGNAL_ROI
-from image_similarity_analysis import (
-    REFERENCE_SIZE,
-    calibrated_image,
-    load_image,
-    region_mean,
-)
+from experiment_config import DATASETS, IMAGE_DATA, REPORT_DIR, SCENES
 
 
 def evaluate_scene(scene):
-    reference_size = REFERENCE_SIZE[scene]
-    anchor = load_image(scene, "Hadamard", reference_size)
-    reference = calibrated_image(anchor, 1.0, reference_size)
-    low, span = reference.min(), np.ptp(reference)
-    reference = (reference - low) / span
-    reference_contrast = region_mean(anchor, SIGNAL_ROI) - region_mean(
-        anchor, BACKGROUND_ROI
-    )
     scores = {}
     for method in METHODS:
-        calibration = load_image(scene, method, reference_size)
-        gain = reference_contrast / (
-            region_mean(calibration, SIGNAL_ROI)
-            - region_mean(calibration, BACKGROUND_ROI)
-        )
+        filename, key = IMAGE_DATA[method]
+        with np.load(DATASETS[scene][method][RESOLUTION] / filename) as data:
+            reference = data[key]
+        low, span = reference.min(), np.ptp(reference)
+        reference = (reference - low) / span
         images, counts = reconstruct_series(scene, method)
         values = np.empty((len(SAMPLING_RATES), 2))
         for index, (pair, (count, total)) in enumerate(zip(images, counts)):
             for column, image in enumerate(pair):
-                image = calibrated_image(image, gain, reference_size)
                 image = (image - low) / span
                 values[index, column] = structural_similarity(
                     reference,
@@ -90,11 +74,10 @@ def main():
                 markersize=6,
                 label=f"{method} {reconstruction}",
             )
-        reference_size = REFERENCE_SIZE[scene]
         ax.set_title(
             f"{panel} {SCENES[scene]}\n"
-            f"Reference: Full Hadamard {reference_size} x {reference_size}",
-            fontsize=12,
+            "Reference: each method's full reconstruction",
+            fontsize=11,
         )
         ax.set_xlabel("Sampling rate (% of measurement groups)")
         ax.set_xticks(rates[order])
