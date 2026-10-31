@@ -131,31 +131,35 @@ def plot_comparison(scene, method, images, counts):
     print("Figure:", output)
 
 
+def reconstruct_series(scene, method):
+    """Reconstruct the same sampled data for image panels and metric curves."""
+    folder = DATASETS[scene][method][RESOLUTION]
+    key = "differential_adc" if method == "Hadamard" else "fourier_coefficients"
+    with np.load(folder / f"{method.lower()}_data.npz") as data:
+        measurements = data[key].reshape(RESOLUTION, RESOLUTION) / RESOLUTION
+    if method == "Hadamard":
+        forward = adjoint = hadamard_transform
+    else:
+        forward = lambda image: np.fft.fft2(image, norm="ortho")
+        adjoint = lambda spectrum: np.fft.ifft2(spectrum, norm="ortho").real
+    reference = adjoint(measurements)
+    span = np.percentile(reference, 99) - np.percentile(reference, 1)
+    images, counts = [], []
+    for rate in SAMPLING_RATES:
+        mask, count, total = sampling_mask(method, RESOLUTION, rate)
+        zero_filled = adjoint(mask * measurements)
+        reconstructed = reconstruct_tv(measurements, mask, forward, adjoint, span)
+        images.append((zero_filled, reconstructed))
+        counts.append((count, total))
+        print(f"{scene} {method}: {count}/{total} groups", flush=True)
+    return images, counts
+
+
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     for scene in SCENES:
         for method in METHODS:
-            folder = DATASETS[scene][method][RESOLUTION]
-            key = "differential_adc" if method == "Hadamard" else "fourier_coefficients"
-            with np.load(folder / f"{method.lower()}_data.npz") as data:
-                measurements = data[key].reshape(RESOLUTION, RESOLUTION) / RESOLUTION
-            if method == "Hadamard":
-                forward = adjoint = hadamard_transform
-            else:
-                forward = lambda image: np.fft.fft2(image, norm="ortho")
-                adjoint = lambda spectrum: np.fft.ifft2(spectrum, norm="ortho").real
-            reference = adjoint(measurements)
-            span = np.percentile(reference, 99) - np.percentile(reference, 1)
-            images, counts = [], []
-            for rate in SAMPLING_RATES:
-                mask, count, total = sampling_mask(method, RESOLUTION, rate)
-                zero_filled = adjoint(mask * measurements)
-                reconstructed = reconstruct_tv(
-                    measurements, mask, forward, adjoint, span
-                )
-                images.append((zero_filled, reconstructed))
-                counts.append((count, total))
-                print(f"{scene} {method}: {count}/{total} groups", flush=True)
+            images, counts = reconstruct_series(scene, method)
             plot_comparison(scene, method, images, counts)
 
 
