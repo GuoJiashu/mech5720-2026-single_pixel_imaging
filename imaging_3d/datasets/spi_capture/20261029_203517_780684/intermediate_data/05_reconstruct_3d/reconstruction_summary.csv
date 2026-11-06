@@ -1,0 +1,5 @@
+﻿space,channel,expected_measurements,usable_measurements,diagnostic_measurements,diagnostic_image_pixels,finite_image_pixels,all_requested_measurements_usable,reference_quality,white_reference_span_pct,rejected_black_phase_ids,interpolated_over_rejected_black_pixels,interpretation
+raw_adc,A0,256,256,256,256,256,True,usable,1.1712483951666286,,0,Uncalibrated diagnostic preview
+raw_adc,A1,256,256,256,256,256,True,usable,1.4430236487779389,,0,Uncalibrated diagnostic preview
+raw_adc,A2,256,256,256,256,256,True,usable,3.1177504003085303,,0,Uncalibrated diagnostic preview
+raw_adc,A3,256,240,256,256,240,False,flagged_black_reference,1.3313216232699099,174,16,Uncalibrated diagnostic preview

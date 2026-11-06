@@ -1,0 +1,58 @@
+{
+  "source_3d": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\results\\hadamard_capture\\plots\\05_reconstruct_3d\\3d",
+  "reference": "ideal sphere, orthographic pixel-centre sampling",
+  "diameter_mm": 40,
+  "roi_mm": [
+    80,
+    80
+  ],
+  "center_col_row": [
+    15.5,
+    15.5
+  ],
+  "center_source": "inherited from 05; not independently verified",
+  "inner_fraction": 0.8,
+  "sphere_fully_inside_roi": true,
+  "height_offset_added_mm": 13.10618142784128,
+  "alignment": "one offset from full_front valid heights; same offset for inner region",
+  "coverage_definition": "valid pixels / reference sphere pixel centres within ROI; no surface-area weighting",
+  "geometry_note": "Board-plane pixel spacing approximates sphere sampling; projector perspective is not corrected.",
+  "reference_quality": {
+    "A0": "usable",
+    "A1": "large_background_change",
+    "A2": "usable",
+    "A3": "flagged_black_reference"
+  },
+  "metrics": [
+    {
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 203,
+      "normal_pixels": 204,
+      "height_coverage_pct": 97.59615384615384,
+      "normal_coverage_pct": 98.07692307692308,
+      "height_rmse_mm": 3.168433309212764,
+      "height_mae_mm": 2.4436408042263964,
+      "height_abs_p95_mm": 5.905569396028802,
+      "height_bias_mm": 3.1414389425846793e-15,
+      "normal_mean_deg": 20.093389313737525,
+      "normal_median_deg": 19.47477583847005,
+      "normal_p95_deg": 37.95084817234047
+    },
+    {
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 124,
+      "normal_pixels": 124,
+      "height_coverage_pct": 100.0,
+      "normal_coverage_pct": 100.0,
+      "height_rmse_mm": 2.342195675905161,
+      "height_mae_mm": 1.8768497462227522,
+      "height_abs_p95_mm": 4.594155152870527,
+      "height_bias_mm": -0.8213159817478468,
+      "normal_mean_deg": 20.24059043145117,
+      "normal_median_deg": 18.795609383896874,
+      "normal_p95_deg": 38.6068075715404
+    }
+  ]
+}

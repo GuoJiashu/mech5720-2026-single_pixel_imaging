@@ -1,0 +1,36 @@
+{
+  "program": "nonlinearity_calibration.py",
+  "version": "2.0",
+  "status": "completed",
+  "simulated": false,
+  "created_at": "2026-10-29T18:11:16.817761+11:00",
+  "roi": {
+    "ROI_X": 832,
+    "ROI_Y": 284,
+    "ROI_W": 352,
+    "ROI_H": 384,
+    "SCREEN_W": 1920,
+    "SCREEN_H": 1080
+  },
+  "acquisition": {
+    "port": "COM6",
+    "baud": 115200,
+    "projector": 1,
+    "roi": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\roi_calibration.json",
+    "output": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\results\\nonlinearity",
+    "settle": 20.0,
+    "record": 5.0,
+    "mapping": "Facing ball: A0=right, A1=bottom, A2=top, A3=left",
+    "note": "",
+    "list_devices": false,
+    "start_now": false,
+    "grid": 16,
+    "stage": "fit",
+    "repeats": 2
+  },
+  "expected_duration_s": 1250.0,
+  "time_basis": "PC receive/display-request time; not hardware synchronized",
+  "n_valid_records": 5975,
+  "invalid_lines": 0,
+  "finished_at": "2026-10-29T18:32:07.773286+11:00"
+}

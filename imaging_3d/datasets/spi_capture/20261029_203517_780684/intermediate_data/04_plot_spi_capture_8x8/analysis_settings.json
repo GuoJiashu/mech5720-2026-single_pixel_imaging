@@ -1,0 +1,46 @@
+{
+  "settle": 3.0,
+  "record": 5.0,
+  "levels": [
+    255,
+    64
+  ],
+  "repeats": 5,
+  "hold": 20.0,
+  "tail": 5.0,
+  "average_window": 1.0,
+  "tolerance": 0.05,
+  "absolute_tolerance": 1.0,
+  "confirm": 1.0,
+  "error_limit": 0.05,
+  "tiles": 8,
+  "mode": "raster",
+  "grid": 16,
+  "gray": 255,
+  "ref_every": 8,
+  "layouts": [
+    "vertical",
+    "checkerboard"
+  ],
+  "port": "COM6",
+  "baud": 115200,
+  "projector": 1,
+  "roi": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\roi_calibration.json",
+  "output": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\results\\spi_capture",
+  "mapping": "Facing ball: A0=right, A1=bottom, A2=top, A3=left",
+  "note": "",
+  "list_devices": false,
+  "start_now": false,
+  "reference_settle": 20.0,
+  "full_white_refs": false,
+  "dry_run": false,
+  "positions": [
+    "right",
+    "bottom",
+    "top",
+    "left"
+  ],
+  "simulate": false,
+  "source_folder": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\results\\spi_capture\\20261029_203517_780684",
+  "calibration_snapshot": null
+}

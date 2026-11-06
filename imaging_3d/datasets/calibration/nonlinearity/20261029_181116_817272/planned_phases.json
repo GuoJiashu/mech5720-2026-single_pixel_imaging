@@ -1,0 +1,1032 @@
+[
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 1,
+    "group_id": 1,
+    "cycle": 1,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 1,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 2,
+    "group_id": 1,
+    "cycle": 1,
+    "state": "A",
+    "kind": "pattern",
+    "index": 1,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 64
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 3,
+    "group_id": 1,
+    "cycle": 1,
+    "state": "B",
+    "kind": "pattern",
+    "index": 1,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 64
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 4,
+    "group_id": 1,
+    "cycle": 1,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 1,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 64
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 5,
+    "group_id": 1,
+    "cycle": 1,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 1,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 6,
+    "group_id": 2,
+    "cycle": 1,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 2,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 7,
+    "group_id": 2,
+    "cycle": 1,
+    "state": "A",
+    "kind": "pattern",
+    "index": 2,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 128
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 8,
+    "group_id": 2,
+    "cycle": 1,
+    "state": "B",
+    "kind": "pattern",
+    "index": 2,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 128
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 9,
+    "group_id": 2,
+    "cycle": 1,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 2,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 128
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 10,
+    "group_id": 2,
+    "cycle": 1,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 2,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 11,
+    "group_id": 3,
+    "cycle": 1,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 3,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 12,
+    "group_id": 3,
+    "cycle": 1,
+    "state": "A",
+    "kind": "pattern",
+    "index": 3,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 13,
+    "group_id": 3,
+    "cycle": 1,
+    "state": "B",
+    "kind": "pattern",
+    "index": 3,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 14,
+    "group_id": 3,
+    "cycle": 1,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 3,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 15,
+    "group_id": 3,
+    "cycle": 1,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 3,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 16,
+    "group_id": 4,
+    "cycle": 1,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 4,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 17,
+    "group_id": 4,
+    "cycle": 1,
+    "state": "A",
+    "kind": "pattern",
+    "index": 4,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 18,
+    "group_id": 4,
+    "cycle": 1,
+    "state": "B",
+    "kind": "pattern",
+    "index": 4,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 19,
+    "group_id": 4,
+    "cycle": 1,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 4,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 20,
+    "group_id": 4,
+    "cycle": 1,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 4,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 21,
+    "group_id": 5,
+    "cycle": 1,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 5,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 22,
+    "group_id": 5,
+    "cycle": 1,
+    "state": "A",
+    "kind": "pattern",
+    "index": 5,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 23,
+    "group_id": 5,
+    "cycle": 1,
+    "state": "B",
+    "kind": "pattern",
+    "index": 5,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 24,
+    "group_id": 5,
+    "cycle": 1,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 5,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 25,
+    "group_id": 5,
+    "cycle": 1,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 5,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 26,
+    "group_id": 6,
+    "cycle": 2,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 6,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 27,
+    "group_id": 6,
+    "cycle": 2,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 6,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 64
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 28,
+    "group_id": 6,
+    "cycle": 2,
+    "state": "B",
+    "kind": "pattern",
+    "index": 6,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 64
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 29,
+    "group_id": 6,
+    "cycle": 2,
+    "state": "A",
+    "kind": "pattern",
+    "index": 6,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 64
+  },
+  {
+    "name": "fit_checker_64",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 64,
+    "cells": [],
+    "phase_id": 30,
+    "group_id": 6,
+    "cycle": 2,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 6,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 31,
+    "group_id": 7,
+    "cycle": 2,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 32,
+    "group_id": 7,
+    "cycle": 2,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 128
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 33,
+    "group_id": 7,
+    "cycle": 2,
+    "state": "B",
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 128
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 34,
+    "group_id": 7,
+    "cycle": 2,
+    "state": "A",
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 128
+  },
+  {
+    "name": "fit_checker_128",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 128,
+    "cells": [],
+    "phase_id": 35,
+    "group_id": 7,
+    "cycle": 2,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 36,
+    "group_id": 8,
+    "cycle": 2,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 8,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 37,
+    "group_id": 8,
+    "cycle": 2,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 8,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 38,
+    "group_id": 8,
+    "cycle": 2,
+    "state": "B",
+    "kind": "pattern",
+    "index": 8,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 39,
+    "group_id": 8,
+    "cycle": 2,
+    "state": "A",
+    "kind": "pattern",
+    "index": 8,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_checker_255",
+    "split": "fit",
+    "layout": "checkerboard",
+    "level": 255,
+    "cells": [],
+    "phase_id": 40,
+    "group_id": 8,
+    "cycle": 2,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 8,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 41,
+    "group_id": 9,
+    "cycle": 2,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 9,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 42,
+    "group_id": 9,
+    "cycle": 2,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 9,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 43,
+    "group_id": 9,
+    "cycle": 2,
+    "state": "B",
+    "kind": "pattern",
+    "index": 9,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 44,
+    "group_id": 9,
+    "cycle": 2,
+    "state": "A",
+    "kind": "pattern",
+    "index": 9,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_top_corners",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "phase_id": 45,
+    "group_id": 9,
+    "cycle": 2,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 9,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 46,
+    "group_id": 10,
+    "cycle": 2,
+    "state": "D0",
+    "kind": "pattern",
+    "index": 10,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 47,
+    "group_id": 10,
+    "cycle": 2,
+    "state": "AB",
+    "kind": "pattern",
+    "index": 10,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 48,
+    "group_id": 10,
+    "cycle": 2,
+    "state": "B",
+    "kind": "pattern",
+    "index": 10,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 49,
+    "group_id": 10,
+    "cycle": 2,
+    "state": "A",
+    "kind": "pattern",
+    "index": 10,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 255
+  },
+  {
+    "name": "fit_centre_horizontal",
+    "split": "fit",
+    "layout": "cells",
+    "level": 255,
+    "cells": [
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    "phase_id": 50,
+    "group_id": 10,
+    "cycle": 2,
+    "state": "D1",
+    "kind": "pattern",
+    "index": 10,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "hold_s": 25.0,
+    "gray_level": 0
+  }
+]

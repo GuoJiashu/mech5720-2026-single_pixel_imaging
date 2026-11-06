@@ -1,0 +1,94 @@
+{
+  "source_folder": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\results\\spi_capture\\20261029_203517_780684",
+  "run_status": "completed",
+  "simulated": false,
+  "roi_mm": [
+    80,
+    80
+  ],
+  "positions_mm": [
+    [
+      130.0,
+      5.0,
+      600.0
+    ],
+    [
+      0.0,
+      -215.0,
+      600.0
+    ],
+    [
+      0.0,
+      250.0,
+      600.0
+    ],
+    [
+      -200.0,
+      10.0,
+      600.0
+    ]
+  ],
+  "directions": [
+    [
+      0.21174632449276234,
+      0.008144089403567782,
+      0.9772907284281338
+    ],
+    [
+      0.0,
+      -0.33733013198604084,
+      0.9413864148447652
+    ],
+    [
+      0.0,
+      0.38461538461538464,
+      0.9230769230769231
+    ],
+    [
+      -0.3161882449561304,
+      0.01580941224780652,
+      0.9485647348683911
+    ]
+  ],
+  "gains": [
+    1.3616029253236854,
+    1.1601548653145306,
+    0.6616287093877803,
+    0.8398451346854696
+  ],
+  "gains_source": "flat board median approximation",
+  "center_col_row": [
+    7.5,
+    7.5
+  ],
+  "mask_radius_mm": 20,
+  "min_signal_adc": 0.5,
+  "max_residual": 0.25,
+  "requested_mask_pixels": 52,
+  "valid_normal_pixels": 52,
+  "integrated_pixels": 52,
+  "edge_integration_rmse_mm": 0.8883771532873868,
+  "reference_quality": {
+    "A0": "usable",
+    "A1": "usable",
+    "A2": "usable",
+    "A3": "flagged_black_reference"
+  },
+  "interpolated_over_rejected_black_pixels": {
+    "A0": 0,
+    "A1": 0,
+    "A2": 0,
+    "A3": 16
+  },
+  "warnings": [
+    "DIAGNOSTIC ONLY: raw ADC response is not independently linearity-calibrated.",
+    "Background-change flags are retained but allowed; other capture QC failures are masked.",
+    "An isolated rejected black reference may be bridged by adjacent valid references; affected pixels are flagged, interpolation uncertainty is not fully propagated.",
+    "Default board gains assume the outer two rows/columns are unshadowed flat board; inspect masks.",
+    "Default circular object mask assumes the ball is centred; inspect or override it.",
+    "Constant detector directions and board-plane sampling approximate perspective/near-field geometry.",
+    "Noise weights omit background/interpolation uncertainty; residual is not an accuracy certificate.",
+    "Three-channel fits have no redundant observation to check the model.",
+    "Only the largest connected valid region is integrated; absolute height/board contact is unknown."
+  ]
+}
