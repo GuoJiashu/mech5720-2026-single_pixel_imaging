@@ -6,7 +6,7 @@ MECH5720 major project. A projector illuminates the target with a sequence of pa
 
 | 2D reconstruction under LOS and NLOS | 3D sphere reconstruction |
 | --- | --- |
-| ![Point scanning, Hadamard and Fourier comparisons at three resolutions](analyze/report_results/reconstruction_comparison.png) | ![Reconstructed sphere surface compared with the ideal sphere](imaging_3d/results/hadamard_capture/08_evaluate_sphere/surface_comparison.png) |
+| ![Point scanning, Hadamard and Fourier comparisons at three resolutions](imaging_2d/results/report_results/reconstruction_comparison.png) | ![Reconstructed sphere surface compared with the ideal sphere](imaging_3d/results/hadamard_capture/2026-10-30_01-16-26/08_evaluate_sphere/surface_comparison.png) |
 
 The 3D example uses a 32 × 32 Hadamard capture of a 40 mm sphere. The height RMSE over the full front footprint was **3.17 mm after constant height offset alignment**, with valid heights at 203 of 208 reference pixels. See the [3D evaluation metrics](imaging_3d/datasets/hadamard_capture/intermediate_data/08_evaluate_sphere/metrics.csv).
 
