@@ -1,0 +1,233 @@
+[
+  {
+    "phase_id": 1,
+    "cycle": 0,
+    "test_level": 0,
+    "gray_level": 0,
+    "direction": "baseline",
+    "host_request_s": 4.350000017439015e-05,
+    "host_show_return_s": 0.0024757000001045526,
+    "host_end_s": 10.009114499999669,
+    "status": "completed"
+  },
+  {
+    "phase_id": 2,
+    "cycle": 1,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "host_request_s": 10.009114499999669,
+    "host_show_return_s": 10.015464400000383,
+    "host_end_s": 20.025334699999803,
+    "status": "completed"
+  },
+  {
+    "phase_id": 3,
+    "cycle": 1,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 20.025334699999803,
+    "host_show_return_s": 20.030362499999683,
+    "host_end_s": 30.042039199999635,
+    "status": "completed"
+  },
+  {
+    "phase_id": 4,
+    "cycle": 2,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "host_request_s": 30.042039199999635,
+    "host_show_return_s": 30.047212299999956,
+    "host_end_s": 40.057518900000105,
+    "status": "completed"
+  },
+  {
+    "phase_id": 5,
+    "cycle": 2,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 40.057518900000105,
+    "host_show_return_s": 40.06242139999995,
+    "host_end_s": 50.07417859999987,
+    "status": "completed"
+  },
+  {
+    "phase_id": 6,
+    "cycle": 3,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "host_request_s": 50.07417859999987,
+    "host_show_return_s": 50.07941320000009,
+    "host_end_s": 60.08779659999982,
+    "status": "completed"
+  },
+  {
+    "phase_id": 7,
+    "cycle": 3,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 60.08779659999982,
+    "host_show_return_s": 60.0929643999998,
+    "host_end_s": 70.10305659999995,
+    "status": "completed"
+  },
+  {
+    "phase_id": 8,
+    "cycle": 4,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "host_request_s": 70.10305659999995,
+    "host_show_return_s": 70.10809809999955,
+    "host_end_s": 80.11799249999967,
+    "status": "completed"
+  },
+  {
+    "phase_id": 9,
+    "cycle": 4,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 80.11799249999967,
+    "host_show_return_s": 80.1245485999998,
+    "host_end_s": 90.12792790000003,
+    "status": "completed"
+  },
+  {
+    "phase_id": 10,
+    "cycle": 5,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "host_request_s": 90.12792790000003,
+    "host_show_return_s": 90.1319725000003,
+    "host_end_s": 100.14315559999977,
+    "status": "completed"
+  },
+  {
+    "phase_id": 11,
+    "cycle": 5,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 100.14315559999977,
+    "host_show_return_s": 100.14821200000006,
+    "host_end_s": 110.1486931999998,
+    "status": "completed"
+  },
+  {
+    "phase_id": 12,
+    "cycle": 1,
+    "test_level": 64,
+    "gray_level": 64,
+    "direction": "rise",
+    "host_request_s": 110.1486931999998,
+    "host_show_return_s": 110.15124550000019,
+    "host_end_s": 120.15122139999949,
+    "status": "completed"
+  },
+  {
+    "phase_id": 13,
+    "cycle": 1,
+    "test_level": 64,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 120.15122139999949,
+    "host_show_return_s": 120.15657589999955,
+    "host_end_s": 130.16654310000013,
+    "status": "completed"
+  },
+  {
+    "phase_id": 14,
+    "cycle": 2,
+    "test_level": 64,
+    "gray_level": 64,
+    "direction": "rise",
+    "host_request_s": 130.16654310000013,
+    "host_show_return_s": 130.17187379999996,
+    "host_end_s": 140.1827457999998,
+    "status": "completed"
+  },
+  {
+    "phase_id": 15,
+    "cycle": 2,
+    "test_level": 64,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 140.1827457999998,
+    "host_show_return_s": 140.1880003999995,
+    "host_end_s": 150.19898990000002,
+    "status": "completed"
+  },
+  {
+    "phase_id": 16,
+    "cycle": 3,
+    "test_level": 64,
+    "gray_level": 64,
+    "direction": "rise",
+    "host_request_s": 150.19898990000002,
+    "host_show_return_s": 150.2039580999999,
+    "host_end_s": 160.21247719999974,
+    "status": "completed"
+  },
+  {
+    "phase_id": 17,
+    "cycle": 3,
+    "test_level": 64,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 160.21247719999974,
+    "host_show_return_s": 160.21633050000037,
+    "host_end_s": 170.21450389999973,
+    "status": "completed"
+  },
+  {
+    "phase_id": 18,
+    "cycle": 4,
+    "test_level": 64,
+    "gray_level": 64,
+    "direction": "rise",
+    "host_request_s": 170.21450389999973,
+    "host_show_return_s": 170.22082620000037,
+    "host_end_s": 180.2198384000003,
+    "status": "completed"
+  },
+  {
+    "phase_id": 19,
+    "cycle": 4,
+    "test_level": 64,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 180.2198384000003,
+    "host_show_return_s": 180.2223296000002,
+    "host_end_s": 190.22827789999974,
+    "status": "completed"
+  },
+  {
+    "phase_id": 20,
+    "cycle": 5,
+    "test_level": 64,
+    "gray_level": 64,
+    "direction": "rise",
+    "host_request_s": 190.22827789999974,
+    "host_show_return_s": 190.2325480999998,
+    "host_end_s": 200.2434930999998,
+    "status": "completed"
+  },
+  {
+    "phase_id": 21,
+    "cycle": 5,
+    "test_level": 64,
+    "gray_level": 0,
+    "direction": "fall",
+    "host_request_s": 200.2434930999998,
+    "host_show_return_s": 200.2503856000003,
+    "host_end_s": 210.2585180999995,
+    "status": "completed"
+  }
+]

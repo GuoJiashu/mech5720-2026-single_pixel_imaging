@@ -51,7 +51,8 @@ def parser(description, name, settle=20.0, record=5.0, timing=False):
     p.add_argument("--projector", type=int, default=1)
     p.add_argument("--roi", type=Path, default=BASE_DIR / "calibration" / "roi_calibration.json")
     dataset_root = DATASETS_DIR if name == "spi_capture" else DATASETS_DIR / "calibration"
-    p.add_argument("--output", type=Path, default=dataset_root / name)
+    p.add_argument("--output", type=Path, default=dataset_root / name,
+                   help="Parent folder for timestamped datasets" if name == "spi_capture" else "Output folder")
     if not timing:
         p.add_argument("--settle", type=float, default=settle)
         p.add_argument("--record", type=float, default=record)
@@ -166,6 +167,19 @@ class Projector:
         self.cv2.destroyAllWindows()
 
 
+def new_dataset_folder(parent):
+    """Reserve a new local-time folder without reusing an existing dataset."""
+    stamp = datetime.now().astimezone().strftime("%Y-%m-%d_%H-%M-%S")
+    suffix = 1
+    while True:
+        folder = parent / (stamp if suffix == 1 else f"{stamp}_{suffix}")
+        try:
+            folder.mkdir(parents=True, exist_ok=False)
+            return folder
+        except FileExistsError:
+            suffix += 1
+
+
 def capture(args, plan, image_for_phase, name):
     """Run a phase list. image_for_phase(phase, width, height) returns ROI pixels."""
     monitors = devices()
@@ -181,14 +195,17 @@ def capture(args, plan, image_for_phase, name):
     if not args.start_now:
         input("Close Serial Monitor. Keep hardware and lighting fixed. Press Enter: ")
     folder = args.output.resolve()
-    if name == "nonlinearity_calibration":
-        folder /= args.stage  # Validation must not overwrite its fitting data/candidate.
-    folder.mkdir(parents=True, exist_ok=True)
-    # Remove only known outputs; keep older timestamp folders and user files.
-    for filename in ("raw_readings.csv", "settings.json", "phases.json", "planned_phases.json"):
-        (folder / filename).unlink(missing_ok=True)
-    for script in [*PLOT_FILES.values(), "05_reconstruct_3d.py", "08_evaluate_sphere.py"]:
-        clear_analysis_outputs(folder, Path(script).stem)
+    if name == "spi_capture_8x8":
+        folder = new_dataset_folder(folder)
+    else:
+        if name == "nonlinearity_calibration":
+            folder /= args.stage  # Validation must not overwrite its fitting data/candidate.
+        folder.mkdir(parents=True, exist_ok=True)
+        # Remove only known outputs; keep older timestamp folders and user files.
+        for filename in ("raw_readings.csv", "settings.json", "phases.json", "planned_phases.json"):
+            (folder / filename).unlink(missing_ok=True)
+        for script in [*PLOT_FILES.values(), "05_reconstruct_3d.py", "08_evaluate_sphere.py"]:
+            clear_analysis_outputs(folder, Path(script).stem)
     meta = dict(
         program=name + ".py",
         version="2.0",

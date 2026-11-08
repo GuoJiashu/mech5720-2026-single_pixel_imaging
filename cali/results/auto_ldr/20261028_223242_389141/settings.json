@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-10-28T22:32:42.389580+11:00",
+  "status": "completed",
+  "simulated": false,
+  "serial_port": "COM6",
+  "baud": 115200,
+  "projector_index": 1,
+  "roi": {
+    "ROI_X": 832,
+    "ROI_Y": 284,
+    "ROI_W": 352,
+    "ROI_H": 384,
+    "SCREEN_W": 1920,
+    "SCREEN_H": 1080
+  },
+  "levels_per_repeat": [
+    0,
+    64,
+    128,
+    192,
+    255,
+    0
+  ],
+  "repeats": 1,
+  "settle_s": 10.0,
+  "buffer_guard_s": 0.5,
+  "record_s": 30.0,
+  "channel_mapping": "not specified",
+  "note": "",
+  "time_basis": "host receive time; not hardware synchronized",
+  "data_definition": "Arduino-reported values; may already be averages in firmware",
+  "error_bar_definition": "Sample SD of serial values; not SEM or raw ADC SD",
+  "firmware_sampling": "Not configured or modified by this Python script",
+  "geometry_requirement": "Hold ROI, detector angle, lenses, target, projector settings and ambient light fixed",
+  "expected_duration_s": 243.0,
+  "display": {
+    "width": 1920,
+    "height": 1080,
+    "x": 2560,
+    "y": 0,
+    "name": "\\\\.\\DISPLAY5",
+    "is_primary": false
+  },
+  "finished_at": "2026-10-28T22:36:46.001074+11:00",
+  "elapsed_s": 243.4972284999999,
+  "n_valid_serial_records": 1155,
+  "n_recording_records": 859
+}

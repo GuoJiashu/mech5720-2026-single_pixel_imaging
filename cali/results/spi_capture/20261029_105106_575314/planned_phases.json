@@ -1,0 +1,65 @@
+[
+  {
+    "phase_id": 1,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 2,
+    "kind": "white",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 3,
+    "kind": "pattern",
+    "index": 0,
+    "polarity": 1,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 4,
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 5,
+    "kind": "pattern",
+    "index": 36,
+    "polarity": 1,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 6,
+    "kind": "pattern",
+    "index": 56,
+    "polarity": 1,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 7,
+    "kind": "pattern",
+    "index": 63,
+    "polarity": 1,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 8,
+    "kind": "white",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0
+  },
+  {
+    "phase_id": 9,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0
+  }
+]

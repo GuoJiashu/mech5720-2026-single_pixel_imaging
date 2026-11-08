@@ -1,0 +1,65 @@
+[
+  {
+    "phase_id": 1,
+    "cycle": 0,
+    "test_level": 0,
+    "gray_level": 0,
+    "direction": "baseline",
+    "settle_s": 0,
+    "hold_s": 30.0
+  },
+  {
+    "phase_id": 2,
+    "cycle": 1,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "settle_s": 0,
+    "hold_s": 30.0
+  },
+  {
+    "phase_id": 3,
+    "cycle": 1,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "settle_s": 0,
+    "hold_s": 30.0
+  },
+  {
+    "phase_id": 4,
+    "cycle": 2,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "settle_s": 0,
+    "hold_s": 30.0
+  },
+  {
+    "phase_id": 5,
+    "cycle": 2,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "settle_s": 0,
+    "hold_s": 30.0
+  },
+  {
+    "phase_id": 6,
+    "cycle": 3,
+    "test_level": 255,
+    "gray_level": 255,
+    "direction": "rise",
+    "settle_s": 0,
+    "hold_s": 30.0
+  },
+  {
+    "phase_id": 7,
+    "cycle": 3,
+    "test_level": 255,
+    "gray_level": 0,
+    "direction": "fall",
+    "settle_s": 0,
+    "hold_s": 30.0
+  }
+]

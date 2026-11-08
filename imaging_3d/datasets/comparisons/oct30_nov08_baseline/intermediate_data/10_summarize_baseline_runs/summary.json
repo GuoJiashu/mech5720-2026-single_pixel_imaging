@@ -1,0 +1,869 @@
+{
+  "sources": [
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "comparison": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-10-30_01-16-26\\intermediate_data\\09_compare_3d_baseline\\report_legacy_geometry\\comparison_settings.json",
+      "comparison_sha256": "941f9e9a8b3fc73065dff8362ab39e2f4426051f1d8d5808b08d3f21c5ac3067",
+      "capture_settings": {
+        "program": "spi_capture_8x8.py",
+        "version": "2.0",
+        "status": "completed",
+        "simulated": false,
+        "created_at": "2026-10-30T01:16:26.773973+11:00",
+        "roi": {
+          "ROI_X": 812,
+          "ROI_Y": 334,
+          "ROI_W": 352,
+          "ROI_H": 384,
+          "SCREEN_W": 1920,
+          "SCREEN_H": 1080
+        },
+        "acquisition": {
+          "port": "COM6",
+          "baud": 115200,
+          "projector": 1,
+          "roi": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\calibration\\roi_calibration.json",
+          "output": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-10-30_01-16-26",
+          "settle": 4.0,
+          "record": 4.0,
+          "mapping": "Facing ball: A0=right, A1=bottom, A2=top, A3=left",
+          "note": "",
+          "list_devices": false,
+          "start_now": false,
+          "mode": "hadamard",
+          "grid": 32,
+          "gray": 255,
+          "ref_every": 32,
+          "reference_settle": 10.0,
+          "full_white_refs": false,
+          "dry_run": false
+        },
+        "expected_duration_s": 17506.0,
+        "time_basis": "PC receive/display-request time; not hardware synchronized",
+        "n_valid_records": 83818,
+        "invalid_lines": 0,
+        "finished_at": "2026-10-30T06:08:48.426860+11:00"
+      },
+      "reconstruction_settings": {
+        "source_folder": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\3d_cali\\results\\hadamard_capture",
+        "run_status": "completed",
+        "simulated": false,
+        "mode": "hadamard",
+        "grid": 32,
+        "excluded_channels": [],
+        "channel_reconstruction": [
+          {
+            "space": "raw_adc",
+            "channel": "A0",
+            "expected_measurements": 1024,
+            "usable_measurements": 1024,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 1024,
+            "all_requested_measurements_usable": true,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 561.2277577473651,
+            "reference_quality": "usable",
+            "white_reference_span_pct": 0.4220833116632031,
+            "rejected_black_phase_ids": "",
+            "interpolated_over_rejected_black_pixels": 0,
+            "interpretation": "Uncalibrated diagnostic preview"
+          },
+          {
+            "space": "raw_adc",
+            "channel": "A1",
+            "expected_measurements": 1024,
+            "usable_measurements": 0,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 0,
+            "all_requested_measurements_usable": false,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 561.2277577473651,
+            "reference_quality": "large_background_change",
+            "white_reference_span_pct": 6.084433221483327,
+            "rejected_black_phase_ids": "",
+            "interpolated_over_rejected_black_pixels": 0,
+            "interpretation": "Uncalibrated diagnostic preview"
+          },
+          {
+            "space": "raw_adc",
+            "channel": "A2",
+            "expected_measurements": 1024,
+            "usable_measurements": 1024,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 1024,
+            "all_requested_measurements_usable": true,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 561.2277577473651,
+            "reference_quality": "usable",
+            "white_reference_span_pct": 0.6480879520399317,
+            "rejected_black_phase_ids": "",
+            "interpolated_over_rejected_black_pixels": 0,
+            "interpretation": "Uncalibrated diagnostic preview"
+          },
+          {
+            "space": "raw_adc",
+            "channel": "A3",
+            "expected_measurements": 1024,
+            "usable_measurements": 928,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 0,
+            "all_requested_measurements_usable": false,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 1641.4105447631537,
+            "reference_quality": "flagged_black_reference",
+            "white_reference_span_pct": 1.139777942462983,
+            "rejected_black_phase_ids": "1717;1783",
+            "interpolated_over_rejected_black_pixels": 192,
+            "interpretation": "Uncalibrated diagnostic preview"
+          }
+        ],
+        "noise_model": "independent pair-mean standard error",
+        "noise_floor_adc": 0.01,
+        "noise_median_adc": {
+          "A0": 0.051161207288782436,
+          "A1": 0.03852244115514287,
+          "A2": 0.04387706854325485,
+          "A3": 0.039641575821742714
+        },
+        "roi_mm": [
+          80,
+          80
+        ],
+        "positions_mm": [
+          [
+            130.0,
+            5.0,
+            600.0
+          ],
+          [
+            0.0,
+            -215.0,
+            600.0
+          ],
+          [
+            0.0,
+            250.0,
+            600.0
+          ],
+          [
+            -200.0,
+            10.0,
+            600.0
+          ]
+        ],
+        "directions": [
+          [
+            0.21174632449276234,
+            0.008144089403567782,
+            0.9772907284281338
+          ],
+          [
+            0.0,
+            -0.33733013198604084,
+            0.9413864148447652
+          ],
+          [
+            0.0,
+            0.38461538461538464,
+            0.9230769230769231
+          ],
+          [
+            -0.3161882449561304,
+            0.01580941224780652,
+            0.9485647348683911
+          ]
+        ],
+        "gains": [
+          1.2002763775670722,
+          1.0996315801637346,
+          0.850884036905098,
+          0.9003684198362656
+        ],
+        "gains_source": "flat board median approximation",
+        "center_col_row": [
+          15.5,
+          15.5
+        ],
+        "mask_radius_mm": 20,
+        "min_signal_adc": 0.05,
+        "max_residual": 0.25,
+        "requested_mask_pixels": 208,
+        "valid_normal_pixels": 204,
+        "integrated_pixels": 203,
+        "edge_integration_rmse_mm": 0.47506635359820726,
+        "reference_quality": {
+          "A0": "usable",
+          "A1": "large_background_change",
+          "A2": "usable",
+          "A3": "flagged_black_reference"
+        },
+        "interpolated_over_rejected_black_pixels": {
+          "A0": 0,
+          "A1": 0,
+          "A2": 0,
+          "A3": 192
+        },
+        "warnings": [
+          "DIAGNOSTIC ONLY: raw ADC response is not independently linearity-calibrated.",
+          "Uses 04 diagnostic QC: timing/reference warnings are retained; hard-invalid measurements are omitted.",
+          "Rejected black anchors are skipped; interpolation between valid anchors can span long gaps. No extrapolation.",
+          "Default board gains assume the outer two rows/columns are unshadowed flat board; inspect masks.",
+          "Default circular object mask assumes the ball is centred; inspect or override it.",
+          "Constant detector directions and board-plane sampling approximate perspective/near-field geometry.",
+          "Noise weights omit background/interpolation uncertainty; residual is not an accuracy certificate.",
+          "Three-channel fits have no redundant observation to check the model.",
+          "Only the largest connected valid region is integrated; absolute height/board contact is unknown.",
+          "Missing Hadamard pairs use minimum-norm projection; missing structure is NOT recovered. Channels without DC are excluded from 3D.",
+          "Hadamard noise weights assume independent samples/pairs; correlated noise, missing-coefficient bias and dark-reference uncertainty are omitted."
+        ]
+      },
+      "diameter_mm": 40,
+      "inner_fraction": 0.8
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "comparison": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\09_compare_3d_baseline\\four_channel_warning_qc\\comparison_settings.json",
+      "comparison_sha256": "ba4e0b0ede078ca8bb9b8a58e376d3ad05563f86368d7d038d63a523dc7c99e9",
+      "capture_settings": {
+        "program": "spi_capture_8x8.py",
+        "version": "2.0",
+        "status": "completed",
+        "simulated": false,
+        "created_at": "2026-11-08T03:16:56.373105+11:00",
+        "roi": {
+          "ROI_X": 802,
+          "ROI_Y": 334,
+          "ROI_W": 352,
+          "ROI_H": 384,
+          "SCREEN_W": 1920,
+          "SCREEN_H": 1080
+        },
+        "acquisition": {
+          "port": "COM6",
+          "baud": 115200,
+          "projector": 1,
+          "roi": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\calibration\\roi_calibration.json",
+          "output": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture",
+          "settle": 2.0,
+          "record": 4.0,
+          "mapping": "Facing ball: A0=right, A1=bottom, A2=top, A3=left",
+          "note": "",
+          "list_devices": false,
+          "start_now": false,
+          "mode": "hadamard",
+          "grid": 32,
+          "gray": 255,
+          "ref_every": 32,
+          "reference_settle": 10.0,
+          "full_white_refs": false,
+          "dry_run": false
+        },
+        "expected_duration_s": 13476.0,
+        "time_basis": "PC receive/display-request time; not hardware synchronized",
+        "n_valid_records": 675177,
+        "invalid_lines": 0,
+        "finished_at": "2026-11-08T07:02:03.162085+11:00"
+      },
+      "reconstruction_settings": {
+        "source_folder": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56",
+        "run_status": "completed",
+        "simulated": false,
+        "mode": "hadamard",
+        "grid": 32,
+        "excluded_channels": [],
+        "channel_reconstruction": [
+          {
+            "space": "raw_adc",
+            "channel": "A0",
+            "expected_measurements": 1024,
+            "usable_measurements": 0,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 0,
+            "all_requested_measurements_usable": false,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 435.1847262364972,
+            "reference_quality": "large_background_change",
+            "white_reference_span_pct": 1.4841107549246342,
+            "rejected_black_phase_ids": "",
+            "warning_black_phase_ids": "",
+            "diagnostic_warning_phases": 0,
+            "interpolated_over_rejected_black_pixels": 0,
+            "interpretation": "Uncalibrated diagnostic preview"
+          },
+          {
+            "space": "raw_adc",
+            "channel": "A1",
+            "expected_measurements": 1024,
+            "usable_measurements": 1023,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 0,
+            "all_requested_measurements_usable": false,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 435.1847262364972,
+            "reference_quality": "usable",
+            "white_reference_span_pct": 0.8895773773071698,
+            "rejected_black_phase_ids": "",
+            "warning_black_phase_ids": "",
+            "diagnostic_warning_phases": 1,
+            "interpolated_over_rejected_black_pixels": 0,
+            "interpretation": "Uncalibrated diagnostic preview"
+          },
+          {
+            "space": "raw_adc",
+            "channel": "A2",
+            "expected_measurements": 1024,
+            "usable_measurements": 0,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 0,
+            "all_requested_measurements_usable": false,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 435.1847262364972,
+            "reference_quality": "flagged_black_reference;large_background_change;white_reference_change_over_10pct",
+            "white_reference_span_pct": 42.284342714076786,
+            "rejected_black_phase_ids": "",
+            "warning_black_phase_ids": "1;67;133;331;397;463;529;595;661;727;925;991;1057;1123;1189;1255;1321;1387;1453;1519;1585;1783;1849;1915;2114",
+            "diagnostic_warning_phases": 86,
+            "interpolated_over_rejected_black_pixels": 0,
+            "interpretation": "Uncalibrated diagnostic preview"
+          },
+          {
+            "space": "raw_adc",
+            "channel": "A3",
+            "expected_measurements": 1024,
+            "usable_measurements": 0,
+            "diagnostic_measurements": 1024,
+            "diagnostic_image_pixels": 1024,
+            "finite_image_pixels": 0,
+            "all_requested_measurements_usable": false,
+            "discarded_coefficients": 0,
+            "diagnostic_method": "complete_inverse",
+            "dc_available": true,
+            "max_valid_black_gap_s": 435.1847262364972,
+            "reference_quality": "large_background_change;white_reference_change_over_10pct",
+            "white_reference_span_pct": 14.560919538557789,
+            "rejected_black_phase_ids": "",
+            "warning_black_phase_ids": "",
+            "diagnostic_warning_phases": 1,
+            "interpolated_over_rejected_black_pixels": 0,
+            "interpretation": "Uncalibrated diagnostic preview"
+          }
+        ],
+        "noise_model": "independent pair-mean standard error",
+        "noise_floor_adc": 0.01,
+        "noise_median_adc": {
+          "A0": 0.03204308437171158,
+          "A1": 0.024386254951546414,
+          "A2": 0.05169809302608721,
+          "A3": 0.03484809577013706
+        },
+        "roi_mm": [
+          80,
+          80
+        ],
+        "positions_mm": [
+          [
+            250.0,
+            12.0,
+            600.0
+          ],
+          [
+            5.0,
+            -198.0,
+            600.0
+          ],
+          [
+            5.0,
+            267.0,
+            600.0
+          ],
+          [
+            -245.0,
+            12.0,
+            600.0
+          ]
+        ],
+        "directions": [
+          [
+            0.3845498574415183,
+            0.01845839315719288,
+            0.922919657859644
+          ],
+          [
+            0.007913324295260005,
+            -0.31336764209229623,
+            0.9495989154312007
+          ],
+          [
+            0.007613304967930779,
+            0.40655048528750365,
+            0.9135965961516935
+          ],
+          [
+            -0.37796717165993937,
+            0.018512677795588867,
+            0.9256338897794434
+          ]
+        ],
+        "gains": [
+          1.0166279937681992,
+          0.9781706232407388,
+          1.0282273567399796,
+          0.9833720062318007
+        ],
+        "gains_source": "flat board median approximation",
+        "center_col_row": [
+          15.5,
+          15.5
+        ],
+        "mask_radius_mm": 20,
+        "min_signal_adc": 0.05,
+        "max_residual": 0.25,
+        "requested_mask_pixels": 208,
+        "valid_normal_pixels": 198,
+        "integrated_pixels": 198,
+        "edge_integration_rmse_mm": 0.5653212416621681,
+        "reference_quality": {
+          "A0": "large_background_change",
+          "A1": "usable",
+          "A2": "flagged_black_reference;large_background_change;white_reference_change_over_10pct",
+          "A3": "large_background_change;white_reference_change_over_10pct"
+        },
+        "interpolated_over_rejected_black_pixels": {
+          "A0": 0,
+          "A1": 0,
+          "A2": 0,
+          "A3": 0
+        },
+        "warnings": [
+          "DIAGNOSTIC ONLY: raw ADC response is not independently linearity-calibrated.",
+          "Uses 04 diagnostic QC: excursion, drift, stability and reference warnings do not exclude observations; hard-invalid measurements are omitted.",
+          "Warning-only black anchors are retained; hard-invalid anchors are skipped. Interpolation can span long gaps; no extrapolation.",
+          "Default board gains assume the outer two rows/columns are unshadowed flat board; inspect masks.",
+          "Default circular object mask assumes the ball is centred; inspect or override it.",
+          "Constant detector directions and board-plane sampling approximate perspective/near-field geometry.",
+          "Noise weights omit background/interpolation uncertainty; residual is not an accuracy certificate.",
+          "Three-channel fits have no redundant observation to check the model.",
+          "Only the largest connected valid region is integrated; absolute height/board contact is unknown.",
+          "Missing Hadamard pairs use minimum-norm projection; missing structure is NOT recovered. Channels without DC are excluded from 3D.",
+          "Hadamard noise weights assume independent samples/pairs; correlated noise, missing-coefficient bias and dark-reference uncertainty are omitted."
+        ]
+      },
+      "diameter_mm": 40,
+      "inner_fraction": 0.8
+    }
+  ],
+  "metrics": [
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "OLS",
+      "evaluation_set": "own_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 200,
+      "normal_pixels": 201,
+      "height_coverage_pct": 96.15384615384616,
+      "normal_coverage_pct": 96.63461538461539,
+      "height_rmse_mm": 2.941990776859294,
+      "height_mae_mm": 2.229650769460089,
+      "height_abs_p95_mm": 5.478819004740583,
+      "height_bias_mm": -1.8918200339612667e-15,
+      "normal_mean_deg": 18.868904644712355,
+      "normal_median_deg": 17.197970241091564,
+      "normal_p95_deg": 36.59602272379901
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "OLS",
+      "evaluation_set": "own_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 124,
+      "normal_pixels": 124,
+      "height_coverage_pct": 100.0,
+      "normal_coverage_pct": 100.0,
+      "height_rmse_mm": 2.111811163425349,
+      "height_mae_mm": 1.5974424367846956,
+      "height_abs_p95_mm": 4.512768744721209,
+      "height_bias_mm": -0.728737589699218,
+      "normal_mean_deg": 18.93149420843335,
+      "normal_median_deg": 16.801645217142283,
+      "normal_p95_deg": 36.25372137762247
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "WLS",
+      "evaluation_set": "own_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 203,
+      "normal_pixels": 204,
+      "height_coverage_pct": 97.59615384615384,
+      "normal_coverage_pct": 98.07692307692308,
+      "height_rmse_mm": 3.168433305431823,
+      "height_mae_mm": 2.4436408044130737,
+      "height_abs_p95_mm": 5.905569080795981,
+      "height_bias_mm": -1.0500631562957145e-16,
+      "normal_mean_deg": 20.093389311527027,
+      "normal_median_deg": 19.474775871229184,
+      "normal_p95_deg": 37.9508481312926
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "WLS",
+      "evaluation_set": "own_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 124,
+      "normal_pixels": 124,
+      "height_coverage_pct": 100.0,
+      "normal_coverage_pct": 100.0,
+      "height_rmse_mm": 2.342195681323661,
+      "height_mae_mm": 1.876849752606324,
+      "height_abs_p95_mm": 4.594155187000519,
+      "height_bias_mm": -0.8213159847065831,
+      "normal_mean_deg": 20.24059044467432,
+      "normal_median_deg": 18.795609298494252,
+      "normal_p95_deg": 38.60680758032176
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "OLS",
+      "evaluation_set": "common_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 200,
+      "normal_pixels": 201,
+      "height_coverage_pct": 96.15384615384616,
+      "normal_coverage_pct": 96.63461538461539,
+      "height_rmse_mm": 2.941990776859294,
+      "height_mae_mm": 2.229650769460089,
+      "height_abs_p95_mm": 5.478819004740583,
+      "height_bias_mm": -1.8918200339612667e-15,
+      "normal_mean_deg": 18.868904644712355,
+      "normal_median_deg": 17.197970241091564,
+      "normal_p95_deg": 36.59602272379901
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "OLS",
+      "evaluation_set": "common_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 124,
+      "normal_pixels": 124,
+      "height_coverage_pct": 100.0,
+      "normal_coverage_pct": 100.0,
+      "height_rmse_mm": 2.111811163425349,
+      "height_mae_mm": 1.5974424367846956,
+      "height_abs_p95_mm": 4.512768744721209,
+      "height_bias_mm": -0.728737589699218,
+      "normal_mean_deg": 18.93149420843335,
+      "normal_median_deg": 16.801645217142283,
+      "normal_p95_deg": 36.25372137762247
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "WLS",
+      "evaluation_set": "common_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 200,
+      "normal_pixels": 201,
+      "height_coverage_pct": 96.15384615384616,
+      "normal_coverage_pct": 96.63461538461539,
+      "height_rmse_mm": 3.191719464305324,
+      "height_mae_mm": 2.4751192324978515,
+      "height_abs_p95_mm": 5.9124523385655365,
+      "height_bias_mm": 1.9184653865522706e-15,
+      "normal_mean_deg": 20.214522551728972,
+      "normal_median_deg": 19.579110402115273,
+      "normal_p95_deg": 38.00930550101449
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "method": "WLS",
+      "evaluation_set": "common_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 124,
+      "normal_pixels": 124,
+      "height_coverage_pct": 100.0,
+      "normal_coverage_pct": 100.0,
+      "height_rmse_mm": 2.340487805388557,
+      "height_mae_mm": 1.8755895739133424,
+      "height_abs_p95_mm": 4.589271994565216,
+      "height_bias_mm": -0.8164327922712802,
+      "normal_mean_deg": 20.24059044467432,
+      "normal_median_deg": 18.795609298494252,
+      "normal_p95_deg": 38.60680758032176
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "OLS",
+      "evaluation_set": "own_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 202,
+      "normal_pixels": 202,
+      "height_coverage_pct": 97.11538461538461,
+      "normal_coverage_pct": 97.11538461538461,
+      "height_rmse_mm": 4.01907085177858,
+      "height_mae_mm": 3.089621464840186,
+      "height_abs_p95_mm": 8.635324565538612,
+      "height_bias_mm": -1.6884183820041984e-15,
+      "normal_mean_deg": 30.148629794850933,
+      "normal_median_deg": 26.943880488522808,
+      "normal_p95_deg": 70.2881412822042
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "OLS",
+      "evaluation_set": "own_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 122,
+      "normal_pixels": 122,
+      "height_coverage_pct": 98.38709677419355,
+      "normal_coverage_pct": 98.38709677419355,
+      "height_rmse_mm": 2.7529663658806203,
+      "height_mae_mm": 2.160579871263592,
+      "height_abs_p95_mm": 5.5183505248084845,
+      "height_bias_mm": -1.1882816368014186,
+      "normal_mean_deg": 27.447212334609155,
+      "normal_median_deg": 24.62587691691237,
+      "normal_p95_deg": 61.661611398423
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "WLS",
+      "evaluation_set": "own_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 198,
+      "normal_pixels": 198,
+      "height_coverage_pct": 95.1923076923077,
+      "normal_coverage_pct": 95.1923076923077,
+      "height_rmse_mm": 2.9990254527819773,
+      "height_mae_mm": 2.3166751391956986,
+      "height_abs_p95_mm": 5.971419446761462,
+      "height_bias_mm": 0.0,
+      "normal_mean_deg": 25.24804827934443,
+      "normal_median_deg": 21.72121608339651,
+      "normal_p95_deg": 56.97490526963644
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "WLS",
+      "evaluation_set": "own_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 117,
+      "normal_pixels": 117,
+      "height_coverage_pct": 94.35483870967742,
+      "normal_coverage_pct": 94.35483870967742,
+      "height_rmse_mm": 2.0927193131827826,
+      "height_mae_mm": 1.7092173818712533,
+      "height_abs_p95_mm": 3.956718200841518,
+      "height_bias_mm": -1.4089309928299494,
+      "normal_mean_deg": 21.83962596658115,
+      "normal_median_deg": 19.21003428767616,
+      "normal_p95_deg": 51.4033241471051
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "OLS",
+      "evaluation_set": "common_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 194,
+      "normal_pixels": 194,
+      "height_coverage_pct": 93.26923076923077,
+      "normal_coverage_pct": 93.26923076923077,
+      "height_rmse_mm": 3.9995482712032895,
+      "height_mae_mm": 3.055332502321984,
+      "height_abs_p95_mm": 8.617169360789998,
+      "height_bias_mm": 5.860146274310105e-16,
+      "normal_mean_deg": 29.962163171870806,
+      "normal_median_deg": 26.220809900263212,
+      "normal_p95_deg": 70.45342593670888
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "OLS",
+      "evaluation_set": "common_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 115,
+      "normal_pixels": 115,
+      "height_coverage_pct": 92.74193548387096,
+      "normal_coverage_pct": 92.74193548387096,
+      "height_rmse_mm": 2.720747333321529,
+      "height_mae_mm": 2.0942736876839465,
+      "height_abs_p95_mm": 5.627873394526451,
+      "height_bias_mm": -1.1933989690711602,
+      "normal_mean_deg": 26.80244007999063,
+      "normal_median_deg": 24.018115852166122,
+      "normal_p95_deg": 62.41316599735126
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "WLS",
+      "evaluation_set": "common_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 194,
+      "normal_pixels": 194,
+      "height_coverage_pct": 93.26923076923077,
+      "normal_coverage_pct": 93.26923076923077,
+      "height_rmse_mm": 3.015191211998605,
+      "height_mae_mm": 2.3240440794793438,
+      "height_abs_p95_mm": 6.116226044015423,
+      "height_bias_mm": -1.465036568577526e-15,
+      "normal_mean_deg": 25.08909485678428,
+      "normal_median_deg": 21.72121608339651,
+      "normal_p95_deg": 56.97720108501331
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "method": "WLS",
+      "evaluation_set": "common_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 115,
+      "normal_pixels": 115,
+      "height_coverage_pct": 92.74193548387096,
+      "normal_coverage_pct": 92.74193548387096,
+      "height_rmse_mm": 2.0946303120339818,
+      "height_mae_mm": 1.712162355402415,
+      "height_abs_p95_mm": 3.9391079059544984,
+      "height_bias_mm": -1.4001997924979925,
+      "normal_mean_deg": 21.311642368799312,
+      "normal_median_deg": 18.42213191645118,
+      "normal_p95_deg": 49.83922199487466
+    }
+  ],
+  "differences": [
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "region": "full_front",
+      "common_height_pixels": 200,
+      "common_normal_pixels": 201,
+      "ols_rmse_mm": 2.941990776859294,
+      "wls_rmse_mm": 3.191719464305324,
+      "wls_rmse_reduction_pct": -8.488425232679571
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "region": "inner",
+      "common_height_pixels": 124,
+      "common_normal_pixels": 124,
+      "ols_rmse_mm": 2.111811163425349,
+      "wls_rmse_mm": 2.340487805388557,
+      "wls_rmse_reduction_pct": -10.828460703479541
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "region": "full_front",
+      "common_height_pixels": 194,
+      "common_normal_pixels": 194,
+      "ols_rmse_mm": 3.9995482712032895,
+      "wls_rmse_mm": 3.015191211998605,
+      "wls_rmse_reduction_pct": 24.611705934193772
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "region": "inner",
+      "common_height_pixels": 115,
+      "common_normal_pixels": 115,
+      "ols_rmse_mm": 2.720747333321529,
+      "wls_rmse_mm": 2.0946303120339818,
+      "wls_rmse_reduction_pct": 23.012685287581412
+    }
+  ],
+  "channel_weights": [
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "channel": "A0",
+      "noise_adc": 0.051161207288782436,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 17.27402589948667
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "channel": "A1",
+      "noise_adc": 0.03852244115514287,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 30.46825166305017
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "channel": "A2",
+      "noise_adc": 0.04387706854325485,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 23.485506253915677
+    },
+    {
+      "dataset": "2026-10-30_01-16-26",
+      "channel": "A3",
+      "noise_adc": 0.039641575821742714,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 28.772216183547467
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "channel": "A0",
+      "noise_adc": 0.03204308437171158,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 25.276732372726702
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "channel": "A1",
+      "noise_adc": 0.024386254951546414,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 43.64146660878684
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "channel": "A2",
+      "noise_adc": 0.05169809302608721,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 9.710475782194898
+    },
+    {
+      "dataset": "2026-11-08_03-16-56",
+      "channel": "A3",
+      "noise_adc": 0.03484809577013706,
+      "ols_weight_pct": 25.0,
+      "wls_weight_pct": 21.371325236291554
+    }
+  ],
+  "interpretation": "Within-capture paired algorithm comparisons; no pooled RMSE or significance test.",
+  "limitations": [
+    "Detector geometry, settling time, sample rate and QC policy differ across captures.",
+    "Common pixels are shared between methods within a capture, not across captures.",
+    "Weights assume all four channels pass the pixel signal check; missing channels change relative weights.",
+    "Two captures are not sufficient to establish general superiority or statistical significance."
+  ]
+}

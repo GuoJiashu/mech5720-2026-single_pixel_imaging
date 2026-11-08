@@ -1,0 +1,58 @@
+{
+  "source_3d": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\3d",
+  "reference": "ideal sphere, orthographic pixel-centre sampling",
+  "diameter_mm": 40.0,
+  "roi_mm": [
+    80,
+    80
+  ],
+  "center_col_row": [
+    15.5,
+    15.5
+  ],
+  "center_source": "inherited from 05; not independently verified",
+  "inner_fraction": 0.8,
+  "sphere_fully_inside_roi": true,
+  "height_offset_added_mm": 12.98287618735569,
+  "alignment": "one offset from full_front valid heights; same offset for inner region",
+  "coverage_definition": "valid pixels / reference sphere pixel centres within ROI; no surface-area weighting",
+  "geometry_note": "Board-plane pixel spacing approximates sphere sampling; projector perspective is not corrected.",
+  "reference_quality": {
+    "A0": "large_background_change",
+    "A1": "usable",
+    "A2": "flagged_black_reference;large_background_change;white_reference_change_over_10pct",
+    "A3": "large_background_change;white_reference_change_over_10pct"
+  },
+  "metrics": [
+    {
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 198,
+      "normal_pixels": 198,
+      "height_coverage_pct": 95.1923076923077,
+      "normal_coverage_pct": 95.1923076923077,
+      "height_rmse_mm": 2.9990254505622067,
+      "height_mae_mm": 2.3166751342296337,
+      "height_abs_p95_mm": 5.971419481986597,
+      "height_bias_mm": -1.866071831289152e-15,
+      "normal_mean_deg": 25.248048275839807,
+      "normal_median_deg": 21.72121621787729,
+      "normal_p95_deg": 56.97490523779676
+    },
+    {
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 117,
+      "normal_pixels": 117,
+      "height_coverage_pct": 94.35483870967742,
+      "normal_coverage_pct": 94.35483870967742,
+      "height_rmse_mm": 2.0927193161844992,
+      "height_mae_mm": 1.709217382580033,
+      "height_abs_p95_mm": 3.956718170162033,
+      "height_bias_mm": -1.4089309964122614,
+      "normal_mean_deg": 21.83962595943012,
+      "normal_median_deg": 19.210034427404022,
+      "normal_p95_deg": 51.40332422734869
+    }
+  ]
+}

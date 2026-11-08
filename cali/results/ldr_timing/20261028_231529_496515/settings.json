@@ -1,0 +1,63 @@
+{
+  "program": "ldr_timing_test.py",
+  "version": "1.0",
+  "status": "completed",
+  "simulated": false,
+  "created_at": "2026-10-28T23:15:29.496877+11:00",
+  "serial_port": "COM6",
+  "baud": 115200,
+  "projector_index": 1,
+  "roi": {
+    "ROI_X": 832,
+    "ROI_Y": 284,
+    "ROI_W": 352,
+    "ROI_H": 384,
+    "SCREEN_W": 1920,
+    "SCREEN_H": 1080
+  },
+  "levels": [
+    255,
+    64
+  ],
+  "repeats": 5,
+  "hold_s": 10.0,
+  "tail_s": 2.0,
+  "average_window_s": 0.5,
+  "confirm_s": 1.0,
+  "tolerance": 0.05,
+  "absolute_tolerance_adc": 1.0,
+  "channel_mapping": "not specified",
+  "note": "",
+  "expected_duration_s": 210.0,
+  "time_basis": "Host receive time and PC display-request time; no hardware synchronization.",
+  "data_definition": "Arduino-reported values; firmware may already average ADC conversions.",
+  "firmware_rate": "Not modified by Python. Optional exported sketch targets 50 Hz; verify actual rate.",
+  "timestamp_note": "Optional T_US saved raw; not used for host/display alignment.",
+  "display": {
+    "width": 1920,
+    "height": 1080,
+    "x": 2560,
+    "y": 0,
+    "name": "\\\\.\\DISPLAY5",
+    "is_primary": false
+  },
+  "invalid_lines": 0,
+  "n_valid_records": 999,
+  "finished_at": "2026-10-28T23:18:59.944307+11:00",
+  "timing_assessment": {
+    "status": "INSUFFICIENT_OR_UNSTABLE_DATA",
+    "simulated": false,
+    "all_requested_transitions_valid": false,
+    "median_host_interval_s": 0.20892800000001444,
+    "p95_host_interval_s": 0.20927737999973034,
+    "approximate_received_records_per_s": 4.786337877163094,
+    "worst_observed_settling_s": 7.108119999999872,
+    "candidate_wait_s": null,
+    "averaging_window_used_s": 0.5,
+    "settling_band_relative_to_step": 0.05,
+    "settling_band_floor_adc": 1.0,
+    "minimum_confirmation_s": 1.0,
+    "limitation": "Candidate applies only to this fixed geometry, firmware and averaging rule; not a raw-ADC settling time, hardware-synchronized measurement or 3D calibration pass.",
+    "next_action": "Validate with actual complementary patterns and check additivity before imaging. If any group is invalid, inspect traces; increase --hold for slow/drifting responses or improve serial sampling before accepting a wait time."
+  }
+}

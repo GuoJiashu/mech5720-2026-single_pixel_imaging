@@ -1,0 +1,16 @@
+{
+  "status": "INSUFFICIENT_OR_UNSTABLE_DATA",
+  "simulated": false,
+  "all_requested_transitions_valid": false,
+  "median_host_interval_s": 0.20892800000001444,
+  "p95_host_interval_s": 0.20927737999973034,
+  "approximate_received_records_per_s": 4.786337877163094,
+  "worst_observed_settling_s": 7.108119999999872,
+  "candidate_wait_s": null,
+  "averaging_window_used_s": 0.5,
+  "settling_band_relative_to_step": 0.05,
+  "settling_band_floor_adc": 1.0,
+  "minimum_confirmation_s": 1.0,
+  "limitation": "Candidate applies only to this fixed geometry, firmware and averaging rule; not a raw-ADC settling time, hardware-synchronized measurement or 3D calibration pass.",
+  "next_action": "Validate with actual complementary patterns and check additivity before imaging. If any group is invalid, inspect traces; increase --hold for slow/drifting responses or improve serial sampling before accepting a wait time."
+}

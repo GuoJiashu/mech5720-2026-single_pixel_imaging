@@ -1,0 +1,5 @@
+﻿channel,board_pixels,rejected_or_missing,below_signal_threshold,usable_board_pixels,required_pixels,reference_quality
+A0,240,0,0,240,8,usable
+A1,240,240,0,0,8,flagged_black_reference
+A2,240,240,0,0,8,flagged_black_reference;insufficient_black_references;insufficient_white_reference_coverage
+A3,240,240,0,0,8,flagged_black_reference;large_background_change;white_reference_change_over_10pct

@@ -1,0 +1,28 @@
+LDR timing test / 四通道时序检测
+Run: completed
+Assessment: COARSE_ESTIMATE_REQUIRES_VALIDATION
+Measured serial stream; host timing only.
+Median receive interval: 0.20892099999946367 s
+Candidate wait: 13.4 s
+Averaging window used (not optimized): 1.0 s
+
+level direction channel valid/expected max_settling_s
+ 64 rise  A0 5/5 4.506209800000761 
+ 64 rise  A1 5/5 4.9044880000001285 
+ 64 rise  A2 5/5 6.366917100000137 
+ 64 rise  A3 5/5 7.829332799999975 
+ 64 fall  A0 5/5 1.425748100000419 
+ 64 fall  A1 5/5 1.7396103000000949 
+ 64 fall  A2 5/5 1.401685699999689 
+ 64 fall  A3 5/5 12.920574399999168 
+
+空白值/None 表示没有可靠估计，不表示 0 秒。
+候选等待时间=本轮最慢有效稳定时间+max(0.2秒,两倍95%接收间隔)，向上取整至0.1秒。
+仅所有要求的重复/通道/方向有效时才提供候选值；模拟结果不能用于实验。
+稳定时间使用因果滑动平均；时间从PC请求投影开始，包含显示和串口等延迟。
+末端平台按最后一段数据估计；有限观察窗不能排除更慢的漂移。
+当前程序不会修改Arduino采样率，时间戳不代表四通道同时采样。
+接收间隔大于0.05秒时标记粗测；即使提高频率，也没有硬件/光学同步。
+T_US（若存在）原样保留：Arduino重启/计时回绕未与PC对齐，不用于显示相对时间估计。
+若任一组无有效估计：查看原始曲线与status；必要时延长--hold或提升固件输出率。
+结果不能替代互补图案验证、光强叠加性测试或3D几何校准。

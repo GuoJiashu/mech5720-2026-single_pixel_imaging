@@ -1,0 +1,9 @@
+﻿simulated,layout,test_level,channel,expected_repeats,valid_repeats,mean_relative_error_pct,sd_repeat_error_pct,max_abs_error_pct,error_limit_pct,data_quality,screen_result
+0,checkerboard,128,A0,3,3,-18.32443943455564,0.26056938707909305,18.625246368350837,5.0,all_repeats_usable,additivity_deviation_detected
+0,checkerboard,128,A1,3,3,-17.52655003237699,0.1684191862994124,17.71941255468497,5.0,all_repeats_usable,additivity_deviation_detected
+0,checkerboard,128,A2,3,3,-14.378879882788498,0.1308357830794706,14.506627423201927,5.0,all_repeats_usable,additivity_deviation_detected
+0,checkerboard,128,A3,3,3,-19.440127025197658,0.32183441600166585,19.684868220834648,5.0,all_repeats_usable,additivity_deviation_detected
+0,checkerboard,64,A0,3,3,-7.368363378247448,0.7325431491481434,8.089577237756648,5.0,all_repeats_usable,additivity_deviation_detected
+0,checkerboard,64,A1,3,3,-7.572221416118743,0.6538893561672741,8.297564786919422,5.0,all_repeats_usable,additivity_deviation_detected
+0,checkerboard,64,A2,3,2,-5.775430375388106,2.3383587658981986,7.428899715601729,5.0,review_required,insufficient_or_unstable_data
+0,checkerboard,64,A3,3,2,-9.896944925738609,1.2968064543814626,10.813925563518225,5.0,review_required,insufficient_or_unstable_data

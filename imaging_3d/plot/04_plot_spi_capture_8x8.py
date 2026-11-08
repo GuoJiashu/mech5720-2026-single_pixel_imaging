@@ -19,16 +19,35 @@ from plot_common import (
 from patterns import hadamard, imaging_plan as make_plan
 
 
-def allowed(row, diagnostic=False):
+# Diagnostic reconstruction retains these observations and records their warnings.
+# Missing/incomplete data, invalid numbers and ADC saturation still block use.
+QC_WARNINGS = frozenset({
+    "large_background_change", "interpolated_over_rejected_black",
+    "recording_drift", "not_stable_before_recording", "insufficient_pre_window",
+    "large_excursion", "flagged_black_reference", "flagged_white_reference",
+    "white_reference_change_over_10pct", "insufficient_white_reference_coverage",
+    "nonpositive_white_signal",
+})
+
+
+def quality_allowed(row, diagnostic=False):
     if row is None:
         return False
     flags = set(row["quality"].split(";")) - {"usable"}
     if diagnostic:
-        flags.discard("large_background_change")
-        flags.discard("interpolated_over_rejected_black")
-        flags -= {"recording_drift", "not_stable_before_recording", "insufficient_pre_window",
-                  "flagged_white_reference", "white_reference_change_over_10pct"}
+        flags -= QC_WARNINGS
     return not flags
+
+
+def reference_allowed(row, field):
+    return (quality_allowed(row, True) and row[field] != ""
+            and math.isfinite(row[field]) and row["midpoint_s"] != ""
+            and math.isfinite(row["midpoint_s"]))
+
+
+def allowed(row, diagnostic=False):
+    return (quality_allowed(row, diagnostic) and row["background_corrected_value"] != ""
+            and math.isfinite(row["background_corrected_value"]))
 
 
 def reconstruct(args, measured, expected_indices, h, diagnostic=False):
@@ -144,7 +163,14 @@ def phase_statistics(np, args, phases, records, calibration):
                     issues.append("insufficient_pre_window")
                 if np.max(v) >= 1022:
                     issues.append("adc_high_rail")
-                if float(np.ptp(v)) > max(10.0, 0.30 * abs(float(v.mean()))):
+                # Channel-specific excursion floors; drift and stability checks stay active.
+                excursion_floor = 10.0
+                if p["kind"] == "dark" and c in ("A1", "A3"):
+                    excursion_floor = 15.0
+                if c == "A2" and (p["kind"] == "dark" or (
+                        args.mode == "hadamard" and p["kind"] == "pattern" and p["index"] == 0)):
+                    excursion_floor = 40.0
+                if float(np.ptp(v)) > max(excursion_floor, 0.30 * abs(float(v.mean()))):
                     issues.append("large_excursion")
                 dt = np.diff(t)
                 pos = dt[dt > 0]
@@ -164,15 +190,18 @@ def phase_statistics(np, args, phases, records, calibration):
                             sd_corrected=float(vv.std(ddof=1)) if len(vv) > 1 else 0.0,
                         )
             out["quality"] = ";".join(issues) or "usable"
+            out["diagnostic_status"] = (
+                "error" if not quality_allowed(out, True) else "warning" if issues else "usable"
+            )
             stats[(p["phase_id"], c)] = out
             rows.append(out)
     return stats, rows
 
 
 def dark_estimate(np, darks, t, field):
-    """Discard rejected anchors and interpolate between surrounding valid references."""
+    """Retain warning-only anchors; interpolate without extrapolating missing references."""
     good = sorted(
-        [s for s in darks if s["quality"] == "usable" and s[field] != ""], key=lambda s: s["midpoint_s"]
+        [s for s in darks if reference_allowed(s, field)], key=lambda s: s["midpoint_s"]
     )
     if len(good) < 2 or t < good[0]["midpoint_s"] or t > good[-1]["midpoint_s"]:
         return None, []
@@ -180,7 +209,7 @@ def dark_estimate(np, darks, t, field):
     right = min((s for s in good if s["midpoint_s"] >= t), key=lambda s: s["midpoint_s"])
     skipped = [s["phase_id"] for s in darks
                if left["phase_id"] < s["phase_id"] < right["phase_id"]
-               and (s["quality"] != "usable" or s[field] == "")]
+               and not reference_allowed(s, field)]
     value = float(np.interp(t, [s["midpoint_s"] for s in good], [s[field] for s in good]))
     return value, skipped
 
@@ -209,7 +238,7 @@ def analyze(np, args, folder, phases, records, meta, calibration):
             darks = [r for r in refs if r["kind"] == "dark"]
             whites = [r for r in refs if r["kind"] == "white"]
             reference_issues = []
-            good_dark = [r for r in darks if r["quality"] == "usable"]
+            good_dark = [r for r in darks if reference_allowed(r, field)]
             if len(good_dark) < 2:
                 reference_issues.append("insufficient_black_references")
             if any(r["quality"] != "usable" for r in darks):
@@ -222,6 +251,7 @@ def analyze(np, args, folder, phases, records, meta, calibration):
             for r in whites:
                 if r["quality"] != "usable":
                     reference_issues.append("flagged_white_reference")
+                if not reference_allowed(r, field):
                     continue
                 d = interpolate_dark(np, darks, r["midpoint_s"], field)
                 if d is not None and r[field] != "":
@@ -250,8 +280,8 @@ def analyze(np, args, folder, phases, records, meta, calibration):
                     issues.append("interpolated_over_rejected_black")
                 if s[field] == "":
                     issues.append("no_measurement")
-                # A rejected anchor is a run-level warning, not a reason to erase the channel.
-                issues += [issue for issue in reference_issues if issue != "flagged_black_reference"]
+                # Preserve reference warnings on all affected measurements.
+                issues += reference_issues
                 signal = s[field] - dark if dark is not None and s[field] != "" else ""
                 out = dict(
                     simulated=int(meta["simulated"]),
@@ -292,7 +322,7 @@ def analyze(np, args, folder, phases, records, meta, calibration):
                 diagnostic_grid,
                 delimiter=",",
                 fmt="%.10g",
-                header="DIAGNOSTIC ONLY: rejected black anchors excluded; missing Hadamard rows omitted via minimum-norm projection; timing/reference warnings retained. "
+                header="DIAGNOSTIC ONLY: warning-only black anchors retained; hard-invalid anchors excluded; missing Hadamard rows omitted via minimum-norm projection. "
                 "Screen rows top-to-bottom; columns left-to-right.",
             )
             arrays[f"{space}_{c}_measurements"] = vals.copy()
@@ -326,7 +356,10 @@ def analyze(np, args, folder, phases, records, meta, calibration):
                                            if len(good_dark) > 1 else ""),
                     reference_quality=";".join(sorted(set(reference_issues))) or "usable",
                     white_reference_span_pct=white_span,
-                    rejected_black_phase_ids=";".join(str(r["phase_id"]) for r in darks if r["quality"] != "usable"),
+                    rejected_black_phase_ids=";".join(str(r["phase_id"]) for r in darks if not reference_allowed(r, field)),
+                    warning_black_phase_ids=";".join(str(r["phase_id"]) for r in good_dark if r["quality"] != "usable"),
+                    diagnostic_warning_phases=sum(
+                        r["channel"] == c and r["diagnostic_status"] == "warning" for r in phase_rows),
                     interpolated_over_rejected_black_pixels=sum(
                         "interpolated_over_rejected_black" in r["quality"] for r in measured.values()),
                     interpretation=(
@@ -343,6 +376,11 @@ def analyze(np, args, folder, phases, records, meta, calibration):
     write_csv(folder / "reference_summary.csv", reference_rows)
     write_csv(folder / "reconstruction_summary.csv", summary)
     meta["reconstruction_summary"] = summary
+    for row in summary:
+        if row["diagnostic_warning_phases"] or row["reference_quality"] != "usable":
+            print(f"WARNING {row['space']} {row['channel']}: "
+                  f"{row['diagnostic_warning_phases']} warning-only phases retained; "
+                  f"references: {row['reference_quality']}")
     return arrays, summary
 
 
@@ -398,7 +436,9 @@ def plots(np, args, folder, phases, records, arrays, meta, diagnostic=False):
             if diagnostic and "large_background_change" in row["reference_quality"]:
                 warning = "\nBACKGROUND CHANGE WARNING"
             if diagnostic and row["interpolated_over_rejected_black_pixels"]:
-                warning += f"\nBLACK ANCHORS SKIPPED: {row['rejected_black_phase_ids']}"
+                warning += f"\nBLACK ANCHORS SKIPPED: {len(row['rejected_black_phase_ids'].split(';'))}"
+            if diagnostic and row["diagnostic_warning_phases"]:
+                warning += f"\nQC WARNINGS RETAINED: {row['diagnostic_warning_phases']} phases"
             if diagnostic and args.mode == "hadamard":
                 warning += f"\nPAIRS USED: {row['diagnostic_measurements']}/{row['expected_measurements']}"
                 if row["discarded_coefficients"]:

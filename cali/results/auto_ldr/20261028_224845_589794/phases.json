@@ -1,0 +1,68 @@
+[
+  {
+    "phase_id": 1,
+    "repeat": 1,
+    "gray_level": 0,
+    "role": "calibration",
+    "host_start_s": 0.042582499999753054,
+    "status": "completed",
+    "invalid_lines": 0,
+    "host_record_start_s": 10.543712199999845,
+    "host_end_s": 40.5636442
+  },
+  {
+    "phase_id": 2,
+    "repeat": 1,
+    "gray_level": 64,
+    "role": "calibration",
+    "host_start_s": 40.622446899999886,
+    "status": "completed",
+    "invalid_lines": 0,
+    "host_record_start_s": 51.128256800000145,
+    "host_end_s": 81.14003569999977
+  },
+  {
+    "phase_id": 3,
+    "repeat": 1,
+    "gray_level": 128,
+    "role": "calibration",
+    "host_start_s": 81.2003021999999,
+    "status": "completed",
+    "invalid_lines": 0,
+    "host_record_start_s": 91.70187750000014,
+    "host_end_s": 121.70679560000008
+  },
+  {
+    "phase_id": 4,
+    "repeat": 1,
+    "gray_level": 192,
+    "role": "calibration",
+    "host_start_s": 121.76212889999988,
+    "status": "completed",
+    "invalid_lines": 0,
+    "host_record_start_s": 132.27775169999995,
+    "host_end_s": 162.28554350000013
+  },
+  {
+    "phase_id": 5,
+    "repeat": 1,
+    "gray_level": 255,
+    "role": "calibration",
+    "host_start_s": 162.34359910000012,
+    "status": "completed",
+    "invalid_lines": 0,
+    "host_record_start_s": 172.84921470000018,
+    "host_end_s": 202.87352340000007
+  },
+  {
+    "phase_id": 6,
+    "repeat": 1,
+    "gray_level": 0,
+    "role": "black_end",
+    "host_start_s": 202.92969790000006,
+    "status": "completed",
+    "invalid_lines": 0,
+    "host_record_start_s": 213.4316414,
+    "host_end_s": 243.44105450000006
+  }
+]

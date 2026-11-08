@@ -1,0 +1,5 @@
+﻿wait_s,channel,consistent,different,inconclusive,all_rows_consistent
+2.0,A0,3,0,6,False
+2.0,A1,5,0,4,False
+2.0,A2,0,0,9,False
+2.0,A3,4,0,5,False

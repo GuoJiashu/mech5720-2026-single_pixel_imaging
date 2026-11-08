@@ -1,0 +1,56 @@
+{
+  "program": "ldr_additivity_test.py",
+  "version": "1.0",
+  "status": "completed",
+  "simulated": false,
+  "created_at": "2026-10-29T00:54:06.078781+11:00",
+  "serial_port": "COM6",
+  "baud": 115200,
+  "projector_index": 1,
+  "roi": {
+    "ROI_X": 832,
+    "ROI_Y": 284,
+    "ROI_W": 352,
+    "ROI_H": 384,
+    "SCREEN_W": 1920,
+    "SCREEN_H": 1080
+  },
+  "layouts": [
+    "checkerboard",
+    "horizontal"
+  ],
+  "levels": [
+    192
+  ],
+  "tiles": 8,
+  "repeats": 3,
+  "settle_s": 20.0,
+  "record_s": 5.0,
+  "error_limit": 0.05,
+  "channel_mapping": "not specified",
+  "note": "",
+  "expected_duration_s": 750.0,
+  "background_method": "Linear interpolation of bracketing black recording means at measurement midpoints",
+  "residual_definition": "S_AB - (S_A + S_B)",
+  "relative_error_definition": "100 * residual / (S_A + S_B)",
+  "time_basis": "PC receive time; no optical or hardware synchronization",
+  "phase_stability_rule": "Compare recording halves and last 2s before recording to last 2s of recording; band=max(1 ADC,5% corrected signal)",
+  "raw_value_definition": "Arduino outputs, possibly already averaged; no intensity linearization applied",
+  "provisional_wait_basis": "Prior 0<->64 timing run suggested 13.4 s under 1s averaging; use 15s initially and recheck stability for these masks",
+  "display": {
+    "width": 1920,
+    "height": 1080,
+    "x": 2560,
+    "y": 0,
+    "name": "\\\\.\\DISPLAY5",
+    "is_primary": false
+  },
+  "invalid_lines": 0,
+  "n_valid_records": 3581,
+  "finished_at": "2026-10-29T01:06:36.664766+11:00",
+  "screening": {
+    "all_groups_usable": true,
+    "all_repeats_within_threshold": false,
+    "not_a_general_linearity_or_3d_calibration_certificate": true
+  }
+}

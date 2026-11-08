@@ -1,0 +1,18 @@
+Measured four-channel system additivity screen
+Run status: completed
+Residual = S_AB - (S_A + S_B). Error = residual / (S_A + S_B).
+Dark values are linearly interpolated between each group's two black recordings.
+Engineering screening limit: +/- 5% (not a universal standard).
+
+gray=192 horizontal A0 valid=3/3 mean_error_pct=-24.83161263988988 additivity_deviation_detected
+gray=192 horizontal A1 valid=3/3 mean_error_pct=-24.60955437918317 additivity_deviation_detected
+gray=192 horizontal A2 valid=3/3 mean_error_pct=-22.32090751424772 additivity_deviation_detected
+gray=192 horizontal A3 valid=3/3 mean_error_pct=-26.479187908592053 additivity_deviation_detected
+
+先检查 data_quality，再解释误差；未完成、采样不足、窗口漂移、弱信号不作通过判定。
+误差为正表示合并照明响应高于单独响应之和；负值表示低于其和。
+重复间标准差是描述性离散程度，不是独立样本假设下的置信区间。
+同一ROI的分区光学强度可相加，但LDR/分压/ADC输出不保证线性。
+本测试失败不能直接认定LDR损坏；需区分非线性、投影自适应、光路、漂移及未充分稳定。
+15秒等待是初始参数；新空间掩膜仍需检查稳定性。满足阈值也只支持本次亮度和空间掩膜。
+下一步仍需实际互补图案验证及成像/3D几何校准；不要用调电阻或各自归一化强行凑叠加。

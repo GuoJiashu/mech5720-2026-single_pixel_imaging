@@ -1,0 +1,44 @@
+{
+  "acquisition": {
+    "port": "COM6",
+    "baud": 115200,
+    "projector": 1,
+    "roi": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\calibration\\roi_calibration.json",
+    "output": "datasets\\calibration\\hadamard_timing\\2026-11-07_18-02-21",
+    "mapping": "Facing ball: A0=right, A1=bottom, A2=top, A3=left",
+    "note": "",
+    "list_devices": false,
+    "start_now": false,
+    "grid": 32,
+    "waits": [
+      2.0,
+      4.0
+    ],
+    "record": 2.0,
+    "black_settle": 10.0,
+    "repeats": 3,
+    "rows": [
+      0,
+      8,
+      16,
+      24,
+      32,
+      40,
+      64,
+      128,
+      136
+    ],
+    "gray": 255,
+    "dry_run": false
+  },
+  "report": {
+    "baseline_s": 4.0,
+    "record_s": 2.0,
+    "shortest_consistent_tested_wait_s": null,
+    "run_status": "completed",
+    "simulated": false,
+    "note": "Engineering screen, not an accuracy certificate. Compare repeat SD and raw traces too. Tolerance=max(absolute limit, relative limit*abs(reference pair difference)); 2SE is a heuristic repeat-error margin, not a calibrated confidence interval. No black subtraction: direct positive-minus-negative values. Black frames are diagnostics. Results cover selected patterns and this record duration only. Longest wait is not ground truth."
+  },
+  "absolute_limit": 2.0,
+  "relative_limit": 0.05
+}

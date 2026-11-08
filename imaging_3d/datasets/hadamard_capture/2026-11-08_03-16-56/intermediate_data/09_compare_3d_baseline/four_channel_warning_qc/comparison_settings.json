@@ -1,0 +1,376 @@
+{
+  "dataset": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56",
+  "source_analysis": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d",
+  "source_sha256": {
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\phase_summary.csv": "67ddc833fa740763806a8e590d50604bd102f65087a7578bda8de79c0c54489b",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\hadamard_coefficients.csv": "429aa50c79af6e656bd16649d46287e859b2eeaac12d7b839dd9e5055270ad7a",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\3d\\reconstruction_settings.json": "4289bf21f30fad50049847c31f9140154787dd73c2a2ed931db6dd21d2d47d2f",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\raw_adc_A0_diagnostic.csv": "1b035c4e90dcc441a24e2c330ed229a6c9741e8d23f6efde9ee911a4cee3ae1f",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\raw_adc_A1_diagnostic.csv": "ec5c501747f98868ff3bc9e3ebbd3d00167e75804ca1a8191eb5bc6d1abfd352",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\raw_adc_A2_diagnostic.csv": "7feae3d79ba76f31b6079cdeb25d8c2dfad67d2059c008e77055e671750cf641",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\raw_adc_A3_diagnostic.csv": "d189f9a4f2c6f5a7da784e5ac0fd4f1222f74160991a921835d3870425c255d9",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\3d\\object_mask.csv": "66ae7a77d9c021c913f0e86fce8a9c3ab927bcb16d8345790fc5d8368359a48e",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\3d\\height_relative_mm.csv": "e2d4535a58ec4f674cd82e7f476414965530091d45b31360a4bebf3e29da5478",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\3d\\normal_x.csv": "881e7a75951abe4d1c5ea2e8af1ec1807bce379d29262c022f0f145b0e1c3adf",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\3d\\normal_y.csv": "88b1e3a4c18b151d2d0291da0a5b27a8439579f70b6f5be6f5dd450e4a3643fd",
+    "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56\\intermediate_data\\05_reconstruct_3d\\3d\\normal_z.csv": "a68efba49786bad91ec6416ed62c819d9b7e52277fb4bd2b2bf9362d34697f7d"
+  },
+  "capture_sha256": {
+    "raw_readings.csv": "083a797ecf52a0f4327dc7f56a6e61d587cad251d391b2cde4b78e613ad8e7cc",
+    "phases.json": "3713a9b3a5c4e9460252c861a399626f294c3c0598832e66b0712581b92bb47e"
+  },
+  "script_sha256": {
+    "09_compare_3d_baseline.py": "5d7644bfae82f8418d0489efa86cd3721be753c58f8c82e7a31697afcdb673e2",
+    "05_reconstruct_3d.py": "314b1761cf9febb9cc1a013c8a7316703f2f52f848e47f8ff40e4a7a9b96e4cd",
+    "08_evaluate_sphere.py": "c3c669c19d47f8a467a87aef29f034aa527c8e6a32be76dc8c8a4af7b579e145"
+  },
+  "source_reconstruction_settings": {
+    "source_folder": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-11-08_03-16-56",
+    "run_status": "completed",
+    "simulated": false,
+    "mode": "hadamard",
+    "grid": 32,
+    "excluded_channels": [],
+    "channel_reconstruction": [
+      {
+        "space": "raw_adc",
+        "channel": "A0",
+        "expected_measurements": 1024,
+        "usable_measurements": 0,
+        "diagnostic_measurements": 1024,
+        "diagnostic_image_pixels": 1024,
+        "finite_image_pixels": 0,
+        "all_requested_measurements_usable": false,
+        "discarded_coefficients": 0,
+        "diagnostic_method": "complete_inverse",
+        "dc_available": true,
+        "max_valid_black_gap_s": 435.1847262364972,
+        "reference_quality": "large_background_change",
+        "white_reference_span_pct": 1.4841107549246342,
+        "rejected_black_phase_ids": "",
+        "warning_black_phase_ids": "",
+        "diagnostic_warning_phases": 0,
+        "interpolated_over_rejected_black_pixels": 0,
+        "interpretation": "Uncalibrated diagnostic preview"
+      },
+      {
+        "space": "raw_adc",
+        "channel": "A1",
+        "expected_measurements": 1024,
+        "usable_measurements": 1023,
+        "diagnostic_measurements": 1024,
+        "diagnostic_image_pixels": 1024,
+        "finite_image_pixels": 0,
+        "all_requested_measurements_usable": false,
+        "discarded_coefficients": 0,
+        "diagnostic_method": "complete_inverse",
+        "dc_available": true,
+        "max_valid_black_gap_s": 435.1847262364972,
+        "reference_quality": "usable",
+        "white_reference_span_pct": 0.8895773773071698,
+        "rejected_black_phase_ids": "",
+        "warning_black_phase_ids": "",
+        "diagnostic_warning_phases": 1,
+        "interpolated_over_rejected_black_pixels": 0,
+        "interpretation": "Uncalibrated diagnostic preview"
+      },
+      {
+        "space": "raw_adc",
+        "channel": "A2",
+        "expected_measurements": 1024,
+        "usable_measurements": 0,
+        "diagnostic_measurements": 1024,
+        "diagnostic_image_pixels": 1024,
+        "finite_image_pixels": 0,
+        "all_requested_measurements_usable": false,
+        "discarded_coefficients": 0,
+        "diagnostic_method": "complete_inverse",
+        "dc_available": true,
+        "max_valid_black_gap_s": 435.1847262364972,
+        "reference_quality": "flagged_black_reference;large_background_change;white_reference_change_over_10pct",
+        "white_reference_span_pct": 42.284342714076786,
+        "rejected_black_phase_ids": "",
+        "warning_black_phase_ids": "1;67;133;331;397;463;529;595;661;727;925;991;1057;1123;1189;1255;1321;1387;1453;1519;1585;1783;1849;1915;2114",
+        "diagnostic_warning_phases": 86,
+        "interpolated_over_rejected_black_pixels": 0,
+        "interpretation": "Uncalibrated diagnostic preview"
+      },
+      {
+        "space": "raw_adc",
+        "channel": "A3",
+        "expected_measurements": 1024,
+        "usable_measurements": 0,
+        "diagnostic_measurements": 1024,
+        "diagnostic_image_pixels": 1024,
+        "finite_image_pixels": 0,
+        "all_requested_measurements_usable": false,
+        "discarded_coefficients": 0,
+        "diagnostic_method": "complete_inverse",
+        "dc_available": true,
+        "max_valid_black_gap_s": 435.1847262364972,
+        "reference_quality": "large_background_change;white_reference_change_over_10pct",
+        "white_reference_span_pct": 14.560919538557789,
+        "rejected_black_phase_ids": "",
+        "warning_black_phase_ids": "",
+        "diagnostic_warning_phases": 1,
+        "interpolated_over_rejected_black_pixels": 0,
+        "interpretation": "Uncalibrated diagnostic preview"
+      }
+    ],
+    "noise_model": "independent pair-mean standard error",
+    "noise_floor_adc": 0.01,
+    "noise_median_adc": {
+      "A0": 0.03204308437171158,
+      "A1": 0.024386254951546414,
+      "A2": 0.05169809302608721,
+      "A3": 0.03484809577013706
+    },
+    "roi_mm": [
+      80,
+      80
+    ],
+    "positions_mm": [
+      [
+        250.0,
+        12.0,
+        600.0
+      ],
+      [
+        5.0,
+        -198.0,
+        600.0
+      ],
+      [
+        5.0,
+        267.0,
+        600.0
+      ],
+      [
+        -245.0,
+        12.0,
+        600.0
+      ]
+    ],
+    "directions": [
+      [
+        0.3845498574415183,
+        0.01845839315719288,
+        0.922919657859644
+      ],
+      [
+        0.007913324295260005,
+        -0.31336764209229623,
+        0.9495989154312007
+      ],
+      [
+        0.007613304967930779,
+        0.40655048528750365,
+        0.9135965961516935
+      ],
+      [
+        -0.37796717165993937,
+        0.018512677795588867,
+        0.9256338897794434
+      ]
+    ],
+    "gains": [
+      1.0166279937681992,
+      0.9781706232407388,
+      1.0282273567399796,
+      0.9833720062318007
+    ],
+    "gains_source": "flat board median approximation",
+    "center_col_row": [
+      15.5,
+      15.5
+    ],
+    "mask_radius_mm": 20,
+    "min_signal_adc": 0.05,
+    "max_residual": 0.25,
+    "requested_mask_pixels": 208,
+    "valid_normal_pixels": 198,
+    "integrated_pixels": 198,
+    "edge_integration_rmse_mm": 0.5653212416621681,
+    "reference_quality": {
+      "A0": "large_background_change",
+      "A1": "usable",
+      "A2": "flagged_black_reference;large_background_change;white_reference_change_over_10pct",
+      "A3": "large_background_change;white_reference_change_over_10pct"
+    },
+    "interpolated_over_rejected_black_pixels": {
+      "A0": 0,
+      "A1": 0,
+      "A2": 0,
+      "A3": 0
+    },
+    "warnings": [
+      "DIAGNOSTIC ONLY: raw ADC response is not independently linearity-calibrated.",
+      "Uses 04 diagnostic QC: excursion, drift, stability and reference warnings do not exclude observations; hard-invalid measurements are omitted.",
+      "Warning-only black anchors are retained; hard-invalid anchors are skipped. Interpolation can span long gaps; no extrapolation.",
+      "Default board gains assume the outer two rows/columns are unshadowed flat board; inspect masks.",
+      "Default circular object mask assumes the ball is centred; inspect or override it.",
+      "Constant detector directions and board-plane sampling approximate perspective/near-field geometry.",
+      "Noise weights omit background/interpolation uncertainty; residual is not an accuracy certificate.",
+      "Three-channel fits have no redundant observation to check the model.",
+      "Only the largest connected valid region is integrated; absolute height/board contact is unknown.",
+      "Missing Hadamard pairs use minimum-norm projection; missing structure is NOT recovered. Channels without DC are excluded from 3D.",
+      "Hadamard noise weights assume independent samples/pairs; correlated noise, missing-coefficient bias and dark-reference uncertainty are omitted."
+    ]
+  },
+  "weighted_maps_reproduced": true,
+  "diameter_mm": 40,
+  "inner_fraction": 0.8,
+  "methods": {
+    "OLS": "Equal weights",
+    "WLS": "1/max(sigma, noise_floor)^2 objective weights"
+  },
+  "alignment": "Separate constant offsets per method; common_valid offsets fit on common full-front heights and reused for inner region",
+  "common_offsets_mm": {
+    "OLS": 12.925874941188077,
+    "WLS": 13.000547314818043
+  },
+  "limitations": [
+    "Condition and relative-residual checks use each solver's own weights; masks can differ.",
+    "Frozen historical QC, signals and geometry; current 04 warning policy is not rerun.",
+    "Single capture comparison; pixel counts are not independent repeated trials.",
+    "Sphere centre inherited from reconstruction; raw ADC response is uncalibrated."
+  ],
+  "metrics": [
+    {
+      "method": "OLS",
+      "evaluation_set": "own_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 202,
+      "normal_pixels": 202,
+      "height_coverage_pct": 97.11538461538461,
+      "normal_coverage_pct": 97.11538461538461,
+      "height_rmse_mm": 4.01907085177858,
+      "height_mae_mm": 3.089621464840186,
+      "height_abs_p95_mm": 8.635324565538612,
+      "height_bias_mm": -1.6884183820041984e-15,
+      "normal_mean_deg": 30.148629794850933,
+      "normal_median_deg": 26.943880488522808,
+      "normal_p95_deg": 70.2881412822042
+    },
+    {
+      "method": "OLS",
+      "evaluation_set": "own_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 122,
+      "normal_pixels": 122,
+      "height_coverage_pct": 98.38709677419355,
+      "normal_coverage_pct": 98.38709677419355,
+      "height_rmse_mm": 2.7529663658806203,
+      "height_mae_mm": 2.160579871263592,
+      "height_abs_p95_mm": 5.5183505248084845,
+      "height_bias_mm": -1.1882816368014186,
+      "normal_mean_deg": 27.447212334609155,
+      "normal_median_deg": 24.62587691691237,
+      "normal_p95_deg": 61.661611398423
+    },
+    {
+      "method": "WLS",
+      "evaluation_set": "own_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 198,
+      "normal_pixels": 198,
+      "height_coverage_pct": 95.1923076923077,
+      "normal_coverage_pct": 95.1923076923077,
+      "height_rmse_mm": 2.9990254527819773,
+      "height_mae_mm": 2.3166751391956986,
+      "height_abs_p95_mm": 5.971419446761462,
+      "height_bias_mm": 0.0,
+      "normal_mean_deg": 25.24804827934443,
+      "normal_median_deg": 21.72121608339651,
+      "normal_p95_deg": 56.97490526963644
+    },
+    {
+      "method": "WLS",
+      "evaluation_set": "own_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 117,
+      "normal_pixels": 117,
+      "height_coverage_pct": 94.35483870967742,
+      "normal_coverage_pct": 94.35483870967742,
+      "height_rmse_mm": 2.0927193131827826,
+      "height_mae_mm": 1.7092173818712533,
+      "height_abs_p95_mm": 3.956718200841518,
+      "height_bias_mm": -1.4089309928299494,
+      "normal_mean_deg": 21.83962596658115,
+      "normal_median_deg": 19.21003428767616,
+      "normal_p95_deg": 51.4033241471051
+    },
+    {
+      "method": "OLS",
+      "evaluation_set": "common_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 194,
+      "normal_pixels": 194,
+      "height_coverage_pct": 93.26923076923077,
+      "normal_coverage_pct": 93.26923076923077,
+      "height_rmse_mm": 3.9995482712032895,
+      "height_mae_mm": 3.055332502321984,
+      "height_abs_p95_mm": 8.617169360789998,
+      "height_bias_mm": 5.860146274310105e-16,
+      "normal_mean_deg": 29.962163171870806,
+      "normal_median_deg": 26.220809900263212,
+      "normal_p95_deg": 70.45342593670888
+    },
+    {
+      "method": "OLS",
+      "evaluation_set": "common_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 115,
+      "normal_pixels": 115,
+      "height_coverage_pct": 92.74193548387096,
+      "normal_coverage_pct": 92.74193548387096,
+      "height_rmse_mm": 2.720747333321529,
+      "height_mae_mm": 2.0942736876839465,
+      "height_abs_p95_mm": 5.627873394526451,
+      "height_bias_mm": -1.1933989690711602,
+      "normal_mean_deg": 26.80244007999063,
+      "normal_median_deg": 24.018115852166122,
+      "normal_p95_deg": 62.41316599735126
+    },
+    {
+      "method": "WLS",
+      "evaluation_set": "common_valid",
+      "region": "full_front",
+      "reference_pixels": 208,
+      "height_pixels": 194,
+      "normal_pixels": 194,
+      "height_coverage_pct": 93.26923076923077,
+      "normal_coverage_pct": 93.26923076923077,
+      "height_rmse_mm": 3.015191211998605,
+      "height_mae_mm": 2.3240440794793438,
+      "height_abs_p95_mm": 6.116226044015423,
+      "height_bias_mm": -1.465036568577526e-15,
+      "normal_mean_deg": 25.08909485678428,
+      "normal_median_deg": 21.72121608339651,
+      "normal_p95_deg": 56.97720108501331
+    },
+    {
+      "method": "WLS",
+      "evaluation_set": "common_valid",
+      "region": "inner",
+      "reference_pixels": 124,
+      "height_pixels": 115,
+      "normal_pixels": 115,
+      "height_coverage_pct": 92.74193548387096,
+      "normal_coverage_pct": 92.74193548387096,
+      "height_rmse_mm": 2.0946303120339818,
+      "height_mae_mm": 1.712162355402415,
+      "height_abs_p95_mm": 3.9391079059544984,
+      "height_bias_mm": -1.4001997924979925,
+      "normal_mean_deg": 21.311642368799312,
+      "normal_median_deg": 18.42213191645118,
+      "normal_p95_deg": 49.83922199487466
+    }
+  ]
+}

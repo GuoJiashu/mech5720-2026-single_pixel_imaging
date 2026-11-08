@@ -1,0 +1,16 @@
+{
+  "status": "HOST_TIMING_ESTIMATE_REQUIRES_VALIDATION",
+  "simulated": false,
+  "all_requested_transitions_valid": true,
+  "median_host_interval_s": 0.02043699999921955,
+  "p95_host_interval_s": 0.02074624000069889,
+  "approximate_received_records_per_s": 48.930860695708176,
+  "worst_observed_settling_s": 1.4744412000000011,
+  "candidate_wait_s": 1.7,
+  "averaging_window_used_s": 1.0,
+  "settling_band_relative_to_step": 0.05,
+  "settling_band_floor_adc": 1.0,
+  "minimum_confirmation_s": 1.0,
+  "limitation": "Candidate applies only to this fixed geometry, firmware and averaging rule; not a raw-ADC settling time, hardware-synchronized measurement or 3D calibration pass.",
+  "next_action": "Validate with actual complementary patterns and check additivity before imaging. If any group is invalid, inspect traces; increase --hold for slow/drifting responses or improve serial sampling before accepting a wait time."
+}

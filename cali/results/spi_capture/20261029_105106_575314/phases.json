@@ -1,0 +1,101 @@
+[
+  {
+    "phase_id": 1,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "host_request_s": 3.3299998904112726e-05,
+    "host_show_return_s": 0.004156899994995911,
+    "host_end_s": 25.003729199997906,
+    "status": "completed"
+  },
+  {
+    "phase_id": 2,
+    "kind": "white",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "host_request_s": 25.003729199997906,
+    "host_show_return_s": 25.008457500000077,
+    "host_end_s": 50.006656899997324,
+    "status": "completed"
+  },
+  {
+    "phase_id": 3,
+    "kind": "pattern",
+    "index": 0,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "host_request_s": 50.006656899997324,
+    "host_show_return_s": 50.0125132999965,
+    "host_end_s": 75.00815349999903,
+    "status": "completed"
+  },
+  {
+    "phase_id": 4,
+    "kind": "pattern",
+    "index": 7,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "host_request_s": 75.00815349999903,
+    "host_show_return_s": 75.01458179999463,
+    "host_end_s": 100.01472189999913,
+    "status": "completed"
+  },
+  {
+    "phase_id": 5,
+    "kind": "pattern",
+    "index": 36,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "host_request_s": 100.01472189999913,
+    "host_show_return_s": 100.02060250000068,
+    "host_end_s": 125.02582439999969,
+    "status": "completed"
+  },
+  {
+    "phase_id": 6,
+    "kind": "pattern",
+    "index": 56,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "host_request_s": 125.02582439999969,
+    "host_show_return_s": 125.03305669999827,
+    "host_end_s": 150.03566059999866,
+    "status": "completed"
+  },
+  {
+    "phase_id": 7,
+    "kind": "pattern",
+    "index": 63,
+    "polarity": 1,
+    "settle_s": 20.0,
+    "host_request_s": 150.03566059999866,
+    "host_show_return_s": 150.04112689999602,
+    "host_end_s": 175.03715069999453,
+    "status": "completed"
+  },
+  {
+    "phase_id": 8,
+    "kind": "white",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "host_request_s": 175.03715069999453,
+    "host_show_return_s": 175.04202429999714,
+    "host_end_s": 200.04391879999457,
+    "status": "completed"
+  },
+  {
+    "phase_id": 9,
+    "kind": "dark",
+    "index": -1,
+    "polarity": 0,
+    "settle_s": 20.0,
+    "host_request_s": 200.04391879999457,
+    "host_show_return_s": 200.05147709999437,
+    "host_end_s": 225.055884399997,
+    "status": "completed"
+  }
+]

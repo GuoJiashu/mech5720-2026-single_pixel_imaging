@@ -1,0 +1,5 @@
+﻿space,channel,expected_measurements,usable_measurements,finite_image_pixels,all_requested_measurements_usable,reference_quality,white_reference_span_pct,interpretation
+raw_adc,A0,5,5,5,True,usable,0.12306246735703266,Uncalibrated diagnostic preview
+raw_adc,A1,5,5,5,True,usable,0.41418982319554826,Uncalibrated diagnostic preview
+raw_adc,A2,5,5,5,True,usable,0.10027559636179821,Uncalibrated diagnostic preview
+raw_adc,A3,5,5,5,True,usable,0.30766308182830426,Uncalibrated diagnostic preview

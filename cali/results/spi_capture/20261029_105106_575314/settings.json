@@ -1,0 +1,94 @@
+{
+  "program": "spi_capture_8x8.py",
+  "version": "1.0",
+  "status": "completed",
+  "simulated": false,
+  "created_at": "2026-10-29T10:51:06.575608+11:00",
+  "serial_port": "COM6",
+  "baud": 115200,
+  "projector_index": 1,
+  "roi": {
+    "ROI_X": 832,
+    "ROI_Y": 284,
+    "ROI_W": 352,
+    "ROI_H": 384,
+    "SCREEN_W": 1920,
+    "SCREEN_H": 1080
+  },
+  "acquisition": {
+    "mode": "pilot",
+    "grid": 8,
+    "gray": 255,
+    "settle": 20.0,
+    "record": 5.0,
+    "ref_every": 16,
+    "mapping": "not specified"
+  },
+  "calibration_snapshot": null,
+  "calibration_independently_verified_by_program": false,
+  "expected_duration_s": 225.0,
+  "n_planned_frames": 9,
+  "note": "",
+  "orientation": "screen row-major, top-to-bottom and left-to-right; no transpose or flip",
+  "pattern_basis": "one grid cell per pattern",
+  "time_basis": "PC receive and display-request times; no hardware synchronization",
+  "data_definition": "Arduino-reported averages, four channels sampled sequentially",
+  "warning": "No validated correction is bundled. Raw-ADC Hadamard result is diagnostic only.",
+  "display": {
+    "width": 1920,
+    "height": 1080,
+    "x": 2560,
+    "y": 0,
+    "name": "\\\\.\\DISPLAY5",
+    "is_primary": false
+  },
+  "invalid_lines": 0,
+  "n_valid_records": 1070,
+  "finished_at": "2026-10-29T10:54:51.821980+11:00",
+  "reconstruction_summary": [
+    {
+      "space": "raw_adc",
+      "channel": "A0",
+      "expected_measurements": 5,
+      "usable_measurements": 5,
+      "finite_image_pixels": 5,
+      "all_requested_measurements_usable": true,
+      "reference_quality": "usable",
+      "white_reference_span_pct": 0.12306246735703266,
+      "interpretation": "Uncalibrated diagnostic preview"
+    },
+    {
+      "space": "raw_adc",
+      "channel": "A1",
+      "expected_measurements": 5,
+      "usable_measurements": 5,
+      "finite_image_pixels": 5,
+      "all_requested_measurements_usable": true,
+      "reference_quality": "usable",
+      "white_reference_span_pct": 0.41418982319554826,
+      "interpretation": "Uncalibrated diagnostic preview"
+    },
+    {
+      "space": "raw_adc",
+      "channel": "A2",
+      "expected_measurements": 5,
+      "usable_measurements": 5,
+      "finite_image_pixels": 5,
+      "all_requested_measurements_usable": true,
+      "reference_quality": "usable",
+      "white_reference_span_pct": 0.10027559636179821,
+      "interpretation": "Uncalibrated diagnostic preview"
+    },
+    {
+      "space": "raw_adc",
+      "channel": "A3",
+      "expected_measurements": 5,
+      "usable_measurements": 5,
+      "finite_image_pixels": 5,
+      "all_requested_measurements_usable": true,
+      "reference_quality": "usable",
+      "white_reference_span_pct": 0.30766308182830426,
+      "interpretation": "Uncalibrated diagnostic preview"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+﻿simulated,layout,test_level,channel,expected_repeats,valid_repeats,mean_relative_error_pct,sd_repeat_error_pct,max_abs_error_pct,error_limit_pct,data_quality,screen_result
+0,horizontal,192,A0,3,3,-24.83161263988988,0.10929507510105337,24.938165175156744,5.0,all_repeats_usable,additivity_deviation_detected
+0,horizontal,192,A1,3,3,-24.60955437918317,0.09716412455671053,24.680370764684366,5.0,all_repeats_usable,additivity_deviation_detected
+0,horizontal,192,A2,3,3,-22.32090751424772,0.05922669271648645,22.38915091024976,5.0,all_repeats_usable,additivity_deviation_detected
+0,horizontal,192,A3,3,3,-26.479187908592053,0.0847386097471297,26.55028719869022,5.0,all_repeats_usable,additivity_deviation_detected

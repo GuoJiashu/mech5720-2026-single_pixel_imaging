@@ -1,0 +1,185 @@
+{
+  "source_folder": "F:\\2026\\Semester_2\\MECH5720\\Workspace_Github\\mech5720-2026-single_pixel_imaging\\imaging_3d\\datasets\\hadamard_capture\\2026-10-30_01-16-26",
+  "run_status": "completed",
+  "simulated": false,
+  "mode": "hadamard",
+  "grid": 32,
+  "excluded_channels": [],
+  "channel_reconstruction": [
+    {
+      "space": "raw_adc",
+      "channel": "A0",
+      "expected_measurements": 1024,
+      "usable_measurements": 1024,
+      "diagnostic_measurements": 1024,
+      "diagnostic_image_pixels": 1024,
+      "finite_image_pixels": 1024,
+      "all_requested_measurements_usable": true,
+      "discarded_coefficients": 0,
+      "diagnostic_method": "complete_inverse",
+      "dc_available": true,
+      "max_valid_black_gap_s": 561.2277577473651,
+      "reference_quality": "usable",
+      "white_reference_span_pct": 0.4220833116632031,
+      "rejected_black_phase_ids": "",
+      "interpolated_over_rejected_black_pixels": 0,
+      "interpretation": "Uncalibrated diagnostic preview"
+    },
+    {
+      "space": "raw_adc",
+      "channel": "A1",
+      "expected_measurements": 1024,
+      "usable_measurements": 0,
+      "diagnostic_measurements": 1024,
+      "diagnostic_image_pixels": 1024,
+      "finite_image_pixels": 0,
+      "all_requested_measurements_usable": false,
+      "discarded_coefficients": 0,
+      "diagnostic_method": "complete_inverse",
+      "dc_available": true,
+      "max_valid_black_gap_s": 561.2277577473651,
+      "reference_quality": "large_background_change",
+      "white_reference_span_pct": 6.084433221483327,
+      "rejected_black_phase_ids": "",
+      "interpolated_over_rejected_black_pixels": 0,
+      "interpretation": "Uncalibrated diagnostic preview"
+    },
+    {
+      "space": "raw_adc",
+      "channel": "A2",
+      "expected_measurements": 1024,
+      "usable_measurements": 1024,
+      "diagnostic_measurements": 1024,
+      "diagnostic_image_pixels": 1024,
+      "finite_image_pixels": 1024,
+      "all_requested_measurements_usable": true,
+      "discarded_coefficients": 0,
+      "diagnostic_method": "complete_inverse",
+      "dc_available": true,
+      "max_valid_black_gap_s": 561.2277577473651,
+      "reference_quality": "usable",
+      "white_reference_span_pct": 0.6480879520399317,
+      "rejected_black_phase_ids": "",
+      "interpolated_over_rejected_black_pixels": 0,
+      "interpretation": "Uncalibrated diagnostic preview"
+    },
+    {
+      "space": "raw_adc",
+      "channel": "A3",
+      "expected_measurements": 1024,
+      "usable_measurements": 928,
+      "diagnostic_measurements": 1024,
+      "diagnostic_image_pixels": 1024,
+      "finite_image_pixels": 0,
+      "all_requested_measurements_usable": false,
+      "discarded_coefficients": 0,
+      "diagnostic_method": "complete_inverse",
+      "dc_available": true,
+      "max_valid_black_gap_s": 1641.4105447631537,
+      "reference_quality": "flagged_black_reference",
+      "white_reference_span_pct": 1.139777942462983,
+      "rejected_black_phase_ids": "1717;1783",
+      "interpolated_over_rejected_black_pixels": 192,
+      "interpretation": "Uncalibrated diagnostic preview"
+    }
+  ],
+  "noise_model": "independent pair-mean standard error",
+  "noise_floor_adc": 0.01,
+  "noise_median_adc": {
+    "A0": 0.051161207288782436,
+    "A1": 0.03852244115514287,
+    "A2": 0.04387706854325485,
+    "A3": 0.039641575821742714
+  },
+  "roi_mm": [
+    80,
+    80
+  ],
+  "positions_mm": [
+    [
+      250.0,
+      12.0,
+      620.0
+    ],
+    [
+      5.0,
+      -198.0,
+      620.0
+    ],
+    [
+      5.0,
+      267.0,
+      620.0
+    ],
+    [
+      -245.0,
+      12.0,
+      620.0
+    ]
+  ],
+  "directions": [
+    [
+      0.37390810006417313,
+      0.01794758880308031,
+      0.9272920881591494
+    ],
+    [
+      0.007682050593076933,
+      -0.3042092034858465,
+      0.9525742735415397
+    ],
+    [
+      0.007406684046428378,
+      0.39551692807927535,
+      0.9184288217571188
+    ],
+    [
+      -0.36744851488377517,
+      0.017997478280021642,
+      0.9298697111344515
+    ]
+  ],
+  "gains": [
+    1.2617218556701413,
+    1.0839055126477188,
+    0.8529781542283035,
+    0.9160944873522812
+  ],
+  "gains_source": "flat board median approximation",
+  "center_col_row": [
+    15.5,
+    15.5
+  ],
+  "mask_radius_mm": 20,
+  "min_signal_adc": 0.05,
+  "max_residual": 0.25,
+  "requested_mask_pixels": 208,
+  "valid_normal_pixels": 202,
+  "integrated_pixels": 202,
+  "edge_integration_rmse_mm": 0.40911400508702717,
+  "reference_quality": {
+    "A0": "usable",
+    "A1": "large_background_change",
+    "A2": "usable",
+    "A3": "flagged_black_reference"
+  },
+  "interpolated_over_rejected_black_pixels": {
+    "A0": 0,
+    "A1": 0,
+    "A2": 0,
+    "A3": 192
+  },
+  "warnings": [
+    "DIAGNOSTIC ONLY: raw ADC response is not independently linearity-calibrated.",
+    "Uses 04 diagnostic QC: timing/reference warnings are retained; hard-invalid measurements are omitted.",
+    "Rejected black anchors are skipped; interpolation between valid anchors can span long gaps. No extrapolation.",
+    "Default board gains assume the outer two rows/columns are unshadowed flat board; inspect masks.",
+    "Default circular object mask assumes the ball is centred; inspect or override it.",
+    "Constant detector directions and board-plane sampling approximate perspective/near-field geometry.",
+    "Noise weights omit background/interpolation uncertainty; residual is not an accuracy certificate.",
+    "Three-channel fits have no redundant observation to check the model.",
+    "Only the largest connected valid region is integrated; absolute height/board contact is unknown.",
+    "Missing Hadamard pairs use minimum-norm projection; missing structure is NOT recovered. Channels without DC are excluded from 3D.",
+    "Hadamard noise weights assume independent samples/pairs; correlated noise, missing-coefficient bias and dark-reference uncertainty are omitted."
+  ]
+}

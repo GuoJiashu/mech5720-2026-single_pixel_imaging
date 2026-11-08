@@ -1,0 +1,8 @@
+{
+  "baseline_s": 4.0,
+  "record_s": 2.0,
+  "shortest_consistent_tested_wait_s": null,
+  "run_status": "completed",
+  "simulated": false,
+  "note": "Engineering screen, not an accuracy certificate. Compare repeat SD and raw traces too. Tolerance=max(absolute limit, relative limit*abs(reference pair difference)); 2SE is a heuristic repeat-error margin, not a calibrated confidence interval. No black subtraction: direct positive-minus-negative values. Black frames are diagnostics. Results cover selected patterns and this record duration only. Longest wait is not ground truth."
+}

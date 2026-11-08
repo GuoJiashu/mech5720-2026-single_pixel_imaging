@@ -3,6 +3,7 @@
 from capture_common import capture, parser
 import numpy as np
 from patterns import hadamard, imaging_plan, grid_mask, expand_mask
+from run_paths import DATASETS_DIR
 
 
 def make_plan(args):
@@ -44,9 +45,11 @@ def main():
     p.add_argument("--reference-settle", type=float, default=None, help="Black/white settling seconds")
     p.add_argument("--full-white-refs", action="store_true", help="Also insert white at each reference interval")
     p.add_argument("--dry-run", action="store_true", help="Print timing without opening serial/projector")
-    p.set_defaults(mapping="Facing ball: A0=right, A1=bottom, A2=top, A3=left")
+    p.set_defaults(mapping="Facing ball: A0=right, A1=bottom, A2=top, A3=left", output=None)
     args = p.parse_args()
     is_hadamard = args.mode == "hadamard"
+    if args.output is None:
+        args.output = DATASETS_DIR / ("hadamard_capture" if is_hadamard else "spi_capture")
     if args.settle is None:
         args.settle = 2.0 if is_hadamard else 3.0
     if args.record is None:

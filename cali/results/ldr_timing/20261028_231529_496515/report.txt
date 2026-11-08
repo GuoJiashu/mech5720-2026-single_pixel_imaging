@@ -1,0 +1,36 @@
+LDR timing test / 四通道时序检测
+Run: completed
+Assessment: INSUFFICIENT_OR_UNSTABLE_DATA
+Measured serial stream; host timing only.
+Median receive interval: 0.20892800000001444 s
+Candidate wait: None s
+Averaging window used (not optimized): 0.5 s
+
+level direction channel valid/expected max_settling_s
+255 rise  A0 5/5 0.9547210000000632 
+255 rise  A1 5/5 1.1672972000005757 
+255 rise  A2 5/5 1.3295060999998896 
+255 rise  A3 5/5 1.002226900000096 
+255 fall  A0 5/5 0.8730083999998897 
+255 fall  A1 5/5 0.983081299999867 
+255 fall  A2 5/5 0.8730083999998897 
+255 fall  A3 5/5 0.9396394000004875 
+ 64 rise  A0 5/5 3.970625199999631 
+ 64 rise  A1 5/5 4.022455600000285 
+ 64 rise  A2 4/5 7.108119999999872 endpoint_drift
+ 64 rise  A3 5/5 6.860426499999448 
+ 64 fall  A0 5/5 1.026335999999901 
+ 64 fall  A1 5/5 1.4819431000005352 
+ 64 fall  A2 4/5 1.2350968999999168 endpoint_drift
+ 64 fall  A3 5/5 5.77176370000052 
+
+空白值/None 表示没有可靠估计，不表示 0 秒。
+候选等待时间=本轮最慢有效稳定时间+max(0.2秒,两倍95%接收间隔)，向上取整至0.1秒。
+仅所有要求的重复/通道/方向有效时才提供候选值；模拟结果不能用于实验。
+稳定时间使用因果滑动平均；时间从PC请求投影开始，包含显示和串口等延迟。
+末端平台按最后一段数据估计；有限观察窗不能排除更慢的漂移。
+当前程序不会修改Arduino采样率，时间戳不代表四通道同时采样。
+接收间隔大于0.05秒时标记粗测；即使提高频率，也没有硬件/光学同步。
+T_US（若存在）原样保留：Arduino重启/计时回绕未与PC对齐，不用于显示相对时间估计。
+若任一组无有效估计：查看原始曲线与status；必要时延长--hold或提升固件输出率。
+结果不能替代互补图案验证、光强叠加性测试或3D几何校准。

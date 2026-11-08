@@ -13,6 +13,17 @@ initial = (x, y, w, h)
 step = 10
 mode = 2
 
+from pathlib import Path
+
+roi_file = Path("roi_calibration.json")
+
+if roi_file.exists():
+    saved = json.loads(roi_file.read_text(encoding="utf-8"))
+    x = int(saved["ROI_X"])
+    y = int(saved["ROI_Y"])
+    w = int(saved["ROI_W"])
+    h = int(saved["ROI_H"])
+
 WINDOW = "ROI Calibration"
 
 m = get_monitors()[PROJECTOR_INDEX]

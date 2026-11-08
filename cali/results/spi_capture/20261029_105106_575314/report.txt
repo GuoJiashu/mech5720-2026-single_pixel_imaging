@@ -1,0 +1,19 @@
+Experimental four-channel capture
+Mode: pilot; grid: 8; acquisition status: completed
+Raw ADC preview is NOT a validated linear-light reconstruction.
+No passed calibration is bundled. An optional calibration file does not certify optical linearity or 3D validity.
+Hadamard inversion: x=H.T @ (positive-negative) / (grid*grid). Dark subtracted before pair difference.
+NaN means unmeasured or flagged. No missing coefficient is replaced with zero.
+Calibration, if supplied, is applied to each received value BEFORE averaging/background subtraction.
+White references monitor changes only; no hidden white normalization. Intermittent errors can evade finite QC windows.
+
+raw_adc A0: usable 5/5; usable
+raw_adc A1: usable 5/5; usable
+raw_adc A2: usable 5/5; usable
+raw_adc A3: usable 5/5; usable
+
+先检查phase_summary和reference_summary，尤其是A2异常；灰色格子是NaN而非黑色目标。
+raster每格为照明区域的积分响应，不是独立像素反射率标定。Hadamard需要接收链路满足线性假设。
+实际目标/图案的低信号和等待时间需要通过pilot确认，默认20秒等待不保证所有条件已稳定。
+pilot只测5个位置，不生成完整图像；黑色目标格信号接近0不自动判定为故障。
+同一数据可用--reanalyze和后续校正文件重新处理；不要为得到完整图片而删掉异常标记。

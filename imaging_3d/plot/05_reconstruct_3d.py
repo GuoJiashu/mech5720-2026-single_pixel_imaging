@@ -5,8 +5,9 @@ import importlib.util
 from plot_common import np, plt, Path, json, plot_parser, load_run, write_json, write_csv, csv_output_path, save_figure
 
 # Facing the ball: x right, y up, z toward the detectors; units: mm.
-# D=620 is assumed perpendicular to the board; sphere centre is 20 mm off the board.
-POSITIONS = np.array([[130, 5, 600], [0, -215, 600], [0, 250, 600], [-200, 10, 600]], float)
+# Testing the previous z=600 mm distance while retaining the newly measured x/y.
+# Positions are relative to the sphere centre, in A0, A1, A2, A3 order.
+POSITIONS = np.array([[250, 12, 600], [5, -198, 600], [5, 267, 600], [-245, 12, 600]], float)
 CHANNELS = ["A0", "A1", "A2", "A3"]
 
 
@@ -337,8 +338,8 @@ def main():
         np.savetxt(csv_output_path(output / f"{name}.csv"), values, delimiter=",", fmt="%.8g")
     warnings = [
         "DIAGNOSTIC ONLY: raw ADC response is not independently linearity-calibrated.",
-        "Uses 04 diagnostic QC: timing/reference warnings are retained; hard-invalid measurements are omitted.",
-        "Rejected black anchors are skipped; interpolation between valid anchors can span long gaps. No extrapolation.",
+        "Uses 04 diagnostic QC: excursion, drift, stability and reference warnings do not exclude observations; hard-invalid measurements are omitted.",
+        "Warning-only black anchors are retained; hard-invalid anchors are skipped. Interpolation can span long gaps; no extrapolation.",
         "Default board gains assume the outer two rows/columns are unshadowed flat board; inspect masks.",
         "Default circular object mask assumes the ball is centred; inspect or override it.",
         "Constant detector directions and board-plane sampling approximate perspective/near-field geometry.",
